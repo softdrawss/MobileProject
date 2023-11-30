@@ -2,6 +2,14 @@
 
 A new Flutter project.
 
+FIGMA: https://www.figma.com/file/zyQ28OH8uT5xYp2eSBFyqo/Untitled?type=design&node-id=201%3A11&mode=design&t=tfbydY53ZUjXGatq-1
+
+Api:
+- Current Location: http://open-notify.org/Open-Notify-API/ISS-Location-Now/
+- Close commets approach: https://ssd-api.jpl.nasa.gov/doc/cad.html
+- Daily Picture: https://github.com/nasa/apod-api
+- https://api.le-systeme-solaire.net/en/
+
 ## Getting Started
 
 This project is a starting point for a Flutter application.
