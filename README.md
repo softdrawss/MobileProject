@@ -4,10 +4,12 @@ A new Flutter project.
 
 FIGMA: https://www.figma.com/file/zyQ28OH8uT5xYp2eSBFyqo/Space-App?type=design&node-id=201%3A11&mode=design&t=BG5qM7K69gCLLf1B-1
 
-Api:
-- Current Location: http://open-notify.org/Open-Notify-API/ISS-Location-Now/
+APIs:
+- ISS Current Location: http://open-notify.org/Open-Notify-API/ISS-Location-Now/
+- People in Space: http://open-notify.org/Open-Notify-API/People-In-Space/
+- Earth Polychromatic Imaging Data: https://epic.gsfc.nasa.gov/about/api
 - Close commets approach: https://ssd-api.jpl.nasa.gov/doc/cad.html
-- Daily Picture: https://github.com/nasa/apod-api
+- Daily Astronomy Picture: https://github.com/nasa/apod-api
 - Information about bodies in the Solar System: https://api.le-systeme-solaire.net/en/
 
 ## Getting Started
