@@ -6,6 +6,27 @@ class APODScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: FutureBuilder(
+        future: loadAPOD(), 
+        builder: (context, snapshot){
+          if (!snapshot.hasData) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          final picture = snapshot.data!;
+          return Center(
+            child: Column(
+              children: [
+                Text(picture.title),
+                Image(image: NetworkImage(picture.url)),
+                Text(picture.explanation),
+              ],
+            ),
+          );
+        },
+      ),
+    );
   }
 }

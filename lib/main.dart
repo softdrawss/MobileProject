@@ -20,6 +20,7 @@ class MyApp extends StatelessWidget {
         "/earthview": (_) => const EarthViewScreen(),
         "/people": (_) => const PeopleInSpaceScreen(),
       },
+      initialRoute: "/apod",
     );
   }
 }
