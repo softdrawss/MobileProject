@@ -14,13 +14,13 @@ Future<List<EPICDates>> loadEPICDates() async {
     Uri.parse("https://epic.gsfc.nasa.gov/api/natural/all"),
   );
     final json = jsonDecode(response.body);
-  final jsonEPICDatesList = json["date"];
-  List<EPICDates> EPICDatesList = [];
+  final jsonEPICDatesList = json;
+  List<EPICDates> epicDatesList = [];
 
     for (final jsonEPICDate in jsonEPICDatesList) {
-    EPICDatesList.add(EPICDates.fromJson(jsonEPICDate));
+    epicDatesList.add(EPICDates.fromJson(jsonEPICDate));
   }
-  return EPICDatesList;
+  return epicDatesList;
 }
 
 class EPICData {
@@ -58,13 +58,13 @@ Future<List<EPICData>> loadEPICData(String date) async {
   );
    final json = jsonDecode(response.body);
 
-  final jsonEPICDataList = json["date"];
-  List<EPICData> EPICDataList = [];
+  final jsonEPICDataList = json;
+  List<EPICData> epicDataList = [];
 
     for (final jsonEPICData in jsonEPICDataList) {
-    EPICDataList.add(EPICData.fromJson(jsonEPICData));
+    epicDataList.add(EPICData.fromJson(jsonEPICData));
   }
-  return EPICDataList;
+  return epicDataList;
 }
 
 
