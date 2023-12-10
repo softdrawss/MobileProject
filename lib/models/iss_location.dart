@@ -2,13 +2,11 @@ import 'dart:convert';
 import 'package:http/http.dart' as http;
 
 class ISSLocation {
-  String timestamp;
   String longitude;
   String latitude;
 
   ISSLocation.fromJson(Map<String, dynamic> json)
-      : timestamp = json["timestamp"],
-        longitude = json["iss_position"]["longitude"],
+      : longitude = json["iss_position"]["longitude"],
         latitude = json["iss_position"]["latitude"];
 }
 

@@ -28,9 +28,9 @@ class ISSLocationScreen extends StatelessWidget {
                     child: const Text('Back'),
                   ),
                 ),
-                Text(issLocation.timestamp),
-                Text(issLocation.longitude),
-                Text(issLocation.latitude),
+                const Text("International Space Station"),
+                Text("Longitude:${issLocation.longitude}"),
+                Text("Latitude:${issLocation.latitude}"),
               ],
             ),
           );
