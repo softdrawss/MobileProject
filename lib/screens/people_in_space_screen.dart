@@ -6,30 +6,65 @@ class PeopleInSpaceScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: FutureBuilder(
-        future: loadPeopleInSpace(),
-        builder: (context, snapshot) {
-          if (!snapshot.hasData) {
-            return const Center(
-              child: CircularProgressIndicator(),
-            );
-          }
-          final people = snapshot.data!;
+    return FutureBuilder<List<PeopleInSpace>>(
+      future: loadPeopleInSpace(),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return CircularProgressIndicator();
+        } else if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+          return Text('No data available');
+        } else {
+          // Organize the data by spacecraft
+          Map<String, List<PeopleInSpace>> peopleBySpacecraft = {};
 
-          return Center(
-            child: Column(
-              children: [
-                Text(people.length.toString()),
-                Text(people[0].name),
-                Text(people[0].craft),
-                Text(people[1].name),
-                Text(people[1].craft),
-              ],
-            ),
+          snapshot.data!.forEach((person) {
+            if (!peopleBySpacecraft.containsKey(person.craft)) {
+              peopleBySpacecraft[person.craft] = [];
+            }
+            peopleBySpacecraft[person.craft]!.add(person);
+          });
+
+          // Display the data
+          return ListView.builder(
+            itemCount: peopleBySpacecraft.length,
+            itemBuilder: (context, index) {
+              String spacecraft = peopleBySpacecraft.keys.elementAt(index);
+              List<PeopleInSpace> peopleOnSpacecraft =
+                  peopleBySpacecraft[spacecraft]!;
+
+              return Card(
+                margin: EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Text(
+                        'Spacecraft: $spacecraft',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0,
+                        ),
+                      ),
+                    ),
+                    Column(
+                      children: peopleOnSpacecraft
+                          .map(
+                            (person) => ListTile(
+                              title: Text(person.name),
+                            ),
+                          )
+                          .toList(),
+                    ),
+                  ],
+                ),
+              );
+            },
           );
-        },
-      ),
+        }
+      },
     );
   }
 }
