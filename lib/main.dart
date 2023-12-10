@@ -3,6 +3,7 @@ import 'package:mobile_project/screens/home_screen.dart';
 import 'package:mobile_project/screens/apod_screen.dart';
 import 'package:mobile_project/screens/earth_screen.dart';
 import 'package:mobile_project/screens/people_in_space_screen.dart';
+import 'package:mobile_project/screens/ss_body_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -19,8 +20,9 @@ class MyApp extends StatelessWidget {
         "/apod": (_) => const APODScreen(),
         "/earthview": (_) => const EarthViewScreen(),
         "/people": (_) => const PeopleInSpaceScreen(),
+        "/body": (_) => const SSBodyScreen(),
       },
-      initialRoute: "/people",
+      initialRoute: "/body",
     );
   }
 }

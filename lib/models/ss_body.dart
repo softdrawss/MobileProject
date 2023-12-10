@@ -21,6 +21,8 @@ class Body {
   String? discoveryDate;
   String? alternativeName;
 
+  //List<Body>? moons;
+
   Body.fromJson(Map<String, dynamic> json)
       : id = json["id"],
         name = json["englishName"],
@@ -33,7 +35,7 @@ class Body {
         massExponent = json["mass"]["massExponent"],
         volValue = json["mass"]["massValue"],
         volExponent = json["mass"]["massExponent"],
-        
+
         density = json["density"],
         meanRadius = json["alternativeName"],
         sideralOrbit = json["sideralOrbit"],
@@ -43,17 +45,22 @@ class Body {
         discoveredBy = json["discoveredBy"],
         discoveryDate = json["discoveryDate"],
         alternativeName = json["alternativeName"];
+
+        //moons = json["moons"];
 }
 
-Future<List<Body>> loadBody(String id) async {
+Future<Body> loadBody(String id) async {
   final response = await http.get(
     Uri.parse("https://api.le-systeme-solaire.net/rest/bodies/$id"),
   );
   final json = jsonDecode(response.body);
+  /*
   final jsonUserList = json["results"];
   List<Body> userList = [];
   for (final jsonUser in jsonUserList) {
     userList.add(Body.fromJson(jsonUser));
-  }
-  return userList;
+  }*/
+
+  Body body = Body.fromJson(json);
+  return body;
 }
