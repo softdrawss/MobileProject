@@ -8,7 +8,6 @@ APIs:
 - ISS Current Location: http://open-notify.org/Open-Notify-API/ISS-Location-Now/
 - People in Space: http://open-notify.org/Open-Notify-API/People-In-Space/
 - Earth Polychromatic Imaging Data: https://epic.gsfc.nasa.gov/about/api
-- Close commets approach: https://ssd-api.jpl.nasa.gov/doc/cad.html
 - Daily Astronomy Picture: https://github.com/nasa/apod-api
 - Information about bodies in the Solar System: https://api.le-systeme-solaire.net/en/
 
