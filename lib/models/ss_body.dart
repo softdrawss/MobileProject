@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:http/http.dart' as http;
 
 class Body {
@@ -21,8 +20,6 @@ class Body {
   String? discoveryDate;
   String? alternativeName;
 
-  //List<Body>? moons;
-
   Body.fromJson(Map<String, dynamic> json)
       : id = json["id"],
         name = json["englishName"],
@@ -33,11 +30,11 @@ class Body {
 
         massValue = json["mass"]["massValue"],
         massExponent = json["mass"]["massExponent"],
-        volValue = json["mass"]["massValue"],
-        volExponent = json["mass"]["massExponent"],
-
+        volValue = json["vol"]["volValue"],
+        volExponent = json["vol"]["volExponent"],
+        
         density = json["density"],
-        meanRadius = json["alternativeName"],
+        meanRadius = json["meanRadius"],
         sideralOrbit = json["sideralOrbit"],
         sideralRotation = json["sideralRotation"],
         axialTilt = json["axialTilt"],
@@ -45,9 +42,8 @@ class Body {
         discoveredBy = json["discoveredBy"],
         discoveryDate = json["discoveryDate"],
         alternativeName = json["alternativeName"];
-
-        //moons = json["moons"];
 }
+
 
 Future<Body> loadBody(String id) async {
   final response = await http.get(

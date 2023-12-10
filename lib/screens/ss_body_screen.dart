@@ -21,7 +21,7 @@ class SSBodyScreen extends StatelessWidget {
               children: [
                 Text(picture.name),
                 Text(picture.bodyType),
-                /*Text("Gravity: ${picture.gravity} m/s^2"),
+                Text("Gravity: ${picture.gravity} m/s^2"),
                 Text("Semimajor Axis: ${picture.semimajorAxis} km"),
                 Text("Orbital inclination: ${picture.inclination}º"),
                 Text(
@@ -36,7 +36,7 @@ class SSBodyScreen extends StatelessWidget {
                 Text("Mean Temperature: ${picture.avgTemp} K"),
                 Text("Discovered by: ${picture. discoveredBy}"),
                 Text("Discovery date: ${picture.discoveryDate}"),
-                Text("Alternative name: ${picture.name}"),*/
+                Text("Alternative name: ${picture.name}"),
               ],
             ),
           );
