@@ -10,9 +10,17 @@ class SSBodyScreen extends StatelessWidget {
       body: FutureBuilder(
         future: loadBody("sycorax"),
         builder: (context, snapshot) {
-          if (!snapshot.hasData) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
               child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError) {
+            return Center(
+              child: Text('Error: ${snapshot.error}'),
+            );
+          } else if (!snapshot.hasData) {
+            return const Center(
+              child: Text('No data available'),
             );
           }
           final picture = snapshot.data!;
@@ -39,13 +47,13 @@ class SSBodyScreen extends StatelessWidget {
                     "Volume: ${picture.volValue} · 10^${picture.volExponent} km^3"),
                 Text("Density: ${picture.density} g/cm^3"),
                 Text("Mean Radius: ${picture.meanRadius}"),
-                Text("Sideral Orbit Period: ${picture.name} days"),
-                Text("Sideral Rotation: ${picture.name} hours"),
+                Text("Sideral Orbit Period: ${picture.sideralOrbit} days"),
+                Text("Sideral Rotation: ${picture.sideralRotation} hours"),
                 Text("Axialt Tilt: ${picture.axialTilt}º"),
                 Text("Mean Temperature: ${picture.avgTemp} K"),
-                Text("Discovered by: ${picture. discoveredBy}"),
+                Text("Discovered by: ${picture.discoveredBy}"),
                 Text("Discovery date: ${picture.discoveryDate}"),
-                Text("Alternative name: ${picture.name}"),
+                Text("Alternative name: ${picture.alternativeName}"),
               ],
             ),
           );
