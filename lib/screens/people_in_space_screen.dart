@@ -10,23 +10,23 @@ class PeopleInSpaceScreen extends StatelessWidget {
       future: loadPeopleInSpace(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-          return Text('No data available');
+          return const Text('No data available');
         } else {
-          // Organize the data by spacecraft
+          // Organize data by spacecraft
           Map<String, List<PeopleInSpace>> peopleBySpacecraft = {};
 
-          snapshot.data!.forEach((person) {
+          for (var person in snapshot.data!) {
             if (!peopleBySpacecraft.containsKey(person.craft)) {
               peopleBySpacecraft[person.craft] = [];
             }
             peopleBySpacecraft[person.craft]!.add(person);
-          });
+          }
 
-          // Display the data
+          // Display data
           return ListView.builder(
             itemCount: peopleBySpacecraft.length,
             itemBuilder: (context, index) {
@@ -35,15 +35,24 @@ class PeopleInSpaceScreen extends StatelessWidget {
                   peopleBySpacecraft[spacecraft]!;
 
               return Card(
-                margin: EdgeInsets.all(8.0),
+                margin: const EdgeInsets.all(8.0),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
+                    Align(
+                      alignment: Alignment.centerLeft,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pop(context);
+                        },
+                        child: const Text('Back'),
+                      ),
+                    ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Text(
                         'Spacecraft: $spacecraft',
-                        style: TextStyle(
+                        style: const TextStyle(
                           fontWeight: FontWeight.bold,
                           fontSize: 18.0,
                         ),

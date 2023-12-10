@@ -19,6 +19,15 @@ class SSBodyScreen extends StatelessWidget {
           return Center(
             child: Column(
               children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Back'),
+                  ),
+                ),
                 Text(picture.name),
                 Text(picture.bodyType),
                 Text("Gravity: ${picture.gravity} m/s^2"),

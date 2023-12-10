@@ -20,6 +20,15 @@ class EarthViewScreen extends StatelessWidget {
           return Center(
             child: Column(
               children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Back'),
+                  ),
+                ),
                 Text(epic[0].date),
                 Image(image: NetworkImage(epic[0].image),),
                 Text(epic[0].imageCode),

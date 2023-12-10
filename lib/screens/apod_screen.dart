@@ -19,6 +19,15 @@ class APODScreen extends StatelessWidget {
           return Center(
             child: Column(
               children: [
+                Align(
+                  alignment: Alignment.centerLeft,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pop(context);
+                    },
+                    child: const Text('Back'),
+                  ),
+                ),
                 Text(picture.title),
                 Image(image: NetworkImage(picture.url)),
                 Text(picture.explanation),

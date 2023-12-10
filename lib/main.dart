@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
         "/people": (_) => const PeopleInSpaceScreen(),
         "/body": (_) => const SSBodyScreen(),
       },
-      initialRoute: "/body",
+      initialRoute: "/",
     );
   }
 }
