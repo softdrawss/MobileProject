@@ -8,7 +8,7 @@ class EarthViewScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
-        future: loadEPICData(/*"2015-10-31"*/),
+        future: loadEPICData("2015-10-31"),
         builder: (context, snapshot) {
           if (!snapshot.hasData) {
             return const Center(
@@ -16,10 +16,26 @@ class EarthViewScreen extends StatelessWidget {
             );
           }
           final epic = snapshot.data!;
+          
           return Center(
             child: Column(
               children: [
                 Text(epic[0].date),
+
+                Image(image: NetworkImage(epic[0].image),),
+                /*FutureBuilder(
+                    future: loadEPICImage("2015-10-31", epic[0].imageCode),
+                    builder: (context, snapshot) {
+                      if (!snapshot.hasData) {
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      final epicPicture = snapshot.data!;
+                      return Image(
+                        image: NetworkImage(epicPicture.imageURL),
+                      );
+                    }),*/
                 Text(epic[0].imageCode),
                 Text(epic[0].caption),
                 Text(epic[0].lat.toString()),

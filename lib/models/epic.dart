@@ -31,6 +31,7 @@ class EPICData {
   double lunarX, lunarY, lunarZ;
   double sunX, sunY, sunZ;
   String date;
+  String image = "";
 
   EPICData.fromJson(Map<String, dynamic> json)
       : imageCode = json["image"],
@@ -46,12 +47,18 @@ class EPICData {
         sunX = json["sun_j2000_position"]["x"],
         sunY = json["sun_j2000_position"]["y"],
         sunZ = json["sun_j2000_position"]["z"],
-        date = json["date"];
+        date = json["date"]{
+           String year = date.substring(0, 4);
+ String month = date.substring(5, 7);
+ String day = date.substring(8, 10); 
+
+ image = "https://epic.gsfc.nasa.gov/archive/natural/$year/$month/$day/png/$imageCode.png";
+        }
 }
 
-Future<List<EPICData>> loadEPICData(/*String date*/) async {
+Future<List<EPICData>> loadEPICData(String date) async {
   final response = await http.get(
-    Uri.parse("https://epic.gsfc.nasa.gov/api/natural/date/2015-10-31"),
+    Uri.parse("https://epic.gsfc.nasa.gov/api/natural/date/$date"),
   );
   final json = jsonDecode(response.body);
 
@@ -64,17 +71,4 @@ Future<List<EPICData>> loadEPICData(/*String date*/) async {
   return epicDataList;
 }
 
-Future<String> loadEPICImage(String date, String imageCode) async {
-  final String year = date.substring(0, 3);
-  final String month = date.substring(5, 6);
-  final String day = date.substring(8, 9);
 
-  final response = await http.get(
-    Uri.parse(
-        "https://epic.gsfc.nasa.gov/archive/natural/$year/$month/$day/png/$imageCode.png"),
-  );
-  final json = jsonDecode(response.body);
-  String image = json;
-
-  return image;
-}
