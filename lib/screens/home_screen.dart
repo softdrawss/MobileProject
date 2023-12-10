@@ -19,6 +19,12 @@ class HomeScreen extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
+                Navigator.pushNamed(context, "/isslocation");
+              },
+              child: const Text('ISS Location'),
+            ),
+            ElevatedButton(
+              onPressed: () {
                 Navigator.pushNamed(context, "/earthview");
               },
               child: const Text('Earth View'),
