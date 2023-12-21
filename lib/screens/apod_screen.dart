@@ -29,7 +29,9 @@ class APODScreen extends StatelessWidget {
                   ),
                 ),
                 Text(picture.title),
-                Image(image: NetworkImage(picture.url)),
+                Image(image: picture.type == "image" ?  NetworkImage(picture.url) : NetworkImage(picture.thumbs!) ),
+                if (picture.type == "video")
+                Text(picture.url),
                 Text(picture.explanation),
               ],
             ),
@@ -39,3 +41,4 @@ class APODScreen extends StatelessWidget {
     );
   }
 }
+

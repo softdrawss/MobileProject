@@ -7,6 +7,7 @@ class APOD {
   String url;
   String explanation;
   String type;
+  String? thumbs;
   String? copyright;
 
   APOD.fromJson(Map<String, dynamic> json)
@@ -14,6 +15,7 @@ class APOD {
   url = json["url"],
   explanation = json["explanation"],
   type = json["media_type"],
+  thumbs = json["thumbs"],
   copyright = json["copyright"];
 }
 
