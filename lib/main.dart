@@ -16,6 +16,20 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      theme: ThemeData(
+        colorScheme: ColorScheme(
+          brightness: Brightness.light, 
+          primary: Color.fromARGB(255, 30, 20, 44), 
+          onPrimary: Colors.white, 
+          secondary: Color.fromARGB(255, 80, 54, 116), 
+          onSecondary: Colors.white,
+          error: Colors.red.shade800, 
+          onError: Colors.white, 
+          background: Color.fromARGB(255, 4, 11, 25), 
+          onBackground: Colors.white, 
+          surface: Color.fromARGB(255, 161, 175, 188), 
+        onSurface: Color.fromARGB(255, 161, 175, 188))
+      ),
       routes: {
         "/": (_) => const HomeScreen(),
         "/apod": (_) => const APODScreen(),
