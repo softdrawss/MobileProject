@@ -41,6 +41,12 @@ class HomeScreen extends StatelessWidget {
               },
               child: const Text('SS Body'),
             ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/list");
+              },
+              child: const Text('List'),
+            ),
           ],
         ),
       ),

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_project/screens/home_screen.dart';
+import 'package:mobile_project/screens/ss_list.dart';
 import 'package:mobile_project/screens/apod_screen.dart';
 import 'package:mobile_project/screens/earth_screen.dart';
 import 'package:mobile_project/screens/iss_location_screen.dart';
@@ -17,21 +18,22 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        colorScheme: ColorScheme(
-          brightness: Brightness.light, 
-          primary: Color.fromARGB(255, 30, 20, 44), 
-          onPrimary: Colors.white, 
-          secondary: Color.fromARGB(255, 80, 54, 116), 
-          onSecondary: Colors.white,
-          error: Colors.red.shade800, 
-          onError: Colors.white, 
-          background: Color.fromARGB(255, 4, 11, 25), 
-          onBackground: Colors.white, 
-          surface: Color.fromARGB(255, 161, 175, 188), 
-        onSurface: Color.fromARGB(255, 161, 175, 188))
-      ),
+          colorScheme: ColorScheme(
+              brightness: Brightness.light,
+              primary: Color.fromARGB(255, 30, 20, 44),
+              onPrimary: Colors.white,
+              secondary: Color.fromARGB(255, 80, 54, 116),
+              onSecondary: Colors.white,
+              error: Colors.red.shade800,
+              onError: Colors.white,
+              background: Color.fromARGB(255, 4, 11, 25),
+              onBackground: Colors.white,
+              surface: Color.fromARGB(255, 161, 175, 188),
+              onSurface: Color.fromARGB(255, 161, 175, 188))),
       routes: {
         "/": (_) => const HomeScreen(),
+        "/list": (_) => const SSList(),
+        "/moonlist": (_) => const MoonList(),
         "/apod": (_) => const APODScreen(),
         "/isslocation": (_) => const ISSLocationScreen(),
         "/earthview": (_) => const EarthViewScreen(),
