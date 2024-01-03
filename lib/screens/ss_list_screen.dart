@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_project/screens/ss_body_screen.dart';
+import 'package:mobile_project/models/ss_list.dart';
 
 class SSList extends StatelessWidget {
   const SSList({super.key});
@@ -47,6 +48,7 @@ class SSList extends StatelessWidget {
   }
 }
 
+// Due to the planets do not appear in the usual order (from nearest to farest to the sun), I prefered to upload them manually
 class PlanetsList extends StatelessWidget {
   const PlanetsList({super.key});
 
@@ -120,6 +122,11 @@ void _navigateToPlanetDetails(BuildContext context, String planetName) {
   }
 }
 
+// Links may have to be changed
+
+// bodyType -> Comet
+// To see all the elements:
+// https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName%2CbodyType&filter%5B%5D=bodyType%2Ceq%2CComet
 class CometsList extends StatelessWidget {
   const CometsList({super.key});
 
@@ -129,6 +136,9 @@ class CometsList extends StatelessWidget {
   }
 }
 
+// bodyType -> Moon
+// To see all the elements:
+// https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName%2CbodyType&filter%5B%5D=bodyType%2Ceq%2CMoon
 class MoonList extends StatelessWidget {
   const MoonList({super.key});
 
@@ -157,6 +167,7 @@ class MoonList extends StatelessWidget {
               },
               child: const Text('Asteroid Moons'),
             ),
+            
           ],
         ),
       ],
@@ -164,6 +175,10 @@ class MoonList extends StatelessWidget {
   }
 }
 
+
+// bodyType -> Dwarf Planet
+// To see all the elements:
+// https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName%2CbodyType&filter%5B%5D=bodyType%2Ceq%2CDwarf%20Planet
 class DwarfList extends StatelessWidget {
   const DwarfList({super.key});
 
@@ -173,6 +188,9 @@ class DwarfList extends StatelessWidget {
   }
 }
 
+// bodyType -> Asteroid
+// To see all the elements:
+//
 class AsteroidsList extends StatelessWidget {
   const AsteroidsList({super.key});
 
