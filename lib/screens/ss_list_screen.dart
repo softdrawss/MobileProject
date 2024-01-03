@@ -51,7 +51,62 @@ class PlanetsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return ListView(
+      children: [
+        Column(
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/moonlist");
+              },
+              child: const Text("Mercury"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/moonlist");
+              },
+              child: const Text("Venus"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/moonlist");
+              },
+              child: const Text("Earth"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/moonlist");
+              },
+              child: const Text("Mars"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/moonlist");
+              },
+              child: const Text("Jupiter"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/moonlist");
+              },
+              child: const Text("Saturn"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/moonlist");
+              },
+              child: const Text("Uranus"),
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, "/moonlist");
+              },
+              child: const Text("Neptune"),
+            ),
+          ],
+        ),
+      ],
+    );
   }
 }
 
@@ -69,10 +124,9 @@ class MoonList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(title: const Text('Space App')),
-      body: Center(
-        child: Column(
+    return ListView(
+      children: [
+        Column(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
             ElevatedButton(
@@ -95,7 +149,7 @@ class MoonList extends StatelessWidget {
             ),
           ],
         ),
-      ),
+      ],
     );
   }
 }
