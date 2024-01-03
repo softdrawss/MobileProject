@@ -35,7 +35,7 @@ class SSList extends StatelessWidget {
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/asteroidlist");
+                Navigator.pushNamed(context, "/asteroidslist");
               },
               child: const Text("ASTEROIDS"),
             ),
@@ -43,6 +43,24 @@ class SSList extends StatelessWidget {
         )
       ],
     );
+  }
+}
+
+class PlanetsList extends StatelessWidget {
+  const PlanetsList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+
+class CometsList extends StatelessWidget {
+  const CometsList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
 
@@ -79,5 +97,23 @@ class MoonList extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+class DwarfList extends StatelessWidget {
+  const DwarfList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+
+class AsteroidsList extends StatelessWidget {
+  const AsteroidsList({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
   }
 }
