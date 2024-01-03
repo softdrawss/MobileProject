@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_project/screens/ss_body_screen.dart';
 
 class SSList extends StatelessWidget {
   const SSList({super.key});
@@ -49,6 +50,15 @@ class SSList extends StatelessWidget {
 class PlanetsList extends StatelessWidget {
   const PlanetsList({super.key});
 
+void _navigateToPlanetDetails(BuildContext context, String planetName) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => SSBodyScreen(id: planetName.toLowerCase()),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return ListView(
@@ -57,49 +67,49 @@ class PlanetsList extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                //Navigator.pushNamed(context, "/moonlist");
+                _navigateToPlanetDetails(context, "mercure");
               },
               child: const Text("Mercury"),
             ),
             ElevatedButton(
               onPressed: () {
-                //Navigator.pushNamed(context, "/moonlist");
+                _navigateToPlanetDetails(context, "venus");
               },
               child: const Text("Venus"),
             ),
             ElevatedButton(
               onPressed: () {
-                //Navigator.pushNamed(context, "/moonlist");
+                _navigateToPlanetDetails(context, "terre");
               },
               child: const Text("Earth"),
             ),
             ElevatedButton(
               onPressed: () {
-                //Navigator.pushNamed(context, "/moonlist");
+                _navigateToPlanetDetails(context, "mars");
               },
               child: const Text("Mars"),
             ),
             ElevatedButton(
               onPressed: () {
-                //Navigator.pushNamed(context, "/moonlist");
+                _navigateToPlanetDetails(context, "jupiter");
               },
               child: const Text("Jupiter"),
             ),
             ElevatedButton(
               onPressed: () {
-                //Navigator.pushNamed(context, "/moonlist");
+                _navigateToPlanetDetails(context, "saturne");
               },
               child: const Text("Saturn"),
             ),
             ElevatedButton(
               onPressed: () {
-                //Navigator.pushNamed(context, "/moonlist");
+                _navigateToPlanetDetails(context, "uranus");
               },
               child: const Text("Uranus"),
             ),
             ElevatedButton(
               onPressed: () {
-                //Navigator.pushNamed(context, "/moonlist");
+                _navigateToPlanetDetails(context, "neptune");
               },
               child: const Text("Neptune"),
             ),
