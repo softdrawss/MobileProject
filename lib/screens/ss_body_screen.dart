@@ -2,13 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:mobile_project/models/ss_body.dart';
 
 class SSBodyScreen extends StatelessWidget {
-  const SSBodyScreen({super.key});
+  const SSBodyScreen({super.key, required this.id});
+  
+final String id;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder(
-        future: loadBody("sycorax"),
+        future: loadBody(id),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(

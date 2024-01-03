@@ -57,49 +57,49 @@ class PlanetsList extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/moonlist");
+                //Navigator.pushNamed(context, "/moonlist");
               },
               child: const Text("Mercury"),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/moonlist");
+                //Navigator.pushNamed(context, "/moonlist");
               },
               child: const Text("Venus"),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/moonlist");
+                //Navigator.pushNamed(context, "/moonlist");
               },
               child: const Text("Earth"),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/moonlist");
+                //Navigator.pushNamed(context, "/moonlist");
               },
               child: const Text("Mars"),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/moonlist");
+                //Navigator.pushNamed(context, "/moonlist");
               },
               child: const Text("Jupiter"),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/moonlist");
+                //Navigator.pushNamed(context, "/moonlist");
               },
               child: const Text("Saturn"),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/moonlist");
+                //Navigator.pushNamed(context, "/moonlist");
               },
               child: const Text("Uranus"),
             ),
             ElevatedButton(
               onPressed: () {
-                Navigator.pushNamed(context, "/moonlist");
+                //Navigator.pushNamed(context, "/moonlist");
               },
               child: const Text("Neptune"),
             ),

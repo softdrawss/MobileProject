@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_project/screens/home_screen.dart';
-import 'package:mobile_project/screens/ss_list.dart';
+import 'package:mobile_project/screens/ss_list_screen.dart';
 import 'package:mobile_project/screens/apod_screen.dart';
 import 'package:mobile_project/screens/earth_screen.dart';
 import 'package:mobile_project/screens/iss_location_screen.dart';
@@ -42,7 +42,7 @@ class MyApp extends StatelessWidget {
         "/isslocation": (_) => const ISSLocationScreen(),
         "/earthview": (_) => const EarthViewScreen(),
         "/people": (_) => const PeopleInSpaceScreen(),
-        "/body": (_) => const SSBodyScreen(),
+        "/body": (_) => const SSBodyScreen(id: "sycorax"),
       },
       initialRoute: "/",
     );
