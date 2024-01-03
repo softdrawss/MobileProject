@@ -14,31 +14,31 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(16.0),
+        padding: const EdgeInsets.all(4.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _buildImageButton('DAILY\nPICTURE', 'image1.jpg', context, "/apod"),
-                _buildImageButton('ISS\nLOCATION', 'image2.jpg', context, "/isslocation"),
+                _buildImageButton('DAILY\nPICTURE', 'lib/assets/images/daily_picture.png', context, "/apod"),
+                _buildImageButton('ISS\nLOCATION', 'lib/assets/images/iss_location.png', context, "/isslocation"),
               ],
             ),
             SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _buildImageButton('SOLAR\nSYSTEM', 'image3.jpg', context, "/list"),
-                _buildImageButton('SPACE\nROCKS', 'image4.jpg', context, "/"),
+                _buildImageButton('SOLAR\nSYSTEM', 'lib/assets/images/solar_system.png', context, "/list"),
+                _buildImageButton('SPACE\nROCKS', 'lib/assets/images/space_rocks.png', context, "/"),
               ],
             ),
             SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _buildImageButton('PEOPLE\nIN SPACE', 'image5.jpg', context, "/people"),
-                _buildImageButton('OUR\nHOME', 'image6.jpg', context, "/earthview"),
+                _buildImageButton('PEOPLE\nIN SPACE', 'lib/assets/images/people_in_space.png', context, "/people"),
+                _buildImageButton('OUR\nHOME', 'lib/assets/images/our_home.png', context, "/earthview"),
               ],
             ),
           ],
@@ -81,8 +81,8 @@ Widget _buildImageButton(String label, String imagePath, BuildContext context, S
       Navigator.pushNamed(context, routeName);
     },
     child: Container(
-      width: MediaQuery.of(context).size.width / 2.5,
-      height: MediaQuery.of(context).size.width / 2.5,
+      width: MediaQuery.of(context).size.width / 2 - 20,
+      height: MediaQuery.of(context).size.height / 3 - 48,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         image: DecorationImage(
@@ -90,13 +90,17 @@ Widget _buildImageButton(String label, String imagePath, BuildContext context, S
           fit: BoxFit.cover,
         ),
       ),
-      child: Center(
-        child: Text(
-          label,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 18,
-            fontWeight: FontWeight.bold,
+      child: Align(
+        alignment: Alignment.bottomLeft,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            label,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),
