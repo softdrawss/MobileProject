@@ -11,33 +11,33 @@ class SSList extends StatelessWidget {
           children: [
             ElevatedButton(
               onPressed: () {
-                debugPrint("You pressed the button!");
+                Navigator.pushNamed(context, "/planetslist");
               },
-              child: Text("PLANETS"),
+              child: const Text("PLANETS"),
             ),
             ElevatedButton(
               onPressed: () {
-                debugPrint("You pressed the button!");
+                Navigator.pushNamed(context, "/cometslist");
               },
-              child: Text("COMETS"),
+              child: const Text("COMETS"),
             ),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, "/moonlist");
               },
-              child: Text("MOONS"),
+              child: const Text("MOONS"),
             ),
             ElevatedButton(
               onPressed: () {
-                debugPrint("You pressed the button!");
+                Navigator.pushNamed(context, "/dwarflist");
               },
-              child: Text("DWARF PLANETS"),
+              child: const Text("DWARF PLANETS"),
             ),
             ElevatedButton(
               onPressed: () {
-                debugPrint("You pressed the button!");
+                Navigator.pushNamed(context, "/asteroidlist");
               },
-              child: Text("ASTEROIDS"),
+              child: const Text("ASTEROIDS"),
             ),
           ],
         )

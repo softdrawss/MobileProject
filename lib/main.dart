@@ -33,7 +33,11 @@ class MyApp extends StatelessWidget {
       routes: {
         "/": (_) => const HomeScreen(),
         "/list": (_) => const SSList(),
+        "/planetslist": (_) => const SSList(),
+        "/cometslist": (_) => const SSList(),
         "/moonlist": (_) => const MoonList(),
+        "/dwarflist": (_) => const SSList(),
+        "/asteroidlist": (_) => const SSList(),
         "/apod": (_) => const APODScreen(),
         "/isslocation": (_) => const ISSLocationScreen(),
         "/earthview": (_) => const EarthViewScreen(),
