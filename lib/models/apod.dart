@@ -7,22 +7,23 @@ class APOD {
   String url;
   String explanation;
   String type;
+  String date;
   String? thumbs;
   String? copyright;
 
   APOD.fromJson(Map<String, dynamic> json)
-  : title = json["title"],
-  url = json["url"],
-  explanation = json["explanation"],
-  type = json["media_type"],
-  thumbs = json["thumbs"],
-  copyright = json["copyright"];
+      : title = json["title"],
+        url = json["url"],
+        explanation = json["explanation"],
+        type = json["media_type"],
+        date = json["date"],
+        thumbs = json["thumbs"],
+        copyright = json["copyright"];
 }
 
 Future<APOD> loadAPOD() async {
-  final response = await http.get(
-    Uri.parse("https://api.nasa.gov/planetary/apod?api_key=TTuFJw8ydRLpqdI02MWSXGy2Xe25vg4IWdtkMRmm"),
-  );
+  final response = await http.get(Uri.parse(
+      "https://api.nasa.gov/planetary/apod?api_key=TTuFJw8ydRLpqdI02MWSXGy2Xe25vg4IWdtkMRmm"));
   final json = jsonDecode(response.body);
   APOD today = APOD.fromJson(json);
 
