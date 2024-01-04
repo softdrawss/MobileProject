@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:mobile_project/models/apod.dart';
+import 'package:youtube_player_iframe/youtube_player_iframe.dart';
+
+import '../widgets/chooseAPOD_date_widget.dart';
 
 class APODScreen extends StatefulWidget {
   const APODScreen({super.key});
@@ -12,37 +14,15 @@ class APODScreen extends StatefulWidget {
 class _APODScreenState extends State<APODScreen> {
   DateTime dateTime = DateTime.now();
 
-  void selectDate() {
-    showDatePicker(
-            builder: (context, child) {
-              return Theme(
-                data: Theme.of(context).copyWith(
-                  colorScheme: const ColorScheme.dark(
-                    primary: Color.fromARGB(
-                        255, 80, 54, 116), // header background color
-                    onPrimary: Colors.white, // header text color
-                    onSurface:
-                        Color.fromARGB(255, 161, 175, 188), // body text color
-                  ),
-                  textButtonTheme: TextButtonThemeData(
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.white, // button text color
-                    ),
-                  ),
-                ),
-                child: child!,
-              );
-            },
-            context: context,
-            initialDate: DateTime.now(),
-            firstDate: DateTime(1995, 6, 20),
-            lastDate: DateTime.now())
-        .then((value) {
-      setState(() {
-        dateTime = value!;
-      });
-    });
-  }
+  ChooseDateWidget? dateWidget;
+
+  final controller = YoutubePlayerController(
+    params: const YoutubePlayerParams(
+      mute: false,
+      showControls: true,
+      showFullscreenButton: true,
+    ),
+  );
 
   @override
   Widget build(BuildContext context) {
@@ -58,6 +38,9 @@ class _APODScreenState extends State<APODScreen> {
             );
           }
           final picture = snapshot.data!;
+          if (picture.type == "video") {
+            controller.loadVideoByUrl(mediaContentUrl: picture.url);
+          }
           return Padding(
             padding: EdgeInsets.fromLTRB(
                 screenWidth * 0.05, screenHeight * 0.02, screenWidth * 0.05, 0),
@@ -79,24 +62,26 @@ class _APODScreenState extends State<APODScreen> {
                         style:
                             const TextStyle(color: Colors.white, fontSize: 20),
                       ),
-                      if (picture.type == "video")
+                      if (picture.copyright != null)
                         Text(
-                          picture.url,
-                          style: const TextStyle(color: Colors.blue),
+                          picture.copyright.toString(),
+                          style: const TextStyle(
+                              color: Colors.white70, fontSize: 15),
+                        ),
+                      if (picture.type == "video")
+                        YoutubePlayer(
+                          controller: controller,
                         )
                       else
                         Image(image: NetworkImage(picture.url)),
                       const SizedBox(height: 15),
-                      GestureDetector(
-                        onTap: () {
-                          selectDate();
-                        },
-                        child: Text(
-                          dateTime.toString().split(" ")[0],
-                          style: const TextStyle(
-                              color: Color.fromARGB(255, 161, 175, 188)),
-                        ),
-                      ),
+                      ChooseDateWidget(
+                          dateTime: dateTime,
+                          onDateChanged: (newDateTime) {
+                            setState(() {
+                              dateTime = newDateTime;
+                            });
+                          }),
                       const SizedBox(height: 15),
                       Text(
                         picture.explanation,
