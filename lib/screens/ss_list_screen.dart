@@ -48,18 +48,18 @@ class SSList extends StatelessWidget {
   }
 }
 
+void navigateToBodyDetails(BuildContext context, String planetName) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => SSBodyScreen(id: planetName),
+    ),
+  );
+}
+
 // Due to the planets do not appear in the usual order (from nearest to farest to the sun), I prefered to upload them manually
 class PlanetsList extends StatelessWidget {
   const PlanetsList({super.key});
-
-void _navigateToPlanetDetails(BuildContext context, String planetName) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => SSBodyScreen(id: planetName.toLowerCase()),
-      ),
-    );
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -67,51 +67,60 @@ void _navigateToPlanetDetails(BuildContext context, String planetName) {
       children: [
         Column(
           children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Back'),
+              ),
+            ),
             ElevatedButton(
               onPressed: () {
-                _navigateToPlanetDetails(context, "mercure");
+                navigateToBodyDetails(context, "mercure");
               },
               child: const Text("Mercury"),
             ),
             ElevatedButton(
               onPressed: () {
-                _navigateToPlanetDetails(context, "venus");
+                navigateToBodyDetails(context, "venus");
               },
               child: const Text("Venus"),
             ),
             ElevatedButton(
               onPressed: () {
-                _navigateToPlanetDetails(context, "terre");
+                navigateToBodyDetails(context, "terre");
               },
               child: const Text("Earth"),
             ),
             ElevatedButton(
               onPressed: () {
-                _navigateToPlanetDetails(context, "mars");
+                navigateToBodyDetails(context, "mars");
               },
               child: const Text("Mars"),
             ),
             ElevatedButton(
               onPressed: () {
-                _navigateToPlanetDetails(context, "jupiter");
+                navigateToBodyDetails(context, "jupiter");
               },
               child: const Text("Jupiter"),
             ),
             ElevatedButton(
               onPressed: () {
-                _navigateToPlanetDetails(context, "saturne");
+                navigateToBodyDetails(context, "saturne");
               },
               child: const Text("Saturn"),
             ),
             ElevatedButton(
               onPressed: () {
-                _navigateToPlanetDetails(context, "uranus");
+                navigateToBodyDetails(context, "uranus");
               },
               child: const Text("Uranus"),
             ),
             ElevatedButton(
               onPressed: () {
-                _navigateToPlanetDetails(context, "neptune");
+                navigateToBodyDetails(context, "neptune");
               },
               child: const Text("Neptune"),
             ),
@@ -126,13 +135,46 @@ void _navigateToPlanetDetails(BuildContext context, String planetName) {
 
 // bodyType -> Comet
 // To see all the elements:
-// https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName%2CbodyType&filter%5B%5D=bodyType%2Ceq%2CComet
+// https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CComet
 class CometsList extends StatelessWidget {
   const CometsList({super.key});
 
+  final String url =
+      "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CComet";
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("List of Bodies"),
+      ),
+      body: FutureBuilder(
+        future: loadList(url),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
+            return Center(child: Text('No data available'));
+          } else {
+            List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
+
+            return ListView.builder(
+              itemCount: bodyList.length,
+              itemBuilder: (context, index) {
+                return ElevatedButton(
+                  onPressed: () {
+                    navigateToBodyDetails(context, bodyList[index].id);
+                  },
+                  child: Text(bodyList[index].name),
+                );
+              },
+            );
+          }
+        },
+      ),
+    );
   }
 }
 
@@ -167,7 +209,6 @@ class MoonList extends StatelessWidget {
               },
               child: const Text('Asteroid Moons'),
             ),
-            
           ],
         ),
       ],
@@ -175,27 +216,93 @@ class MoonList extends StatelessWidget {
   }
 }
 
-
 // bodyType -> Dwarf Planet
 // To see all the elements:
-// https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName%2CbodyType&filter%5B%5D=bodyType%2Ceq%2CDwarf%20Planet
+// https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CDwarf%20Planet
+
 class DwarfList extends StatelessWidget {
   const DwarfList({super.key});
 
+  final String url =
+      "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CDwarf%20Planet";
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("List of Bodies"),
+      ),
+      body: FutureBuilder(
+        future: loadList(url),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
+            return Center(child: Text('No data available'));
+          } else {
+            List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
+
+            return ListView.builder(
+              itemCount: bodyList.length,
+              itemBuilder: (context, index) {
+                return ElevatedButton(
+                  onPressed: () {
+                    navigateToBodyDetails(context, bodyList[index].id);
+                  },
+                  child: Text(bodyList[index].name),
+                );
+              },
+            );
+          }
+        },
+      ),
+    );
   }
 }
 
 // bodyType -> Asteroid
 // To see all the elements:
-//
+// https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CAsteroid
 class AsteroidsList extends StatelessWidget {
   const AsteroidsList({super.key});
 
+final String url =
+      "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CAsteroid";
+
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("List of Bodies"),
+      ),
+      body: FutureBuilder(
+        future: loadList(url),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
+            return Center(child: Text('No data available'));
+          } else {
+            List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
+
+            return ListView.builder(
+              itemCount: bodyList.length,
+              itemBuilder: (context, index) {
+                return ElevatedButton(
+                  onPressed: () {
+                    navigateToBodyDetails(context, bodyList[index].id);
+                  },
+                  child: Text(bodyList[index].name),
+                );
+              },
+            );
+          }
+        },
+      ),
+    );
   }
 }
