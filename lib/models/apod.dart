@@ -21,11 +21,11 @@ class APOD {
         copyright = json["copyright"];
 }
 
-Future<APOD> loadAPOD() async {
+Future<APOD> loadAPOD(String? date) async {
   final response = await http.get(Uri.parse(
-      "https://api.nasa.gov/planetary/apod?api_key=TTuFJw8ydRLpqdI02MWSXGy2Xe25vg4IWdtkMRmm"));
+      "https://api.nasa.gov/planetary/apod?api_key=TTuFJw8ydRLpqdI02MWSXGy2Xe25vg4IWdtkMRmm&date=$date"));
   final json = jsonDecode(response.body);
-  APOD today = APOD.fromJson(json);
+  APOD day = APOD.fromJson(json);
 
-  return today;
+  return day;
 }
