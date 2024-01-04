@@ -47,6 +47,7 @@ class _APODScreenState extends State<APODScreen> {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       body: FutureBuilder(
         future: loadAPOD(dateTime.toString().split(" ")[0]),
@@ -57,61 +58,54 @@ class _APODScreenState extends State<APODScreen> {
             );
           }
           final picture = snapshot.data!;
-          return Center(
-            child: Padding(
-              padding: EdgeInsets.fromLTRB(
-                  screenWidth * 0.05, 0, screenWidth * 0.05, 0),
-              child: SingleChildScrollView(
-                child: Column(
-                  children: [
-                    Align(
-                      alignment: Alignment.topLeft,
-                      child: BackButton(
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      ),
+          return Padding(
+            padding: EdgeInsets.fromLTRB(
+                screenWidth * 0.05, screenHeight * 0.02, screenWidth * 0.05, 0),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Align(
+                    alignment: Alignment.topLeft,
+                    child: BackButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
                     ),
-                    Column(
-                      children: [
+                  ),
+                  Column(
+                    children: [
+                      Text(
+                        picture.title,
+                        style:
+                            const TextStyle(color: Colors.white, fontSize: 20),
+                      ),
+                      if (picture.type == "video")
                         Text(
-                          picture.title,
+                          picture.url,
+                          style: const TextStyle(color: Colors.blue),
+                        )
+                      else
+                        Image(image: NetworkImage(picture.url)),
+                      const SizedBox(height: 15),
+                      GestureDetector(
+                        onTap: () {
+                          selectDate();
+                        },
+                        child: Text(
+                          dateTime.toString().split(" ")[0],
                           style: const TextStyle(
-                              color: Colors.white, fontSize: 20),
+                              color: Color.fromARGB(255, 161, 175, 188)),
                         ),
-                        // if (picture.copyright != null)
-                        //   Text(
-                        //     picture.copyright,
-                        //     style: const TextStyle(
-                        //         color: Colors.white, fontSize: 20),
-                        //   ),
-                        Image(
-                          image: picture.type == "image"
-                              ? NetworkImage(picture.url)
-                              : NetworkImage(picture.thumbs!),
-                        ),
-                        if (picture.type == "video") Text(picture.url),
-                        const SizedBox(height: 15),
-                        GestureDetector(
-                          onTap: () {
-                            selectDate();
-                          },
-                          child: Text(
-                            dateTime.toString().split(" ")[0],
-                            style: const TextStyle(
-                                color: Color.fromARGB(255, 161, 175, 188)),
-                          ),
-                        ),
-                        const SizedBox(height: 15),
-                        Text(
-                          picture.explanation,
-                          textAlign: TextAlign.justify,
-                          style: const TextStyle(color: Colors.white),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
+                      ),
+                      const SizedBox(height: 15),
+                      Text(
+                        picture.explanation,
+                        textAlign: TextAlign.justify,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                    ],
+                  )
+                ],
               ),
             ),
           );
