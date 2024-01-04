@@ -64,9 +64,24 @@ class _ChooseDateWidgetState extends State<ChooseDateWidget> {
       onTap: () {
         selectDate();
       },
-      child: Text(
-        selectedDateTime.toString().split(" ")[0],
-        style: const TextStyle(color: Color.fromARGB(255, 161, 175, 188)),
+      child: Container(
+        width: 100,
+        decoration: BoxDecoration(
+          border: Border.all(
+              color: const Color.fromARGB(255, 161, 175, 188), width: .50),
+          borderRadius: const BorderRadius.all(
+            Radius.circular(10),
+          ),
+        ),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Text(
+              selectedDateTime.toString().split(" ")[0],
+              style: const TextStyle(color: Color.fromARGB(255, 161, 175, 188)),
+            ),
+          ],
+        ),
       ),
     );
   }
