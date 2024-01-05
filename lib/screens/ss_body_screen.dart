@@ -62,88 +62,98 @@ class SSBodyScreen extends StatelessWidget {
                     color: const Color.fromARGB(255, 161, 175, 188),
                   ),
                   child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          picture.gravity == 0
-                              ? "Gravity: Unknown"
-                              : "Gravity: ${picture.gravity} m/s^2",
-                          style: text,
-                        ),
-                        Text(
-                          picture.semimajorAxis == 0
-                              ? "Semimajor Axis: Unknown"
-                              : "Semimajor Axis: ${picture.semimajorAxis} km",
-                          style: text,
-                        ),
-                        Text(
-                          "Orbital inclination: ${picture.inclination}º",
-                          style: text,
-                        ),
-                        Text(
-                          picture.massValue == 0
-                              ? "Mass: Unknown"
-                              : "Mass: ${picture.massValue} · 10^${picture.massExponent} kg",
-                          style: text,
-                        ),
-                        Text(
-                          picture.volValue == 0
-                              ? "Volume: Unknown"
-                              : "Volume: ${picture.volValue} · 10^${picture.volExponent} km^3",
-                          style: text,
-                        ),
-                        Text(
-                          picture.density == 0
-                              ? "Density: Unknown"
-                              : "Density: ${picture.density} g/cm^3",
-                          style: text,
-                        ),
-                        Text(
-                          picture.meanRadius == 0
-                              ? "Mean radius: Unknown"
-                              : "Mean Radius: ${picture.meanRadius}",
-                          style: text,
-                        ),
-                        Text(
-                          picture.sideralOrbit == 0
-                              ? "Sideral Orbit Period: Unknown"
-                              : "Sideral Orbit Period: ${picture.sideralOrbit} days",
-                          style: text,
-                        ),
-                        Text(
-                          picture.sideralRotation == 0
-                              ? "Sideral Rotation: Unknown"
-                              : "Sideral Rotation: ${picture.sideralRotation} hours",
-                          style: text,
-                        ),
-                        Text(
-                          "Axialt Tilt: ${picture.axialTilt}º",
-                          style: text,
-                        ),
-                        Text(
-                          "Mean Temperature: ${picture.avgTemp} K",
-                          style: text,
-                        ),
-                        Text(
-                          picture.discoveredBy == ""
-                              ? "Discovered by: Unknown"
-                              : "Discovered by: ${picture.discoveredBy}",
-                          style: text,
-                        ),
-                        Text(
-                          picture.discoveryDate == ""
-                              ? "Discovery date: Unknown"
-                              : "Discovery date: ${picture.discoveryDate}",
-                          style: text,
-                        ),
-                        Text(
-                          picture.alternativeName == ""
-                              ? "Alternative name: -"
-                              : "Alternative name: ${picture.alternativeName}",
-                          style: text,
-                        ),
-                      ]),
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        picture.gravity == 0
+                            ? "Gravity: Unknown"
+                            : "Gravity: ${picture.gravity} m/s^2",
+                        style: text,
+                      ),
+                      Text(
+                        picture.semimajorAxis == 0
+                            ? "Semimajor Axis: Unknown"
+                            : "Semimajor Axis: ${picture.semimajorAxis} km",
+                        style: text,
+                      ),
+                      Text(
+                        "Orbital inclination: ${picture.inclination}º",
+                        style: text,
+                      ),
+                      Text(
+                        picture.massValue == 0
+                            ? "Mass: Unknown"
+                            : "Mass: ${picture.massValue} · 10^${picture.massExponent} kg",
+                        style: text,
+                      ),
+                      Text(
+                        picture.volValue == 0
+                            ? "Volume: Unknown"
+                            : "Volume: ${picture.volValue} · 10^${picture.volExponent} km^3",
+                        style: text,
+                      ),
+                      Text(
+                        picture.density == 0
+                            ? "Density: Unknown"
+                            : "Density: ${picture.density} g/cm^3",
+                        style: text,
+                      ),
+                      Text(
+                        picture.meanRadius == 0
+                            ? "Mean radius: Unknown"
+                            : "Mean Radius: ${picture.meanRadius} km",
+                        style: text,
+                      ),
+                      Text(
+                        picture.sideralOrbit == 0
+                            ? "Sideral Orbit Period: Unknown"
+                            : "Sideral Orbit Period: ${picture.sideralOrbit} days",
+                        style: text,
+                      ),
+                      Text(
+                        picture.sideralRotation == 0
+                            ? "Sideral Rotation: Unknown"
+                            : "Sideral Rotation: ${picture.sideralRotation} hours",
+                        style: text,
+                      ),
+                      Text(
+                        "Axialt Tilt: ${picture.axialTilt}º",
+                        style: text,
+                      ),
+                      Text(
+                        "Mean Temperature: ${picture.avgTemp} K",
+                        style: text,
+                      ),
+                      Text(
+                        picture.discoveredBy == ""
+                            ? "Discovered by: Unknown"
+                            : "Discovered by: ${picture.discoveredBy}",
+                        style: text,
+                      ),
+                      Text(
+                        picture.discoveryDate == ""
+                            ? "Discovery date: Unknown"
+                            : "Discovery date: ${picture.discoveryDate}",
+                        style: text,
+                      ),
+                      Text(
+                        picture.alternativeName == ""
+                            ? "Alternative name: -"
+                            : "Alternative name: ${picture.alternativeName}",
+                        style: text,
+                      ),
+                    ],
+                  ),
                 ),
+                const SizedBox(height: 20),
+                if (picture.moons != null && picture.moons.isNotEmpty)
+                  ElevatedButton(
+                    onPressed: () {
+                      // Handle button press for moons
+                    },
+                    child: Text("SEE MOONS IN ${picture.name.toUpperCase()}"),
+                  ),
+                  const SizedBox(height: 20),
               ],
             ),
           );
