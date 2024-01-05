@@ -57,6 +57,40 @@ void navigateToBodyDetails(BuildContext context, String planetName) {
   );
 }
 
+Widget _buildImageButton(
+    String label, String imagePath, BuildContext context, String id) {
+  return GestureDetector(
+    onTap: () {
+      navigateToBodyDetails(context, id);
+    },
+    child: Container(
+      width: MediaQuery.of(context).size.width / 2 - 20,
+      height: MediaQuery.of(context).size.height / 3 - 48,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        image: DecorationImage(
+          image: AssetImage(imagePath),
+          fit: BoxFit.contain,
+        ),
+      ),
+      child: Align(
+        alignment: Alignment.bottomLeft,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            label,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
 // Due to the planets do not appear in the usual order (from nearest to farest to the sun), I prefered to upload them manually
 class PlanetsList extends StatelessWidget {
   const PlanetsList({super.key});
@@ -76,54 +110,22 @@ class PlanetsList extends StatelessWidget {
                 child: const Text('Back'),
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                navigateToBodyDetails(context, "mercure");
-              },
-              child: const Text("Mercury"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                navigateToBodyDetails(context, "venus");
-              },
-              child: const Text("Venus"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                navigateToBodyDetails(context, "terre");
-              },
-              child: const Text("Earth"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                navigateToBodyDetails(context, "mars");
-              },
-              child: const Text("Mars"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                navigateToBodyDetails(context, "jupiter");
-              },
-              child: const Text("Jupiter"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                navigateToBodyDetails(context, "saturne");
-              },
-              child: const Text("Saturn"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                navigateToBodyDetails(context, "uranus");
-              },
-              child: const Text("Uranus"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                navigateToBodyDetails(context, "neptune");
-              },
-              child: const Text("Neptune"),
-            ),
+            _buildImageButton(
+                "MERCURY", "lib/assets/images/planets/mercury.jpg", context, "mercure"),
+            _buildImageButton(
+                "Venus", "lib/assets/images/planets/venus.jpg", context, "venus"),
+            _buildImageButton(
+                "Earth", "lib/assets/images/planets/earth.jpg", context, "terre"),
+            _buildImageButton(
+                "Mars", "lib/assets/images/planets/mars.jpg", context, "mars"),
+            _buildImageButton(
+                "Jupiter", "lib/assets/images/planets/jupiter.jpg", context, "jupiter"),
+            _buildImageButton(
+                "Saturn", "lib/assets/images/planets/saturn.jpg", context, "saturne"),
+            _buildImageButton(
+                "Uranus", "lib/assets/images/planets/uranus.jpg", context, "uranus"),
+            _buildImageButton(
+                "Neptune", "lib/assets/images/planets/neptune.jpg", context, "neptune"),
           ],
         ),
       ],
@@ -184,7 +186,7 @@ class CometsList extends StatelessWidget {
 class MoonList extends StatelessWidget {
   const MoonList({super.key});
 
-final String url =
+  final String url =
       "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CMoon";
 
   @override
@@ -275,7 +277,7 @@ class DwarfList extends StatelessWidget {
 class AsteroidsList extends StatelessWidget {
   const AsteroidsList({super.key});
 
-final String url =
+  final String url =
       "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CAsteroid";
 
   @override

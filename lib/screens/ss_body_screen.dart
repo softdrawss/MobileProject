@@ -39,7 +39,7 @@ class SSBodyScreen extends StatelessWidget {
           }
           final picture = snapshot.data!;
           return Container(
-            padding: EdgeInsets.fromLTRB(10, 25, 10, 25),
+            padding: const EdgeInsets.fromLTRB(10, 25, 10, 25),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
