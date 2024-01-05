@@ -50,12 +50,6 @@ Future<Body> loadBody(String id) async {
     Uri.parse("https://api.le-systeme-solaire.net/rest/bodies/$id"),
   );
   final json = jsonDecode(response.body);
-  /*
-  final jsonUserList = json["results"];
-  List<Body> userList = [];
-  for (final jsonUser in jsonUserList) {
-    userList.add(Body.fromJson(jsonUser));
-  }*/
 
   Body body = Body.fromJson(json);
   return body;
@@ -66,12 +60,6 @@ Future<Body> loadBodyURL(String url) async {
     Uri.parse(url),
   );
   final json = jsonDecode(response.body);
-  /*
-  final jsonUserList = json["results"];
-  List<Body> userList = [];
-  for (final jsonUser in jsonUserList) {
-    userList.add(Body.fromJson(jsonUser));
-  }*/
 
   Body body = Body.fromJson(json);
   return body;
