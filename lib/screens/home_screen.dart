@@ -21,24 +21,24 @@ class HomeScreen extends StatelessWidget {
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _buildImageButton('DAILY\nPICTURE', 'lib/assets/images/daily_picture.png', context, "/apod"),
-                _buildImageButton('ISS\nLOCATION', 'lib/assets/images/iss_location.png', context, "/isslocation"),
+                _buildImageButton('DAILY\nPICTURE', 'lib/assets/images/home_screen/daily_picture.png', context, "/apod"),
+                _buildImageButton('ISS\nLOCATION', 'lib/assets/images/home_screen/iss_location.png', context, "/isslocation"),
               ],
             ),
             const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _buildImageButton('SOLAR\nSYSTEM', 'lib/assets/images/solar_system.png', context, "/list"),
-                _buildImageButton('SPACE\nROCKS', 'lib/assets/images/space_rocks.png', context, "/spacerocks"),
+                _buildImageButton('SOLAR\nSYSTEM', 'lib/assets/images/home_screen/solar_system.png', context, "/list"),
+                _buildImageButton('SPACE\nROCKS', 'lib/assets/images/home_screen/space_rocks.png', context, "/spacerocks"),
               ],
             ),
             const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                _buildImageButton('PEOPLE\nIN SPACE', 'lib/assets/images/people_in_space.png', context, "/people"),
-                _buildImageButton('OUR\nHOME', 'lib/assets/images/our_home.png', context, "/earthview"),
+                _buildImageButton('PEOPLE\nIN SPACE', 'lib/assets/images/home_screen/people_in_space.png', context, "/people"),
+                _buildImageButton('OUR\nHOME', 'lib/assets/images/home_screen/our_home.png', context, "/earthview"),
               ],
             ),
           ],
@@ -58,7 +58,7 @@ class CustomAppBar extends StatelessWidget {
       children: [
         const SizedBox(width: 12.0),
         Image.asset(
-          'lib/assets/images/icon.png',
+          'lib/assets/images/home_screen/icon.png',
           height: 48.0,
           width: 48.0,
         ),
