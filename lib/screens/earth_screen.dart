@@ -25,12 +25,11 @@ class EarthViewScreen extends StatelessWidget {
             child: Column(
               children: [
                 Align(
-                  alignment: Alignment.centerLeft,
-                  child: ElevatedButton(
+                  alignment: Alignment.topLeft,
+                  child: BackButton(
                     onPressed: () {
                       Navigator.pop(context);
                     },
-                    child: const Text('Back'),
                   ),
                 ),
                 Expanded(
@@ -79,9 +78,10 @@ class EarthViewScreen extends StatelessWidget {
                         const SizedBox(height: 5),
                         Row(
                           children: [
-                            const Text("Latitude:           ",
+                            const Text("Latitude:",
                                 style: TextStyle(
-                                    color: Color.fromARGB(255, 30, 20, 44))),
+                                    color: Color.fromARGB(255, 30, 20, 44)),),
+                                    const SizedBox(width: 15),
                             Text(epic[currentImg].lat.toString(),
                                 style: const TextStyle(
                                     color: Color.fromARGB(255, 30, 20, 44))),
@@ -89,86 +89,32 @@ class EarthViewScreen extends StatelessWidget {
                         ),
                         Row(
                           children: [
-                            const Text("Longitude:        ",
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 30, 20, 44))),
+                            const Text(
+                              "Longitude:",
+                              style: TextStyle(
+                                  color: Color.fromARGB(255, 30, 20, 44)),
+                            ),
+                            const SizedBox(width: 15),
                             Text(epic[currentImg].lon.toString(),
                                 style: const TextStyle(
                                     color: Color.fromARGB(255, 30, 20, 44))),
                           ],
                         ),
-                        Row(
-                          children: [
-                            const Text("DSCOVR position:    ",
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 30, 20, 44))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(epic[currentImg].dscovrX.toString(),
-                                    style: const TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 30, 20, 44))),
-                                Text(epic[currentImg].dscovrY.toString(),
-                                    style: const TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 30, 20, 44))),
-                                Text(epic[currentImg].dscovrZ.toString(),
-                                    style: const TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 30, 20, 44))),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Text("Moon position:    ",
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 30, 20, 44))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(epic[currentImg].lunarX.toString(),
-                                    style: const TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 30, 20, 44))),
-                                Text(epic[currentImg].lunarY.toString(),
-                                    style: const TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 30, 20, 44))),
-                                Text(epic[currentImg].lunarZ.toString(),
-                                    style: const TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 30, 20, 44))),
-                              ],
-                            ),
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            const Text("Sun position:    ",
-                                style: TextStyle(
-                                    color: Color.fromARGB(255, 30, 20, 44))),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(epic[currentImg].sunX.toString(),
-                                    style: const TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 30, 20, 44))),
-                                Text(epic[currentImg].sunY.toString(),
-                                    style: const TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 30, 20, 44))),
-                                Text(epic[currentImg].sunZ.toString(),
-                                    style: const TextStyle(
-                                        color:
-                                            Color.fromARGB(255, 30, 20, 44))),
-                              ],
-                            ),
-                          ],
-                        ),
+                        XYZPositions(
+                            object: "DSCOVR",
+                            x: epic[currentImg].dscovrX.toString(),
+                            y: epic[currentImg].dscovrY.toString(),
+                            z: epic[currentImg].dscovrZ.toString()),
+                        XYZPositions(
+                            object: "Moon",
+                            x: epic[currentImg].lunarX.toString(),
+                            y: epic[currentImg].lunarY.toString(),
+                            z: epic[currentImg].lunarZ.toString()),
+                        XYZPositions(
+                            object: "Sun",
+                            x: epic[currentImg].sunX.toString(),
+                            y: epic[currentImg].sunY.toString(),
+                            z: epic[currentImg].sunZ.toString()),
                         const SizedBox(height: 5),
                       ],
                     ),
@@ -179,6 +125,42 @@ class EarthViewScreen extends StatelessWidget {
           );
         },
       ),
+    );
+  }
+}
+
+class XYZPositions extends StatelessWidget {
+  const XYZPositions({
+    super.key,
+    required this.object,
+    required this.x,
+    required this.y,
+    required this.z,
+  });
+
+  final String object, x, y, z;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      children: [
+        Text(
+          "$object position:",
+          style: const TextStyle(color: Color.fromARGB(255, 30, 20, 44)),
+        ),
+        const SizedBox(width: 10),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(x,
+                style: const TextStyle(color: Color.fromARGB(255, 30, 20, 44))),
+            Text(y,
+                style: const TextStyle(color: Color.fromARGB(255, 30, 20, 44))),
+            Text(z,
+                style: const TextStyle(color: Color.fromARGB(255, 30, 20, 44))),
+          ],
+        ),
+      ],
     );
   }
 }

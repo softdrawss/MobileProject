@@ -57,6 +57,40 @@ void navigateToBodyDetails(BuildContext context, String planetName) {
   );
 }
 
+Widget _buildImageButton(
+    String label, String imagePath, BuildContext context, String id) {
+  return GestureDetector(
+    onTap: () {
+      navigateToBodyDetails(context, id);
+    },
+    child: Container(
+      width: MediaQuery.of(context).size.width / 2 - 20,
+      height: MediaQuery.of(context).size.height / 3 - 48,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(8),
+        image: DecorationImage(
+          image: AssetImage(imagePath),
+          fit: BoxFit.contain,
+        ),
+      ),
+      child: Align(
+        alignment: Alignment.bottomLeft,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            label,
+            style: const TextStyle(
+              color: Colors.white,
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}
+
 // Due to the planets do not appear in the usual order (from nearest to farest to the sun), I prefered to upload them manually
 class PlanetsList extends StatelessWidget {
   const PlanetsList({super.key});
@@ -76,54 +110,22 @@ class PlanetsList extends StatelessWidget {
                 child: const Text('Back'),
               ),
             ),
-            ElevatedButton(
-              onPressed: () {
-                navigateToBodyDetails(context, "mercure");
-              },
-              child: const Text("Mercury"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                navigateToBodyDetails(context, "venus");
-              },
-              child: const Text("Venus"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                navigateToBodyDetails(context, "terre");
-              },
-              child: const Text("Earth"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                navigateToBodyDetails(context, "mars");
-              },
-              child: const Text("Mars"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                navigateToBodyDetails(context, "jupiter");
-              },
-              child: const Text("Jupiter"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                navigateToBodyDetails(context, "saturne");
-              },
-              child: const Text("Saturn"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                navigateToBodyDetails(context, "uranus");
-              },
-              child: const Text("Uranus"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                navigateToBodyDetails(context, "neptune");
-              },
-              child: const Text("Neptune"),
-            ),
+            _buildImageButton(
+                "MERCURY", "lib/assets/images/planets/mercury.jpg", context, "mercure"),
+            _buildImageButton(
+                "Venus", "lib/assets/images/planets/venus.jpg", context, "venus"),
+            _buildImageButton(
+                "Earth", "lib/assets/images/planets/earth.jpg", context, "terre"),
+            _buildImageButton(
+                "Mars", "lib/assets/images/planets/mars.jpg", context, "mars"),
+            _buildImageButton(
+                "Jupiter", "lib/assets/images/planets/jupiter.jpg", context, "jupiter"),
+            _buildImageButton(
+                "Saturn", "lib/assets/images/planets/saturn.jpg", context, "saturne"),
+            _buildImageButton(
+                "Uranus", "lib/assets/images/planets/uranus.jpg", context, "uranus"),
+            _buildImageButton(
+                "Neptune", "lib/assets/images/planets/neptune.jpg", context, "neptune"),
           ],
         ),
       ],
@@ -146,17 +148,17 @@ class CometsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("List of Bodies"),
+        title: const Text("List of Bodies"),
       ),
       body: FutureBuilder(
         future: loadList(url),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
-            return Center(child: Text('No data available'));
+            return const Center(child: Text('No data available'));
           } else {
             List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
 
@@ -184,24 +186,24 @@ class CometsList extends StatelessWidget {
 class MoonList extends StatelessWidget {
   const MoonList({super.key});
 
-final String url =
+  final String url =
       "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CMoon";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("List of Moons"),
+        title: const Text("List of Moons"),
       ),
       body: FutureBuilder(
         future: loadList(url),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
-            return Center(child: Text('No data available'));
+            return const Center(child: Text('No data available'));
           } else {
             List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
 
@@ -237,17 +239,17 @@ class DwarfList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("List of Dwarf Planets"),
+        title: const Text("List of Dwarf Planets"),
       ),
       body: FutureBuilder(
         future: loadList(url),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
-            return Center(child: Text('No data available'));
+            return const Center(child: Text('No data available'));
           } else {
             List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
 
@@ -275,24 +277,24 @@ class DwarfList extends StatelessWidget {
 class AsteroidsList extends StatelessWidget {
   const AsteroidsList({super.key});
 
-final String url =
+  final String url =
       "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CAsteroid";
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("List of Asteroids"),
+        title: const Text("List of Asteroids"),
       ),
       body: FutureBuilder(
         future: loadList(url),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
-            return Center(child: Text('No data available'));
+            return const Center(child: Text('No data available'));
           } else {
             List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
 
