@@ -78,16 +78,19 @@ class _APODScreenState extends State<APODScreen> {
                             fontWeight: FontWeight.bold,
                             color: Colors.white),
                       ),
-                      if (picture.copyright != null)
-                        Text(
-                          picture.copyright.toString(),
-                          style: GoogleFonts.shareTechMono(
-                              fontSize: 16, color: Colors.white),
-                        ),
+                      picture.copyright != null
+                          ? Text(
+                              picture.copyright.toString(),
+                              style: GoogleFonts.shareTechMono(
+                                  fontSize: 16, color: Colors.white),
+                            )
+                          : Text(
+                              'NASA',
+                              style: GoogleFonts.shareTechMono(
+                                  fontSize: 16, color: Colors.white),
+                            ),
                       if (picture.type == "video")
-                        YoutubePlayer(
-                          controller: controller,
-                        )
+                        YoutubePlayer(controller: controller)
                       else
                         Image(image: NetworkImage(picture.url)),
                       const SizedBox(height: 15),
