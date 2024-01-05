@@ -1,8 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
 
-class SpaceRocksScreen extends StatelessWidget {
-  SpaceRocksScreen({super.key});
+
+class AppScrollBehavior extends MaterialScrollBehavior {
+  @override
+  Set<PointerDeviceKind> get dragDevices => {
+    PointerDeviceKind.touch,
+    PointerDeviceKind.mouse,
+  };
+}
+
+class SpaceRocksScreen extends StatefulWidget {
+  const SpaceRocksScreen({super.key});
+
+  @override
+  State<SpaceRocksScreen> createState() => _SpaceRocksScreenState();
+}
+
+
+class _SpaceRocksScreenState extends State<SpaceRocksScreen> {
 
   final PageController  _pageController = PageController();
 
@@ -38,7 +54,7 @@ class SpaceRocksScreen extends StatelessWidget {
       'image': 'assets/images/image3.png',
       'title': 'Meteoroids',
       'description':
-        'Meteoroids are fragments and debris in space resulting from collisions among asteroids, comets, moons, and planets.\n'
+        'Meteoroids are fragments and debris in space resulting from collisions among asteroids, comets, moons, and planets.\n\n'
         'They are among the smallest “space rocks.” We can see them when they streak through our atmosphere in the form of meteors and meteor showers.',
     },
     {
@@ -47,14 +63,14 @@ class SpaceRocksScreen extends StatelessWidget {
       'description':
         'Meteors are meteoroids that fall through Earth’s atmosphere at extremely high speeds. The pressure and heat they generate as they push through the air causes them to glow and create streaks of light in the sky.\n\n'
         'Most burn up completely before touching the ground. We often refer to them as “shooting stars.” Meteors may be made mostly of rock, metal, or a combination of the two.\n\n'
-        'Scientists estimate that about 48.5 tons (44,000 kilograms) of meteoritic material falls on Earth each day.'
+        'Scientists estimate that about 48 tons (48,000 kilograms) of meteoritic material fall on the Earth each day.'
     },
     {
       'image': 'assets/images/image5.png',
       'title': 'Meteorites',
       'description':
         'Meteors can usually be seen on any clear night throughout the year. Sometimes the number increases dramatically – these events are termed meteor showers.\n\n'
-        'They occur when Earth passes through trails of particles left by comets. When the particles enter Earth’s atmosphere, they burn up, creating hundreds or even thousands of bright streaks in the sky.'
+        'They occur when Earth passes through trails of particles left by comets. When the particles enter Earth’s atmosphere, they burn up, creating hundreds or even thousands of bright streaks in the sky.\n\n'
         'We can easily plan when to watch meteor showers because numerous showers happen annually as Earth’s orbit takes it through the same patches of comet debris.'
     },
   ];
@@ -69,10 +85,12 @@ class SpaceRocksScreen extends StatelessWidget {
             itemCount: _pages.length,
             scrollBehavior: AppScrollBehavior(),
             onPageChanged: (int page) {
+              setState(() {
                 _activePage = page;
+              });
             },
             itemBuilder: (BuildContext context, int index){
-              return IntroWidget(
+              return SpaceRockWidget(
                 index: index,
                 image: _pages[index]['image'],
                 title: _pages[index]['title'],
@@ -82,14 +100,14 @@ class SpaceRocksScreen extends StatelessWidget {
             }
           ),
           Positioned(
-            top: MediaQuery.of(context).size.height - 40,
+            top: MediaQuery.of(context).size.height - 32,
             right: 0,
             left: 0,
             child: Column(
               children: [
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
-                  //children: _buildIndicator()
+                  children: _buildIndicator()
                 )
               ],
             ),
@@ -99,19 +117,50 @@ class SpaceRocksScreen extends StatelessWidget {
     );
   }
 
-  //hekbas: implement _buildIndicator
+  List<Widget> _buildIndicator() {
+    final indicators =  <Widget>[];
+
+    for(var i = 0; i < _pages.length; i++) {
+
+      if(_activePage == i) {
+        indicators.add(_indicatorsTrue());
+      }
+      else{
+        indicators.add(_indicatorsFalse());
+      }
+    }
+    return  indicators;
+  }
+
+  Widget _indicatorsTrue() {
+    return AnimatedContainer(
+      duration: const Duration(microseconds: 300),
+      height: 4,
+      width: 32,
+      margin: const EdgeInsets.only(right: 8),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(50),
+        color: Colors.white,
+      ),
+    );
+  }
+
+  Widget _indicatorsFalse() {
+    return AnimatedContainer(
+      duration: const Duration(microseconds: 300),
+      height: 6,
+      width: 6,
+      margin: const EdgeInsets.only(right: 8),
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(50),
+        color: Colors.grey.shade600,
+      ),
+    );
+  }
 }
 
-class AppScrollBehavior extends MaterialScrollBehavior {
-  @override
-  Set<PointerDeviceKind> get dragDevices => {
-    PointerDeviceKind.touch,
-    PointerDeviceKind.mouse,
-  };
-}
-
-class IntroWidget extends StatelessWidget {
-  const IntroWidget({
+class SpaceRockWidget extends StatelessWidget {
+  const SpaceRockWidget({
     super.key,
     required this.image,
     required this.title,
