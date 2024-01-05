@@ -146,17 +146,17 @@ class CometsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("List of Bodies"),
+        title: const Text("List of Bodies"),
       ),
       body: FutureBuilder(
         future: loadList(url),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
-            return Center(child: Text('No data available'));
+            return const Center(child: Text('No data available'));
           } else {
             List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
 
@@ -191,17 +191,17 @@ final String url =
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("List of Moons"),
+        title: const Text("List of Moons"),
       ),
       body: FutureBuilder(
         future: loadList(url),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
-            return Center(child: Text('No data available'));
+            return const Center(child: Text('No data available'));
           } else {
             List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
 
@@ -237,17 +237,17 @@ class DwarfList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("List of Dwarf Planets"),
+        title: const Text("List of Dwarf Planets"),
       ),
       body: FutureBuilder(
         future: loadList(url),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
-            return Center(child: Text('No data available'));
+            return const Center(child: Text('No data available'));
           } else {
             List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
 
@@ -282,17 +282,17 @@ final String url =
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("List of Asteroids"),
+        title: const Text("List of Asteroids"),
       ),
       body: FutureBuilder(
         future: loadList(url),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
-            return Center(child: CircularProgressIndicator());
+            return const Center(child: CircularProgressIndicator());
           } else if (snapshot.hasError) {
             return Center(child: Text('Error: ${snapshot.error}'));
           } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
-            return Center(child: Text('No data available'));
+            return const Center(child: Text('No data available'));
           } else {
             List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
 
