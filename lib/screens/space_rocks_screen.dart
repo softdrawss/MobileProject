@@ -76,7 +76,6 @@ class _SpaceRocksScreenState extends State<SpaceRocksScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      //appBar: AppBar(),
       body: Stack(
         children: [
           PageView.builder(
@@ -110,7 +109,15 @@ class _SpaceRocksScreenState extends State<SpaceRocksScreen> {
                 )
               ],
             ),
-          )
+          ),
+          Align(
+            alignment: Alignment.topLeft,
+            child: BackButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
         ],
       ),
     );

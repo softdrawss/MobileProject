@@ -82,26 +82,39 @@ Widget _buildImageButton(String label, String imagePath, BuildContext context, S
     onTap: () {
       Navigator.pushNamed(context, routeName);
     },
-    child: Container(
-      width: MediaQuery.of(context).size.width / 2 - 20,
-      height: MediaQuery.of(context).size.height / 3 - 48,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        image: DecorationImage(
-          image: AssetImage(imagePath),
-          fit: BoxFit.cover,
+    child: MouseRegion(
+      cursor: SystemMouseCursors.click,
+      child: Container(
+        width: MediaQuery.of(context).size.width / 2 - 20,
+        height: MediaQuery.of(context).size.height / 3 - 48,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(8),
+          image: DecorationImage(
+            image: AssetImage(imagePath),
+            fit: BoxFit.cover,
+          ),
         ),
-      ),
-      child: Align(
-        alignment: Alignment.bottomLeft,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            label,
-            style: const TextStyle(
-              color: Colors.white,
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
+        child: Material(
+          color: Color.fromARGB(0, 0, 0, 0),
+          child: InkWell(
+            onTap: () {
+              Navigator.pushNamed(context, routeName);
+            },
+            splashColor: Colors.white.withOpacity(0.1), // Adjust splash color as needed
+            borderRadius: BorderRadius.circular(8),
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Text(
+                  label,
+                  style: const TextStyle(
+                    color: Colors.white,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
             ),
           ),
         ),
