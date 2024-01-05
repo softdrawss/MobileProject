@@ -6,8 +6,8 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(80.0),
+      appBar: const PreferredSize(
+        preferredSize: Size.fromHeight(80.0),
         child: Align(
           alignment: Alignment.center,
           child: CustomAppBar(),
@@ -25,15 +25,15 @@ class HomeScreen extends StatelessWidget {
                 _buildImageButton('ISS\nLOCATION', 'lib/assets/images/iss_location.png', context, "/isslocation"),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _buildImageButton('SOLAR\nSYSTEM', 'lib/assets/images/solar_system.png', context, "/list"),
-                _buildImageButton('SPACE\nROCKS', 'lib/assets/images/space_rocks.png', context, "/"),
+                _buildImageButton('SPACE\nROCKS', 'lib/assets/images/space_rocks.png', context, "/spacerocks"),
               ],
             ),
-            SizedBox(height: 16),
+            const SizedBox(height: 16),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
@@ -49,6 +49,8 @@ class HomeScreen extends StatelessWidget {
 }
 
 class CustomAppBar extends StatelessWidget {
+  const CustomAppBar({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Row(
