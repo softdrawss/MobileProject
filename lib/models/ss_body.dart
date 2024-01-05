@@ -28,10 +28,11 @@ class Body {
         semimajorAxis = json["semimajorAxis"],
         inclination = json["inclination"],
 
-        massValue = json["mass"]["massValue"],
-        massExponent = json["mass"]["massExponent"],
-        volValue = json["vol"]["volValue"],
-        volExponent = json["vol"]["volExponent"],
+        // Check if "mass" is not null before accessing its properties
+        massValue = json["mass"] != null ? json["mass"]["massValue"] : 0,
+        massExponent = json["mass"] != null ? json["mass"]["massExponent"] : 0,
+        volValue = json["vol"] != null ? json["vol"]["volValue"] : 0,
+        volExponent = json["vol"] != null ? json["vol"]["volExponent"] : 0,
         
         density = json["density"],
         meanRadius = json["meanRadius"],
@@ -43,7 +44,6 @@ class Body {
         discoveryDate = json["discoveryDate"],
         alternativeName = json["alternativeName"];
 }
-
 
 Future<Body> loadBody(String id) async {
   final response = await http.get(

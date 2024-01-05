@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_project/models/apod.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 import '../widgets/chooseAPOD_date_widget.dart';
@@ -23,6 +24,18 @@ class _APODScreenState extends State<APODScreen> {
       showFullscreenButton: true,
     ),
   );
+
+  String separateIntoParagraphs(String text) {
+    List<String> paragraphs = text
+        .split('. '); // Assuming paragraphs are separated by a dot and a space
+    String result = '';
+
+    for (String paragraph in paragraphs) {
+      result += '$paragraph.\n\n'; // Add two line breaks after each paragraph
+    }
+
+    return result.trim(); // Trim any leading or trailing whitespace
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -59,14 +72,17 @@ class _APODScreenState extends State<APODScreen> {
                     children: [
                       Text(
                         picture.title,
-                        style:
-                            const TextStyle(color: Colors.white, fontSize: 20),
+                        textAlign: TextAlign.justify,
+                        style: GoogleFonts.play(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white),
                       ),
                       if (picture.copyright != null)
                         Text(
                           picture.copyright.toString(),
-                          style: const TextStyle(
-                              color: Colors.white70, fontSize: 15),
+                          style: GoogleFonts.shareTechMono(
+                              fontSize: 16, color: Colors.white),
                         ),
                       if (picture.type == "video")
                         YoutubePlayer(
@@ -84,9 +100,9 @@ class _APODScreenState extends State<APODScreen> {
                           }),
                       const SizedBox(height: 15),
                       Text(
-                        picture.explanation,
+                        separateIntoParagraphs(picture.explanation),
                         textAlign: TextAlign.justify,
-                        style: const TextStyle(color: Colors.white),
+                        style: GoogleFonts.inter(color: Colors.white),
                       ),
                     ],
                   )
