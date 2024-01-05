@@ -180,38 +180,45 @@ class CometsList extends StatelessWidget {
 
 // bodyType -> Moon
 // To see all the elements:
-// https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName%2CbodyType&filter%5B%5D=bodyType%2Ceq%2CMoon
+// https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CMoon
 class MoonList extends StatelessWidget {
   const MoonList({super.key});
 
+final String url =
+      "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CMoon";
+
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-            ElevatedButton(
-              onPressed: () {
-                debugPrint("You pressed the button!");
+    return Scaffold(
+      appBar: AppBar(
+        title: Text("List of Moons"),
+      ),
+      body: FutureBuilder(
+        future: loadList(url),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Center(child: Text('Error: ${snapshot.error}'));
+          } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
+            return Center(child: Text('No data available'));
+          } else {
+            List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
+
+            return ListView.builder(
+              itemCount: bodyList.length,
+              itemBuilder: (context, index) {
+                return ElevatedButton(
+                  onPressed: () {
+                    navigateToBodyDetails(context, bodyList[index].id);
+                  },
+                  child: Text(bodyList[index].name),
+                );
               },
-              child: const Text('Planet Moons'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                debugPrint("You pressed the button!");
-              },
-              child: const Text('Dwarf Planet Moons'),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                debugPrint("You pressed the button!");
-              },
-              child: const Text('Asteroid Moons'),
-            ),
-          ],
-        ),
-      ],
+            );
+          }
+        },
+      ),
     );
   }
 }
@@ -230,7 +237,7 @@ class DwarfList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("List of Bodies"),
+        title: Text("List of Dwarf Planets"),
       ),
       body: FutureBuilder(
         future: loadList(url),
@@ -275,7 +282,7 @@ final String url =
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("List of Bodies"),
+        title: Text("List of Asteroids"),
       ),
       body: FutureBuilder(
         future: loadList(url),
