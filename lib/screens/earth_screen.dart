@@ -33,11 +33,14 @@ class EarthViewScreen extends StatelessWidget {
                     child: const Text('Back'),
                   ),
                 ),
-                Container(
+                Expanded(
+                  child: Container(
                     padding: const EdgeInsets.fromLTRB(10, 10, 10, 2),
                     child: Image(
                       image: NetworkImage(epic[currentImg].image),
-                    )),
+                    ),
+                  ),
+                ),
                 Align(
                   alignment: Alignment.center,
                   child: Text(epic[currentImg].caption,
@@ -52,7 +55,7 @@ class EarthViewScreen extends StatelessWidget {
                     Text(epic[currentImg].date.substring(0, 10)),
                   ],
                 ),
-                const SizedBox(height: 7),
+                const SizedBox(height: 5),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
@@ -60,52 +63,154 @@ class EarthViewScreen extends StatelessWidget {
                     Text(epic[currentImg].date.substring(11)),
                   ],
                 ),
-                const SizedBox(height: 7),
+                NumberSlider(
+                  maxValue: epic.length,
+                ),
                 Container(
-                  margin: const EdgeInsets.all(15),
-                  padding: const EdgeInsets.all(10),
+                  height: 130,
+                  margin: const EdgeInsets.fromLTRB(30, 10, 30, 10),
+                  padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
                   decoration: const BoxDecoration(
-                    color: Color.fromARGB(255, 161, 175, 188),
-                    borderRadius: BorderRadius.all(Radius.circular(10))
-                    ),
+                      color: Color.fromARGB(255, 161, 175, 188),
+                      borderRadius: BorderRadius.all(Radius.circular(10))),
                   child: SingleChildScrollView(
                     child: Column(
                       children: [
+                        const SizedBox(height: 5),
                         Row(
                           children: [
-                            Text("Latitude: ", style: TextStyle(color: Color.fromARGB(255, 30, 20, 44))),
-                            Text(epic[currentImg].lat.toString(), style: TextStyle(color: Color.fromARGB(255, 30, 20, 44))),
+                            const Text("Latitude:           ",
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 30, 20, 44))),
+                            Text(epic[currentImg].lat.toString(),
+                                style: const TextStyle(
+                                    color: Color.fromARGB(255, 30, 20, 44))),
                           ],
                         ),
                         Row(
                           children: [
-                            Text("Longitude: ", style: TextStyle(color: Color.fromARGB(255, 30, 20, 44))),
-                            Text(epic[currentImg].lon.toString(), style: TextStyle(color: Color.fromARGB(255, 30, 20, 44))),
+                            const Text("Longitude:        ",
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 30, 20, 44))),
+                            Text(epic[currentImg].lon.toString(),
+                                style: const TextStyle(
+                                    color: Color.fromARGB(255, 30, 20, 44))),
                           ],
                         ),
                         Row(
                           children: [
-                            Text("DSCOVR position:      ", style: TextStyle(color: Color.fromARGB(255, 30, 20, 44))),
+                            const Text("DSCOVR position:    ",
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 30, 20, 44))),
                             Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(epic[currentImg].dscovrX.toString(), style: TextStyle(color: Color.fromARGB(255, 30, 20, 44))),
-                                Text(epic[currentImg].dscovrY.toString(), style: TextStyle(color: Color.fromARGB(255, 30, 20, 44))),
-                                Text(epic[currentImg].dscovrZ.toString(), style: TextStyle(color: Color.fromARGB(255, 30, 20, 44))),
+                                Text(epic[currentImg].dscovrX.toString(),
+                                    style: const TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 30, 20, 44))),
+                                Text(epic[currentImg].dscovrY.toString(),
+                                    style: const TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 30, 20, 44))),
+                                Text(epic[currentImg].dscovrZ.toString(),
+                                    style: const TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 30, 20, 44))),
                               ],
                             ),
-                            
                           ],
                         ),
+                        Row(
+                          children: [
+                            const Text("Moon position:    ",
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 30, 20, 44))),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(epic[currentImg].lunarX.toString(),
+                                    style: const TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 30, 20, 44))),
+                                Text(epic[currentImg].lunarY.toString(),
+                                    style: const TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 30, 20, 44))),
+                                Text(epic[currentImg].lunarZ.toString(),
+                                    style: const TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 30, 20, 44))),
+                              ],
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            const Text("Sun position:    ",
+                                style: TextStyle(
+                                    color: Color.fromARGB(255, 30, 20, 44))),
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(epic[currentImg].sunX.toString(),
+                                    style: const TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 30, 20, 44))),
+                                Text(epic[currentImg].sunY.toString(),
+                                    style: const TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 30, 20, 44))),
+                                Text(epic[currentImg].sunZ.toString(),
+                                    style: const TextStyle(
+                                        color:
+                                            Color.fromARGB(255, 30, 20, 44))),
+                              ],
+                            ),
+                          ],
+                        ),
+                        const SizedBox(height: 5),
                       ],
                     ),
                   ),
                 ),
-
               ],
             ),
           );
         },
       ),
+    );
+  }
+}
+
+class NumberSlider extends StatefulWidget {
+  const NumberSlider({super.key, this.maxValue = 0});
+
+  final int maxValue;
+
+  @override
+  State<NumberSlider> createState() => _NumberSliderState();
+}
+
+class _NumberSliderState extends State<NumberSlider> {
+  double number = 0.0; // <---- store the value
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Slider(
+          value: number, // <---- show the value
+          min: 0,
+          max: widget.maxValue.toDouble(),
+          divisions: widget.maxValue,
+          onChanged: (newValue) {
+            setState(() {
+              number = newValue; // <---- set new value
+            });
+          },
+        ),
+      ],
     );
   }
 }
