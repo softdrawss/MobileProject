@@ -15,15 +15,24 @@ class SSList extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            buildExpandedButton('PLANETS', 'lib/assets/images/ss_screen/planets.png', context, "/planetslist"),
+            Align(
+              alignment: Alignment.topLeft,
+              child: BackButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+              ),
+            ),
+            const SizedBox(height: 12),
+            buildExpandedButton('PLANETS', Alignment.center, 'lib/assets/images/ss_screen/planets.png', context, "/planetslist"),
             const SizedBox(height: 6),
-            buildExpandedButton('COMETS', 'lib/assets/images/ss_screen/comets.png', context, "/cometslist"),
+            buildExpandedButton('COMETS', Alignment.center, 'lib/assets/images/ss_screen/comets.png', context, "/cometslist"),
             const SizedBox(height: 6),
-            buildExpandedButton('MOONS', 'lib/assets/images/ss_screen/moons.png', context, "/moonlist"),
+            buildExpandedButton('MOONS', Alignment.center, 'lib/assets/images/ss_screen/moons.png', context, "/moonlist"),
             const SizedBox(height: 6),
-            buildExpandedButton('DWARF PLANETS', 'lib/assets/images/ss_screen/dwarf_planets.png', context, "/dwarflist"),
+            buildExpandedButton('DWARF PLANETS', Alignment.center, 'lib/assets/images/ss_screen/dwarf_planets.png', context, "/dwarflist"),
             const SizedBox(height: 6),
-            buildExpandedButton('ASTEROIDS', 'lib/assets/images/ss_screen/asteroids.png', context, "/asteroidslist"),
+            buildExpandedButton('ASTEROIDS', Alignment.center, 'lib/assets/images/ss_screen/asteroids.png', context, "/asteroidslist"),
           ],
         ),
       ),

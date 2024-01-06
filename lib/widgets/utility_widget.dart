@@ -68,7 +68,13 @@ class ImageGradientFade extends StatelessWidget {
 
 
 // Image button with label
-Widget buildImageButton(String label, String imagePath, BuildContext context, String routeName) {
+Widget buildImageButton(
+  String label,
+  Alignment labelAlignment,
+  String imagePath,
+  BuildContext context,
+  String routeName,
+) {
   return GestureDetector(
     onTap: () {
       Navigator.pushNamed(context, routeName);
@@ -76,8 +82,6 @@ Widget buildImageButton(String label, String imagePath, BuildContext context, St
     child: MouseRegion(
       cursor: SystemMouseCursors.click,
       child: Container(
-        //width: MediaQuery.of(context).size.width  / 2 - 20,
-        //height: MediaQuery.of(context).size.height / 3 - 48,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           image: DecorationImage(
@@ -91,10 +95,10 @@ Widget buildImageButton(String label, String imagePath, BuildContext context, St
             onTap: () {
               Navigator.pushNamed(context, routeName);
             },
-            splashColor: Colors.white.withOpacity(0.1), // Adjust splash color as needed
+            splashColor: Colors.white.withOpacity(0.1),
             borderRadius: BorderRadius.circular(8),
             child: Align(
-              alignment: Alignment.bottomLeft,
+              alignment: labelAlignment,
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Text(
@@ -114,9 +118,9 @@ Widget buildImageButton(String label, String imagePath, BuildContext context, St
   );
 }
 
-Widget buildExpandedButton(String label, String imagePath, BuildContext context, String routeName) {
+Widget buildExpandedButton(String label, Alignment labelAlignment, String imagePath, BuildContext context, String routeName) {
   return Expanded(
-    child: buildImageButton(label, imagePath, context, routeName),
+    child: buildImageButton(label, labelAlignment, imagePath, context, routeName),
   );
 }
 

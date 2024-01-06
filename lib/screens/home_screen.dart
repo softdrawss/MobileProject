@@ -21,21 +21,21 @@ class HomeScreen extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
             buildExpandedRow([
-              buildExpandedButton('DAILY\nPICTURE', 'lib/assets/images/home_screen/daily_picture.png', context, "/apod"),
+              buildExpandedButton('DAILY\nPICTURE', Alignment.bottomLeft, 'lib/assets/images/home_screen/daily_picture.png', context, "/apod"),
               const SizedBox(width: 6),
-              buildExpandedButton('ISS\nLOCATION', 'lib/assets/images/home_screen/iss_location.png', context, "/isslocation"),
+              buildExpandedButton('ISS\nLOCATION', Alignment.bottomLeft, 'lib/assets/images/home_screen/iss_location.png', context, "/isslocation"),
             ]),
             const SizedBox(height: 6),
             buildExpandedRow([
-              buildExpandedButton('SOLAR\nSYSTEM', 'lib/assets/images/home_screen/solar_system.png', context, "/list"),
+              buildExpandedButton('SOLAR\nSYSTEM', Alignment.bottomLeft, 'lib/assets/images/home_screen/solar_system.png', context, "/list"),
               const SizedBox(width: 6),
-              buildExpandedButton('SPACE\nROCKS', 'lib/assets/images/home_screen/space_rocks.png', context, "/spacerocks"),
+              buildExpandedButton('SPACE\nROCKS', Alignment.bottomLeft, 'lib/assets/images/home_screen/space_rocks.png', context, "/spacerocks"),
             ]),
             const SizedBox(height: 6),
             buildExpandedRow([
-              buildExpandedButton('PEOPLE\nIN SPACE', 'lib/assets/images/home_screen/people_in_space.png', context, "/people"),
+              buildExpandedButton('PEOPLE\nIN SPACE', Alignment.bottomLeft, 'lib/assets/images/home_screen/people_in_space.png', context, "/people"),
               const SizedBox(width: 6),
-              buildExpandedButton('OUR\nHOME', 'lib/assets/images/home_screen/our_home.png', context, "/earthview"),
+              buildExpandedButton('OUR\nHOME', Alignment.bottomLeft, 'lib/assets/images/home_screen/our_home.png', context, "/earthview"),
             ]),
           ],
         ),
