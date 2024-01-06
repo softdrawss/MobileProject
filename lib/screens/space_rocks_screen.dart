@@ -101,7 +101,7 @@ class _SpaceRocksScreenState extends State<SpaceRocksScreen> {
           Positioned(
             top: MediaQuery.of(context).size.height - 32,
             right: 0,
-            left: 0,
+            left: 0,  
             child: Column(
               children: [
                 Row(
@@ -166,7 +166,10 @@ class SpaceRockWidget extends StatelessWidget {
             height: MediaQuery.of(context).size.height / 1.86,
             child: Align(
               alignment: Alignment.center,
-              child: ImageWithGradientFade(imagePath: image),
+              child: ImageGradientFade(
+                imagePath: image,
+                gradientStops: const [0.0, 0.1, 0.94, 1.0],
+                ),
             ),
           ),
           Positioned(
@@ -197,28 +200,6 @@ class SpaceRockWidget extends StatelessWidget {
           ),
         ],
       ),
-    );
-  }
-}
-
-class ImageWithGradientFade extends StatelessWidget {
-  const ImageWithGradientFade({super.key, required this.imagePath});
-
-  final String imagePath;
-
-  @override
-  Widget build(BuildContext context) {
-    return ShaderMask(
-      shaderCallback: (Rect bounds) {
-        return const LinearGradient(
-          begin: Alignment.bottomCenter,
-          end: Alignment.topCenter,
-          stops: [0.0, 0.1, 0.94, 1.0], // Adjust stops for a more even fade
-          colors: [Colors.transparent, Colors.black, Colors.black, Colors.transparent],
-        ).createShader(bounds);
-      },
-      blendMode: BlendMode.dstIn,
-      child: Image.asset(imagePath),
     );
   }
 }

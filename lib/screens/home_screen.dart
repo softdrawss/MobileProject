@@ -16,33 +16,27 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
       body: Padding(
-        padding: const EdgeInsets.all(4.0),
+        padding: const EdgeInsets.all(6.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                buildImageButton('DAILY\nPICTURE', 'lib/assets/images/home_screen/daily_picture.png', context, "/apod"),
-                buildImageButton('ISS\nLOCATION', 'lib/assets/images/home_screen/iss_location.png', context, "/isslocation"),
-              ],
-            ),
-            const SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                buildImageButton('SOLAR\nSYSTEM', 'lib/assets/images/home_screen/solar_system.png', context, "/list"),
-                buildImageButton('SPACE\nROCKS', 'lib/assets/images/home_screen/space_rocks.png', context, "/spacerocks"),
-              ],
-            ),
-            const SizedBox(height: 16),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                buildImageButton('PEOPLE\nIN SPACE', 'lib/assets/images/home_screen/people_in_space.png', context, "/people"),
-                buildImageButton('OUR\nHOME', 'lib/assets/images/home_screen/our_home.png', context, "/earthview"),
-              ],
-            ),
+            buildExpandedRow([
+              buildExpandedButton('DAILY\nPICTURE', 'lib/assets/images/home_screen/daily_picture.png', context, "/apod"),
+              const SizedBox(width: 6),
+              buildExpandedButton('ISS\nLOCATION', 'lib/assets/images/home_screen/iss_location.png', context, "/isslocation"),
+            ]),
+            const SizedBox(height: 6),
+            buildExpandedRow([
+              buildExpandedButton('SOLAR\nSYSTEM', 'lib/assets/images/home_screen/solar_system.png', context, "/list"),
+              const SizedBox(width: 6),
+              buildExpandedButton('SPACE\nROCKS', 'lib/assets/images/home_screen/space_rocks.png', context, "/spacerocks"),
+            ]),
+            const SizedBox(height: 6),
+            buildExpandedRow([
+              buildExpandedButton('PEOPLE\nIN SPACE', 'lib/assets/images/home_screen/people_in_space.png', context, "/people"),
+              const SizedBox(width: 6),
+              buildExpandedButton('OUR\nHOME', 'lib/assets/images/home_screen/our_home.png', context, "/earthview"),
+            ]),
           ],
         ),
       ),

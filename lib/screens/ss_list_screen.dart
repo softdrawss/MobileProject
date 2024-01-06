@@ -1,57 +1,32 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_project/screens/ss_body_screen.dart';
 import 'package:mobile_project/models/ss_list.dart';
+import '../widgets/utility_widget.dart';
+
 
 class SSList extends StatelessWidget {
   const SSList({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Column(
+    return Scaffold(
+      body: Padding(
+        padding: const EdgeInsets.all(6.0),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            Align(
-            alignment: Alignment.topLeft,
-            child: BackButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, "/planetslist");
-              },
-              child: const Text("PLANETS"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, "/cometslist");
-              },
-              child: const Text("COMETS"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, "/moonlist");
-              },
-              child: const Text("MOONS"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, "/dwarflist");
-              },
-              child: const Text("DWARF PLANETS"),
-            ),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushNamed(context, "/asteroidslist");
-              },
-              child: const Text("ASTEROIDS"),
-            ),
+            buildExpandedButton('PLANETS', 'lib/assets/images/ss_screen/planets.png', context, "/planetslist"),
+            const SizedBox(height: 6),
+            buildExpandedButton('COMETS', 'lib/assets/images/ss_screen/comets.png', context, "/cometslist"),
+            const SizedBox(height: 6),
+            buildExpandedButton('MOONS', 'lib/assets/images/ss_screen/moons.png', context, "/moonlist"),
+            const SizedBox(height: 6),
+            buildExpandedButton('DWARF PLANETS', 'lib/assets/images/ss_screen/dwarf_planets.png', context, "/dwarflist"),
+            const SizedBox(height: 6),
+            buildExpandedButton('ASTEROIDS', 'lib/assets/images/ss_screen/asteroids.png', context, "/asteroidslist"),
           ],
-        )
-      ],
+        ),
+      ),
     );
   }
 }
@@ -65,8 +40,7 @@ void navigateToBodyDetails(BuildContext context, String planetName) {
   );
 }
 
-Widget _buildImageButton(
-    String label, String imagePath, BuildContext context, String id) {
+Widget _buildImageButton(String label, String imagePath, BuildContext context, String id) {
   return GestureDetector(
     onTap: () {
       navigateToBodyDetails(context, id);

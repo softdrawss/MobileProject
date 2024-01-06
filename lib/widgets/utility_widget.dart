@@ -76,8 +76,8 @@ Widget buildImageButton(String label, String imagePath, BuildContext context, St
     child: MouseRegion(
       cursor: SystemMouseCursors.click,
       child: Container(
-        width: MediaQuery.of(context).size.width / 2 - 20,
-        height: MediaQuery.of(context).size.height / 3 - 48,
+        //width: MediaQuery.of(context).size.width  / 2 - 20,
+        //height: MediaQuery.of(context).size.height / 3 - 48,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),
           image: DecorationImage(
@@ -110,6 +110,21 @@ Widget buildImageButton(String label, String imagePath, BuildContext context, St
           ),
         ),
       ),
+    ),
+  );
+}
+
+Widget buildExpandedButton(String label, String imagePath, BuildContext context, String routeName) {
+  return Expanded(
+    child: buildImageButton(label, imagePath, context, routeName),
+  );
+}
+
+Widget buildExpandedRow(List<Widget> widgets) {
+  return Expanded(
+    child: Row(
+      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: widgets,
     ),
   );
 }
