@@ -12,14 +12,13 @@ class SSList extends StatelessWidget {
         Column(
           children: [
             Align(
-              alignment: Alignment.centerLeft,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                child: const Text('Back'),
-              ),
+            alignment: Alignment.topLeft,
+            child: BackButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
             ),
+          ),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, "/planetslist");

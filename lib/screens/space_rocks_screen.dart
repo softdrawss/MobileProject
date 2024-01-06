@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/gestures.dart';
+import '../widgets/utility_widget.dart';
 
 
 class AppScrollBehavior extends MaterialScrollBehavior {
@@ -19,7 +20,7 @@ class SpaceRocksScreen extends StatefulWidget {
 
 class _SpaceRocksScreenState extends State<SpaceRocksScreen> {
 
-  final PageController  _pageController = PageController();
+  final PageController _pageController = PageController();
 
   int _activePage = 0;
 
@@ -129,39 +130,13 @@ class _SpaceRocksScreenState extends State<SpaceRocksScreen> {
     for(var i = 0; i < _pages.length; i++) {
 
       if(_activePage == i) {
-        indicators.add(_indicatorsTrue());
+        indicators.add(IndicatorsTrueWidget());
       }
       else{
-        indicators.add(_indicatorsFalse());
+        indicators.add(IndicatorsFalseWidget());
       }
     }
     return  indicators;
-  }
-
-  Widget _indicatorsTrue() {
-    return AnimatedContainer(
-      duration: const Duration(microseconds: 400),
-      height: 4,
-      width: 24,
-      margin: const EdgeInsets.only(right: 8),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
-        color: Colors.white,
-      ),
-    );
-  }
-
-  Widget _indicatorsFalse() {
-    return AnimatedContainer(
-      duration: const Duration(microseconds: 400),
-      height: 6,
-      width: 6,
-      margin: const EdgeInsets.only(right: 8),
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(50),
-        color: Colors.grey.shade600,
-      ),
-    );
   }
 }
 
