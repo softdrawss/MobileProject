@@ -66,6 +66,7 @@ flutter:
     - lib/assets/images/home_screen/
     - lib/assets/images/spacerocks_screen/
     - lib/assets/images/planets/
+    - lib/assets/images/ss_body_screen/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

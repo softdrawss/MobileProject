@@ -147,13 +147,50 @@ class SSBodyScreen extends StatelessWidget {
                 ),
                 const SizedBox(height: 20),
                 if (picture.moons != null && picture.moons.isNotEmpty)
-                  ElevatedButton(
+                  /*ElevatedButton(
                     onPressed: () {
                       // Handle button press for moons
                     },
                     child: Text("SEE MOONS IN ${picture.name.toUpperCase()}"),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 20),*/
+                  GestureDetector(
+                    onTap: () {
+                      //navigateToBodyDetails(context, id);
+                    },
+                    child: Container(
+                      width: MediaQuery.of(context).size.width - 20,
+                      height: MediaQuery.of(context).size.height / 3 - 48,
+                      decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        border: Border.all(
+                            color: const Color.fromARGB(255, 219, 230, 240),
+                            width: 2), // Add white border
+                        image: const DecorationImage(
+                          image: AssetImage(
+                              "lib/assets/images/ss_body_screen/moons.jpg"),
+                          fit: BoxFit.cover,
+                          opacity: 0.5
+                        ),
+                      ),
+                      child: Align(
+                        alignment: Alignment.bottomLeft,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "SEE MOONS IN ${picture.name.toUpperCase()}",
+                            style: const TextStyle(
+                              color: Color.fromARGB(255, 219, 230, 240),
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              decoration:
+                                  TextDecoration.none, // Remove text decoration
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
               ],
             ),
           );

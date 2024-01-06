@@ -11,6 +11,15 @@ class SSList extends StatelessWidget {
       children: [
         Column(
           children: [
+            Align(
+              alignment: Alignment.centerLeft,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                child: const Text('Back'),
+              ),
+            ),
             ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, "/planetslist");
@@ -64,10 +73,11 @@ Widget _buildImageButton(
       navigateToBodyDetails(context, id);
     },
     child: Container(
-      width: MediaQuery.of(context).size.width / 2 - 20,
+      width: MediaQuery.of(context).size.width - 20,
       height: MediaQuery.of(context).size.height / 3 - 48,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: const Color.fromARGB(255, 219, 230, 240), width: 2), // Add white border
         image: DecorationImage(
           image: AssetImage(imagePath),
           fit: BoxFit.contain,
@@ -80,9 +90,10 @@ Widget _buildImageButton(
           child: Text(
             label,
             style: const TextStyle(
-              color: Colors.white,
+              color: Color.fromARGB(255, 219, 230, 240),
               fontSize: 18,
               fontWeight: FontWeight.bold,
+              decoration: TextDecoration.none, // Remove text decoration
             ),
           ),
         ),
@@ -110,22 +121,29 @@ class PlanetsList extends StatelessWidget {
                 child: const Text('Back'),
               ),
             ),
-            _buildImageButton(
-                "MERCURY", "lib/assets/images/planets/mercury.jpg", context, "mercure"),
-            _buildImageButton(
-                "Venus", "lib/assets/images/planets/venus.jpg", context, "venus"),
-            _buildImageButton(
-                "Earth", "lib/assets/images/planets/earth.jpg", context, "terre"),
+            _buildImageButton('Mercury',
+                "lib/assets/images/planets/mercury.jpg", context, "mercure"),
+            const SizedBox(height: 10),
+            _buildImageButton("Venus", "lib/assets/images/planets/venus.jpg",
+                context, "venus"),
+            const SizedBox(height: 10),
+            _buildImageButton("Earth", "lib/assets/images/planets/earth.jpg",
+                context, "terre"),
+            const SizedBox(height: 10),
             _buildImageButton(
                 "Mars", "lib/assets/images/planets/mars.jpg", context, "mars"),
-            _buildImageButton(
-                "Jupiter", "lib/assets/images/planets/jupiter.jpg", context, "jupiter"),
-            _buildImageButton(
-                "Saturn", "lib/assets/images/planets/saturn.jpg", context, "saturne"),
-            _buildImageButton(
-                "Uranus", "lib/assets/images/planets/uranus.jpg", context, "uranus"),
-            _buildImageButton(
-                "Neptune", "lib/assets/images/planets/neptune.jpg", context, "neptune"),
+            const SizedBox(height: 10),
+            _buildImageButton("Jupiter",
+                "lib/assets/images/planets/jupiter.jpg", context, "jupiter"),
+            const SizedBox(height: 10),
+            _buildImageButton("Saturn", "lib/assets/images/planets/saturn.jpg",
+                context, "saturne"),
+            const SizedBox(height: 10),
+            _buildImageButton("Uranus", "lib/assets/images/planets/uranus.jpg",
+                context, "uranus"),
+            const SizedBox(height: 10),
+            _buildImageButton("Neptune",
+                "lib/assets/images/planets/neptune.jpg", context, "neptune"),
           ],
         ),
       ],
