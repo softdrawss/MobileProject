@@ -1,15 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_project/models/epic.dart';
 
-class EarthViewScreen extends StatelessWidget {
+class EarthViewScreen extends StatefulWidget {
   const EarthViewScreen({super.key});
 
+  @override
+  State<EarthViewScreen> createState() => _EarthViewScreenState();
+}
+
+class _EarthViewScreenState extends State<EarthViewScreen> {
   //final String date = "2024-01-13";
   final String date = "2015-06-13";
-  final int currentImg = 0;
+  int currentImg = 0;
+
 
   @override
   Widget build(BuildContext context) {
+    
     return Scaffold(
       body: FutureBuilder(
         future: loadEPICData(date),
@@ -64,6 +71,11 @@ class EarthViewScreen extends StatelessWidget {
                 ),
                 NumberSlider(
                   maxValue: epic.length,
+                  position: (newPosition) {
+                            setState(() {
+                              currentImg = newPosition.toInt();
+                            });
+                          }
                 ),
                 Container(
                   height: 130,
@@ -166,9 +178,10 @@ class XYZPositions extends StatelessWidget {
 }
 
 class NumberSlider extends StatefulWidget {
-  const NumberSlider({super.key, this.maxValue = 0});
+  const NumberSlider({super.key, required this.maxValue, required this.position});
 
   final int maxValue;
+  final Function(double) position;
 
   @override
   State<NumberSlider> createState() => _NumberSliderState();
@@ -184,11 +197,12 @@ class _NumberSliderState extends State<NumberSlider> {
         Slider(
           value: number, // <---- show the value
           min: 0,
-          max: widget.maxValue.toDouble(),
+          max: widget.maxValue.toDouble()-1,
           divisions: widget.maxValue,
           onChanged: (newValue) {
             setState(() {
               number = newValue; // <---- set new value
+              widget.position(number);
             });
           },
         ),
