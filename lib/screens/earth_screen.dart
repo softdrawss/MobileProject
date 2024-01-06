@@ -198,7 +198,7 @@ class _NumberSliderState extends State<NumberSlider> {
           value: number, // <---- show the value
           min: 0,
           max: widget.maxValue.toDouble()-1,
-          divisions: widget.maxValue,
+          divisions: widget.maxValue-1,
           onChanged: (newValue) {
             setState(() {
               number = newValue; // <---- set new value
