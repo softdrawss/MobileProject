@@ -3,7 +3,7 @@ import 'package:mobile_project/models/apod.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
-import '../widgets/chooseAPOD_date_widget.dart';
+import '../widgets/apod_choose_date_widget.dart';
 
 class APODScreen extends StatefulWidget {
   const APODScreen({super.key});

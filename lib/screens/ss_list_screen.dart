@@ -23,7 +23,9 @@ Widget buildBodyButton(
       height: MediaQuery.of(context).size.height / 3 - 48,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color.fromARGB(255, 219, 230, 240), width: 2), // Add white border
+        border: Border.all(
+            color: const Color.fromARGB(255, 219, 230, 240),
+            width: 2), // Add white border
         image: DecorationImage(
           image: AssetImage(imagePath),
           fit: BoxFit.contain,
@@ -68,15 +70,36 @@ class SSList extends StatelessWidget {
               ),
             ),
             const SizedBox(height: 12),
-            buildExpandedButton('PLANETS', Alignment.center, 'lib/assets/images/ss_screen/planets.png', context, "/planetslist"),
+            buildExpandedButton(
+                'PLANETS',
+                Alignment.center,
+                'lib/assets/images/ss_screen/planets.png',
+                context,
+                "/planetslist"),
             const SizedBox(height: 6),
-            buildExpandedButton('COMETS', Alignment.center, 'lib/assets/images/ss_screen/comets.png', context, "/cometslist"),
+            buildExpandedButton(
+                'COMETS',
+                Alignment.center,
+                'lib/assets/images/ss_screen/comets.png',
+                context,
+                "/cometslist"),
             const SizedBox(height: 6),
-            buildExpandedButton('MOONS', Alignment.center, 'lib/assets/images/ss_screen/moons.png', context, "/moonlist"),
+            buildExpandedButton('MOONS', Alignment.center,
+                'lib/assets/images/ss_screen/moons.png', context, "/moonlist"),
             const SizedBox(height: 6),
-            buildExpandedButton('DWARF PLANETS', Alignment.center, 'lib/assets/images/ss_screen/dwarf_planets.png', context, "/dwarflist"),
+            buildExpandedButton(
+                'DWARF PLANETS',
+                Alignment.center,
+                'lib/assets/images/ss_screen/dwarf_planets.png',
+                context,
+                "/dwarflist"),
             const SizedBox(height: 6),
-            buildExpandedButton('ASTEROIDS', Alignment.center, 'lib/assets/images/ss_screen/asteroids.png', context, "/asteroidslist"),
+            buildExpandedButton(
+                'ASTEROIDS',
+                Alignment.center,
+                'lib/assets/images/ss_screen/asteroids.png',
+                context,
+                "/asteroidslist"),
           ],
         ),
       ),
@@ -102,8 +125,8 @@ class PlanetsList extends StatelessWidget {
                 },
               ),
             ),
-            buildBodyButton('Mercury',
-                "lib/assets/images/planets/mercury.jpg", context, "mercure"),
+            buildBodyButton('Mercury', "lib/assets/images/planets/mercury.jpg",
+                context, "mercure"),
             const SizedBox(height: 6),
             buildBodyButton("Venus", "lib/assets/images/planets/venus.jpg",
                 context, "venus"),
@@ -114,8 +137,8 @@ class PlanetsList extends StatelessWidget {
             buildBodyButton(
                 "Mars", "lib/assets/images/planets/mars.jpg", context, "mars"),
             const SizedBox(height: 6),
-            buildBodyButton("Jupiter",
-                "lib/assets/images/planets/jupiter.jpg", context, "jupiter"),
+            buildBodyButton("Jupiter", "lib/assets/images/planets/jupiter.jpg",
+                context, "jupiter"),
             const SizedBox(height: 6),
             buildBodyButton("Saturn", "lib/assets/images/planets/saturn.jpg",
                 context, "saturne"),
@@ -123,8 +146,8 @@ class PlanetsList extends StatelessWidget {
             buildBodyButton("Uranus", "lib/assets/images/planets/uranus.jpg",
                 context, "uranus"),
             const SizedBox(height: 6),
-            buildBodyButton("Neptune",
-                "lib/assets/images/planets/neptune.jpg", context, "neptune"),
+            buildBodyButton("Neptune", "lib/assets/images/planets/neptune.jpg",
+                context, "neptune"),
           ],
         ),
       ],
@@ -138,7 +161,7 @@ class PlanetsList extends StatelessWidget {
 // To see all the elements:
 // https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CComet
 class CometsList extends StatelessWidget {
-  const CometsList({super.key});
+  const CometsList({Key? key}) : super(key: key);
 
   final String url =
       "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CComet";
@@ -146,34 +169,44 @@ class CometsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("List of Bodies"),
-      ),
-      body: FutureBuilder(
-        future: loadList(url),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
-            return const Center(child: Text('No data available'));
-          } else {
-            List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
-
-            return ListView.builder(
-              itemCount: bodyList.length,
-              itemBuilder: (context, index) {
-                return ElevatedButton(
-                  onPressed: () {
-                    navigateToBodyDetails(context, bodyList[index].id);
-                  },
-                  child: Text(bodyList[index].name),
-                );
+      body: Column(
+        children: [
+          Align(
+            alignment: Alignment.topLeft,
+            child: BackButton(
+              onPressed: () {
+                Navigator.pop(context);
               },
-            );
-          }
-        },
+            ),
+          ),
+          Expanded(
+            child: FutureBuilder(
+              future: loadList(url),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
+                  return const Center(child: Text('No data available'));
+                } else {
+                  List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
+                  return ListView.builder(
+                    itemCount: bodyList.length,
+                    itemBuilder: (context, index) {
+                      return ElevatedButton(
+                        onPressed: () {
+                          navigateToBodyDetails(context, bodyList[index].id);
+                        },
+                        child: Text(bodyList[index].name),
+                      );
+                    },
+                  );
+                }
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -191,34 +224,44 @@ class MoonList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("List of Moons"),
-      ),
-      body: FutureBuilder(
-        future: loadList(url),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
-            return const Center(child: Text('No data available'));
-          } else {
-            List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
-
-            return ListView.builder(
-              itemCount: bodyList.length,
-              itemBuilder: (context, index) {
-                return ElevatedButton(
-                  onPressed: () {
-                    navigateToBodyDetails(context, bodyList[index].id);
-                  },
-                  child: Text(bodyList[index].name),
-                );
+      body: Column(
+        children: [
+          Align(
+            alignment: Alignment.topLeft,
+            child: BackButton(
+              onPressed: () {
+                Navigator.pop(context);
               },
-            );
-          }
-        },
+            ),
+          ),
+          Expanded(
+            child: FutureBuilder(
+              future: loadList(url),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
+                  return const Center(child: Text('No data available'));
+                } else {
+                  List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
+                  return ListView.builder(
+                    itemCount: bodyList.length,
+                    itemBuilder: (context, index) {
+                      return ElevatedButton(
+                        onPressed: () {
+                          navigateToBodyDetails(context, bodyList[index].id);
+                        },
+                        child: Text(bodyList[index].name),
+                      );
+                    },
+                  );
+                }
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -237,34 +280,44 @@ class DwarfList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("List of Dwarf Planets"),
-      ),
-      body: FutureBuilder(
-        future: loadList(url),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
-            return const Center(child: Text('No data available'));
-          } else {
-            List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
-
-            return ListView.builder(
-              itemCount: bodyList.length,
-              itemBuilder: (context, index) {
-                return ElevatedButton(
-                  onPressed: () {
-                    navigateToBodyDetails(context, bodyList[index].id);
-                  },
-                  child: Text(bodyList[index].name),
-                );
+      body: Column(
+        children: [
+          Align(
+            alignment: Alignment.topLeft,
+            child: BackButton(
+              onPressed: () {
+                Navigator.pop(context);
               },
-            );
-          }
-        },
+            ),
+          ),
+          Expanded(
+            child: FutureBuilder(
+              future: loadList(url),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
+                  return const Center(child: Text('No data available'));
+                } else {
+                  List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
+                  return ListView.builder(
+                    itemCount: bodyList.length,
+                    itemBuilder: (context, index) {
+                      return ElevatedButton(
+                        onPressed: () {
+                          navigateToBodyDetails(context, bodyList[index].id);
+                        },
+                        child: Text(bodyList[index].name),
+                      );
+                    },
+                  );
+                }
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -282,34 +335,44 @@ class AsteroidsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text("List of Asteroids"),
-      ),
-      body: FutureBuilder(
-        future: loadList(url),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return Center(child: Text('Error: ${snapshot.error}'));
-          } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
-            return const Center(child: Text('No data available'));
-          } else {
-            List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
-
-            return ListView.builder(
-              itemCount: bodyList.length,
-              itemBuilder: (context, index) {
-                return ElevatedButton(
-                  onPressed: () {
-                    navigateToBodyDetails(context, bodyList[index].id);
-                  },
-                  child: Text(bodyList[index].name),
-                );
+      body: Column(
+        children: [
+          Align(
+            alignment: Alignment.topLeft,
+            child: BackButton(
+              onPressed: () {
+                Navigator.pop(context);
               },
-            );
-          }
-        },
+            ),
+          ),
+          Expanded(
+            child: FutureBuilder(
+              future: loadList(url),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
+                  return const Center(child: Text('No data available'));
+                } else {
+                  List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
+                  return ListView.builder(
+                    itemCount: bodyList.length,
+                    itemBuilder: (context, index) {
+                      return ElevatedButton(
+                        onPressed: () {
+                          navigateToBodyDetails(context, bodyList[index].id);
+                        },
+                        child: Text(bodyList[index].name),
+                      );
+                    },
+                  );
+                }
+              },
+            ),
+          ),
+        ],
       ),
     );
   }
