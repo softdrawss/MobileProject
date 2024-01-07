@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_project/models/epic.dart';
 
-import '../widgets/chooseAPOD_date_widget.dart';
+import '../widgets/apod_choose_date_widget.dart';
 
 class EarthViewScreen extends StatefulWidget {
   const EarthViewScreen({super.key});
@@ -258,5 +258,3 @@ class _NumberSliderState extends State<NumberSlider> {
     );
   }
 }
-
-
