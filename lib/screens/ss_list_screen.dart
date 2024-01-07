@@ -57,8 +57,22 @@ Widget buildBodyButton(
   );
 }
 
-Widget listWidget(String url, BuildContext context){
-  return Column(
+class PaginatedBodyList extends StatefulWidget {
+  final String url;
+
+  const PaginatedBodyList({super.key, required this.url});
+
+  @override
+  PaginatedBodyListState createState() => PaginatedBodyListState();
+}
+
+class PaginatedBodyListState extends State<PaginatedBodyList> {
+  final PageController _pageController = PageController();
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
         children: [
           Align(
             alignment: Alignment.topLeft,
@@ -70,7 +84,7 @@ Widget listWidget(String url, BuildContext context){
           ),
           Expanded(
             child: FutureBuilder(
-              future: loadList(url),
+              future: loadList(widget.url),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
                   return const Center(child: CircularProgressIndicator());
@@ -81,20 +95,36 @@ Widget listWidget(String url, BuildContext context){
                   return const Center(child: Text('No data available'));
                 } else {
                   List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
-                  return ListView.builder(
-                    itemCount: bodyList.length,
-                    itemBuilder: (context, index) {
-                      return Column(
-                        children: [
-                          ElevatedButton(
-                            onPressed: () {
-                              navigateToBodyDetails(
-                                  context, bodyList[index].id);
-                            },
-                            child: Text(bodyList[index].name),
-                          ),
-                          const SizedBox(height: 6)
-                        ],
+
+                  return PageView.builder(
+                    controller: _pageController,
+                    itemCount: (bodyList.length / 10).ceil(),
+                    itemBuilder: (context, pageIndex) {
+                      int startIndex = pageIndex * 10;
+                      int endIndex = (pageIndex + 1) * 10;
+                      endIndex = endIndex > bodyList.length
+                          ? bodyList.length
+                          : endIndex;
+
+                      List<ListedBody> pageItems =
+                          bodyList.sublist(startIndex, endIndex);
+
+                      return ListView.builder(
+                        itemCount: pageItems.length,
+                        itemBuilder: (context, index) {
+                          return Column(
+                            children: [
+                              ElevatedButton(
+                                onPressed: () {
+                                  navigateToBodyDetails(
+                                      context, pageItems[index].id);
+                                },
+                                child: Text(pageItems[index].name),
+                              ),
+                              const SizedBox(height: 6)
+                            ],
+                          );
+                        },
                       );
                     },
                   );
@@ -102,9 +132,38 @@ Widget listWidget(String url, BuildContext context){
               },
             ),
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              IconButton(
+                icon: const Icon(Icons.arrow_back),
+                onPressed: () {
+                  if (_pageController.page!.toInt() != 0) {
+                    _pageController.previousPage(
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeInOut);
+                  }
+                },
+              ),
+              IconButton(
+                icon: const Icon(Icons.arrow_forward),
+                onPressed: () {
+                  if (_pageController.page!.toInt() !=
+                      (_pageController.page!.toInt() - 1)) {
+                    _pageController.nextPage(
+                        duration: const Duration(milliseconds: 500),
+                        curve: Curves.easeInOut);
+                  }
+                },
+              ),
+            ],
+          ),
         ],
-      );
+      ),
+    );
+  }
 }
+
 
 class SSList extends StatelessWidget {
   const SSList({super.key});
@@ -181,6 +240,7 @@ class PlanetsList extends StatelessWidget {
                 },
               ),
             ),
+            const SizedBox(height: 12),
             buildBodyButton('MERCURY', "lib/assets/images/planets/mercury.jpg",
                 context, "mercure"),
             const SizedBox(height: 6),
@@ -220,9 +280,10 @@ class CometsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: listWidget("https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CComet", context)
-    );
+    return const Scaffold(
+        body: PaginatedBodyList(
+            url:
+                "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CComet"));
   }
 }
 
@@ -233,9 +294,10 @@ class MoonList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: listWidget("https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CMoon", context)
-    );
+    return const Scaffold(
+        body: PaginatedBodyList(
+            url:
+                "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CMoon"));
   }
 }
 
@@ -247,9 +309,10 @@ class DwarfList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: listWidget("https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CDwarf%20Planet", context)
-    );
+    return const Scaffold(
+        body: PaginatedBodyList(
+            url:
+                "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CDwarf%20Planet"));
   }
 }
 
@@ -260,8 +323,9 @@ class AsteroidsList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: listWidget("https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CAsteroid", context)
-    );
+    return const Scaffold(
+        body: PaginatedBodyList(
+            url:
+                "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CAsteroid"));
   }
 }
