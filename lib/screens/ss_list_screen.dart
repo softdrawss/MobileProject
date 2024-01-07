@@ -20,28 +20,38 @@ Widget buildBodyButton(
     },
     child: Container(
       width: MediaQuery.of(context).size.width - 20,
-      height: MediaQuery.of(context).size.height / 3 - 48,
+      height: MediaQuery.of(context).size.height / 4 - 10,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
+        borderRadius: BorderRadius.circular(8),
         border: Border.all(
-            color: const Color.fromARGB(255, 219, 230, 240),
-            width: 2), // Add white border
+            color: const Color.fromARGB(255, 219, 230, 240), width: 2),
         image: DecorationImage(
           image: AssetImage(imagePath),
           fit: BoxFit.contain,
+          opacity: 0.8
         ),
       ),
-      child: Align(
-        alignment: Alignment.bottomLeft,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            label,
-            style: const TextStyle(
-              color: Color.fromARGB(255, 219, 230, 240),
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.none, // Remove text decoration
+      child: Material(
+        color: const Color.fromARGB(0, 0, 0, 0),
+        child: InkWell(
+          onTap: () {
+            navigateToBodyDetails(context, id);
+          },
+          splashColor: Colors.white.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(8),
+          child: Align(
+            alignment: Alignment.center,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                label,
+                style: const TextStyle(
+                  color: Color.fromARGB(255, 219, 230, 240),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.none, // Remove text decoration
+                ),
+              ),
             ),
           ),
         ),
@@ -125,28 +135,28 @@ class PlanetsList extends StatelessWidget {
                 },
               ),
             ),
-            buildBodyButton('Mercury', "lib/assets/images/planets/mercury.jpg",
+            buildBodyButton('MERCURY', "lib/assets/images/planets/mercury.jpg",
                 context, "mercure"),
             const SizedBox(height: 6),
-            buildBodyButton("Venus", "lib/assets/images/planets/venus.jpg",
+            buildBodyButton("VENUS", "lib/assets/images/planets/venus.jpg",
                 context, "venus"),
             const SizedBox(height: 6),
-            buildBodyButton("Earth", "lib/assets/images/planets/earth.jpg",
+            buildBodyButton("EARTH", "lib/assets/images/planets/earth.jpg",
                 context, "terre"),
             const SizedBox(height: 6),
             buildBodyButton(
-                "Mars", "lib/assets/images/planets/mars.jpg", context, "mars"),
+                "MARS", "lib/assets/images/planets/mars.jpg", context, "mars"),
             const SizedBox(height: 6),
-            buildBodyButton("Jupiter", "lib/assets/images/planets/jupiter.jpg",
+            buildBodyButton("JUPITER", "lib/assets/images/planets/jupiter.jpg",
                 context, "jupiter"),
             const SizedBox(height: 6),
-            buildBodyButton("Saturn", "lib/assets/images/planets/saturn.jpg",
+            buildBodyButton("SATURN", "lib/assets/images/planets/saturn.jpg",
                 context, "saturne"),
             const SizedBox(height: 6),
-            buildBodyButton("Uranus", "lib/assets/images/planets/uranus.jpg",
+            buildBodyButton("URANUS", "lib/assets/images/planets/uranus.jpg",
                 context, "uranus"),
             const SizedBox(height: 6),
-            buildBodyButton("Neptune", "lib/assets/images/planets/neptune.jpg",
+            buildBodyButton("NEPTUNE", "lib/assets/images/planets/neptune.jpg",
                 context, "neptune"),
           ],
         ),
@@ -161,7 +171,7 @@ class PlanetsList extends StatelessWidget {
 // To see all the elements:
 // https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CComet
 class CometsList extends StatelessWidget {
-  const CometsList({Key? key}) : super(key: key);
+  const CometsList({super.key});
 
   final String url =
       "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CComet";
@@ -187,7 +197,8 @@ class CometsList extends StatelessWidget {
                   return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
-                } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
+                } else if (!snapshot.hasData ||
+                    (snapshot.data as List).isEmpty) {
                   return const Center(child: Text('No data available'));
                 } else {
                   List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
@@ -242,7 +253,8 @@ class MoonList extends StatelessWidget {
                   return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
-                } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
+                } else if (!snapshot.hasData ||
+                    (snapshot.data as List).isEmpty) {
                   return const Center(child: Text('No data available'));
                 } else {
                   List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
@@ -298,7 +310,8 @@ class DwarfList extends StatelessWidget {
                   return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
-                } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
+                } else if (!snapshot.hasData ||
+                    (snapshot.data as List).isEmpty) {
                   return const Center(child: Text('No data available'));
                 } else {
                   List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
@@ -353,7 +366,8 @@ class AsteroidsList extends StatelessWidget {
                   return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
                   return Center(child: Text('Error: ${snapshot.error}'));
-                } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
+                } else if (!snapshot.hasData ||
+                    (snapshot.data as List).isEmpty) {
                   return const Center(child: Text('No data available'));
                 } else {
                   List<ListedBody> bodyList = snapshot.data as List<ListedBody>;

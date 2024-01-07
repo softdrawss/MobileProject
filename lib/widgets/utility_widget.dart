@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mobile_project/models/ss_body.dart';
 
 // Pageview Index UI ----------------------------
 class IndicatorsTrueWidget extends StatelessWidget {
