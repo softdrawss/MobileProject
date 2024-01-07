@@ -17,13 +17,7 @@ class ChooseDateWidget extends StatefulWidget {
 }
 
 class _ChooseDateWidgetState extends State<ChooseDateWidget> {
-  late DateTime selectedDateTime;
-
-  @override
-  void initState() {
-    super.initState();
-    selectedDateTime = widget.dateTime;
-  }
+  late DateTime selectedDateTime = widget.dateTime;
 
   void selectDate() {
     showDatePicker(
@@ -47,7 +41,8 @@ class _ChooseDateWidgetState extends State<ChooseDateWidget> {
               );
             },
             context: context,
-            initialDate: DateTime.now(),
+            initialDate: selectedDateTime,
+            currentDate: selectedDateTime,
             firstDate: DateTime(1995, 6, 20),
             lastDate: DateTime.now())
         .then((value) {
