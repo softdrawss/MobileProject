@@ -58,7 +58,11 @@ class SSBodyScreen extends StatelessWidget {
                 bodyInformation(picture, screenWidth),
                 const SizedBox(height: 20),
                 if (picture.moons.isNotEmpty)
-                  bodyMoons(picture, screenWidth, screenHeight),
+                  bodyMoons(
+                    picture,
+                    screenWidth,
+                    screenHeight,
+                  ),
               ],
             ),
           );
@@ -149,7 +153,7 @@ Widget bodyMoons(final picture, double screenWidth, double screenHeight) {
         color: const Color.fromARGB(0, 0, 0, 0),
         child: InkWell(
           onTap: () {
-            //navigateToBodyDetails(context, id);
+            //(context) => SSBodyMoonList(planetID: picture.id);
           },
           splashColor: Colors.white.withOpacity(0.1),
           borderRadius: BorderRadius.circular(8),

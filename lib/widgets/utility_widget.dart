@@ -121,9 +121,11 @@ Widget buildImageButton(
   );
 }
 
-Widget buildExpandedButton(String label, Alignment labelAlignment, String imagePath, BuildContext context, String routeName) {
+Widget buildExpandedButton(String label, Alignment labelAlignment,
+    String imagePath, BuildContext context, String routeName) {
   return Expanded(
-    child: buildImageButton(label, labelAlignment, imagePath, context, routeName),
+    child:
+        buildImageButton(label, labelAlignment, imagePath, context, routeName),
   );
 }
 
@@ -132,7 +134,7 @@ Widget buildExpandedRow(List<Widget> widgets) {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: widgets,
-          ),
+    ),
   );
 }
 

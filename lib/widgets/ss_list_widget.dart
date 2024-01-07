@@ -56,16 +56,16 @@ Widget buildBodyButton(
   );
 }
 
-class PaginatedBodyList extends StatefulWidget {
+class BodyList extends StatefulWidget {
   final String url;
 
-  const PaginatedBodyList({super.key, required this.url});
+  const BodyList({super.key, required this.url});
 
   @override
-  PaginatedBodyListState createState() => PaginatedBodyListState();
+  BodyListState createState() => BodyListState();
 }
 
-class PaginatedBodyListState extends State<PaginatedBodyList> {
+class BodyListState extends State<BodyList> {
   final PageController _pageController = PageController();
   int currentPage = 0;
   int maxPages = 0;

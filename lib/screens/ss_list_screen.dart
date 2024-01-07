@@ -118,7 +118,7 @@ class CometsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-        body: PaginatedBodyList(
+        body: BodyList(
             url:
                 "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CComet"));
   }
@@ -132,7 +132,7 @@ class MoonList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-        body: PaginatedBodyList(
+        body: BodyList(
             url:
                 "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CMoon"));
   }
@@ -147,7 +147,7 @@ class DwarfList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-        body: PaginatedBodyList(
+        body: BodyList(
             url:
                 "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CDwarf%20Planet"));
   }
@@ -161,8 +161,19 @@ class AsteroidsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-        body: PaginatedBodyList(
+        body: BodyList(
             url:
                 "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CAsteroid"));
   }
 }
+
+class SSBodyMoonList extends StatelessWidget {
+  const SSBodyMoonList({super.key, required this.planetID});
+
+final String planetID;
+  @override
+  Widget build(BuildContext context) {
+    return const Placeholder();
+  }
+}
+
