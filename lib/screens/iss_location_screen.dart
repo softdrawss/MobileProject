@@ -1,7 +1,6 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:mobile_project/models/iss_location.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:youtube_player_iframe/youtube_player_iframe.dart';
 
 class ISSLocationScreen extends StatefulWidget {
@@ -25,8 +24,10 @@ class _ISSLocationScreenState extends State<ISSLocationScreen> {
   @override
   void initState() {
     super.initState();
-    controller.loadVideoById(videoId: "P9C25Un7xaM");
-    // Define a timer
+    controller.loadVideoById(
+        videoId:
+            "P9C25Un7xaM"); //The video streaming is the same ID cause the NASA doesn't close the stream
+    // Define a timer to update values each second
     everySecond = Timer.periodic(const Duration(seconds: 1), (Timer t) {
       setState(() {
         future = loadISSLocation();
@@ -52,56 +53,49 @@ class _ISSLocationScreenState extends State<ISSLocationScreen> {
             padding: EdgeInsets.fromLTRB(
                 screenWidth * 0.05, screenHeight * 0.02, screenWidth * 0.05, 0),
             child: Center(
-              child: Column(
-                children: [
-                  Align(
-                    alignment: Alignment.centerLeft,
-                    child: BackButton(
-                      onPressed: () {
-                        Navigator.pop(context);
-                      },
-                    ),
-                  ),
-                  Text(
-                    "International Space Station",
-                    style: GoogleFonts.play(
-                        fontSize: 20,
-                        fontWeight: FontWeight.bold,
-                        color: Colors.white),
-                  ),
-                  const SizedBox(height: 15),
-                  YoutubePlayer(controller: controller),
-                  const SizedBox(height: 40),
-                  Text(
-                    "UNIX Timestamp:\n\n${issLocation.timestamp}\n\n",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.inter(
-                        fontStyle: FontStyle.italic,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  Text(
-                    "Longitude:\n\n${issLocation.longitude}\n\n",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.inter(
-                        fontStyle: FontStyle.italic,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600),
-                  ),
-                  Text(
-                    "Latitude:\n\n${issLocation.latitude}",
-                    textAlign: TextAlign.center,
-                    style: GoogleFonts.inter(
-                        fontStyle: FontStyle.italic,
-                        color: Colors.white,
-                        fontWeight: FontWeight.w600),
-                  ),
-                ],
-              ),
+              child: ISSLocationInfoWidget(
+                  controller: controller, issLocation: issLocation),
             ),
           );
         },
       ),
+    );
+  }
+}
+
+class ISSLocationInfoWidget extends StatelessWidget {
+  const ISSLocationInfoWidget({
+    super.key,
+    required this.controller,
+    required this.issLocation,
+  });
+
+  final YoutubePlayerController controller;
+  final ISSLocation issLocation;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        Align(
+          alignment: Alignment.centerLeft,
+          child: BackButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+        ),
+        Text("International Space Station", style: titleStyle),
+        const SizedBox(height: 15),
+        YoutubePlayer(controller: controller),
+        const SizedBox(height: 40),
+        Text("UNIX Timestamp:\n\n${issLocation.timestamp}\n\n",
+            textAlign: TextAlign.center, style: infoStyle),
+        Text("Longitude:\n\n${issLocation.longitude}\n\n",
+            textAlign: TextAlign.center, style: infoStyle),
+        Text("Latitude:\n\n${issLocation.latitude}",
+            textAlign: TextAlign.center, style: infoStyle),
+      ],
     );
   }
 }

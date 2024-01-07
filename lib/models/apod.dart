@@ -1,6 +1,16 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:http/http.dart' as http;
+
+final TextStyle titleStyle = GoogleFonts.play(
+    fontSize: 20, fontWeight: FontWeight.bold, color: Colors.white);
+
+final TextStyle autorStyle =
+    GoogleFonts.shareTechMono(fontSize: 16, color: Colors.white70);
+
+final TextStyle infoStyle = GoogleFonts.inter(color: Colors.white);
 
 class APOD {
   String title;
