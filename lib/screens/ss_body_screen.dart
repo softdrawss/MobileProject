@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_project/models/ss_body.dart';
+import '../widgets/utility_widget.dart';
 
 class SSBodyScreen extends StatelessWidget {
   SSBodyScreen({super.key, required this.id});
@@ -54,106 +55,9 @@ class SSBodyScreen extends StatelessWidget {
                 ),
                 Text(picture.name, style: name),
                 Text(picture.bodyType, style: bodyType),
-                Container(
-                  width: screenWidth,
-                  padding: const EdgeInsets.all(10),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(10),
-                    color: const Color.fromARGB(255, 161, 175, 188),
-                  ),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Text(
-                        picture.gravity == 0
-                            ? "Gravity: Unknown"
-                            : "Gravity: ${picture.gravity} m/s^2",
-                        style: text,
-                      ),
-                      Text(
-                        picture.semimajorAxis == 0
-                            ? "Semimajor Axis: Unknown"
-                            : "Semimajor Axis: ${picture.semimajorAxis} km",
-                        style: text,
-                      ),
-                      Text(
-                        "Orbital inclination: ${picture.inclination}º",
-                        style: text,
-                      ),
-                      Text(
-                        picture.massValue == 0
-                            ? "Mass: Unknown"
-                            : "Mass: ${picture.massValue} · 10^${picture.massExponent} kg",
-                        style: text,
-                      ),
-                      Text(
-                        picture.volValue == 0
-                            ? "Volume: Unknown"
-                            : "Volume: ${picture.volValue} · 10^${picture.volExponent} km^3",
-                        style: text,
-                      ),
-                      Text(
-                        picture.density == 0
-                            ? "Density: Unknown"
-                            : "Density: ${picture.density} g/cm^3",
-                        style: text,
-                      ),
-                      Text(
-                        picture.meanRadius == 0
-                            ? "Mean radius: Unknown"
-                            : "Mean Radius: ${picture.meanRadius} km",
-                        style: text,
-                      ),
-                      Text(
-                        picture.sideralOrbit == 0
-                            ? "Sideral Orbit Period: Unknown"
-                            : "Sideral Orbit Period: ${picture.sideralOrbit} days",
-                        style: text,
-                      ),
-                      Text(
-                        picture.sideralRotation == 0
-                            ? "Sideral Rotation: Unknown"
-                            : "Sideral Rotation: ${picture.sideralRotation} hours",
-                        style: text,
-                      ),
-                      Text(
-                        "Axialt Tilt: ${picture.axialTilt}º",
-                        style: text,
-                      ),
-                      Text(
-                        "Mean Temperature: ${picture.avgTemp} K",
-                        style: text,
-                      ),
-                      Text(
-                        picture.discoveredBy == ""
-                            ? "Discovered by: Unknown"
-                            : "Discovered by: ${picture.discoveredBy}",
-                        style: text,
-                      ),
-                      Text(
-                        picture.discoveryDate == ""
-                            ? "Discovery date: Unknown"
-                            : "Discovery date: ${picture.discoveryDate}",
-                        style: text,
-                      ),
-                      Text(
-                        picture.alternativeName == ""
-                            ? "Alternative name: -"
-                            : "Alternative name: ${picture.alternativeName}",
-                        style: text,
-                      ),
-                    ],
-                  ),
-                ),
+                bodyInformation(picture, screenWidth),
                 const SizedBox(height: 20),
-                if (picture.moons != null && picture.moons.isNotEmpty)
-                  /*ElevatedButton(
-                    onPressed: () {
-                      // Handle button press for moons
-                    },
-                    child: Text("SEE MOONS IN ${picture.name.toUpperCase()}"),
-                  ),
-                  const SizedBox(height: 20),*/
+                if (picture.moons.isNotEmpty)
                   GestureDetector(
                     onTap: () {
                       //navigateToBodyDetails(context, id);
@@ -167,11 +71,10 @@ class SSBodyScreen extends StatelessWidget {
                             color: const Color.fromARGB(255, 219, 230, 240),
                             width: 2), // Add white border
                         image: const DecorationImage(
-                          image: AssetImage(
-                              "lib/assets/images/ss_body_screen/moons.jpg"),
-                          fit: BoxFit.cover,
-                          opacity: 0.5
-                        ),
+                            image: AssetImage(
+                                "lib/assets/images/ss_body_screen/moons.jpg"),
+                            fit: BoxFit.cover,
+                            opacity: 0.5),
                       ),
                       child: Align(
                         alignment: Alignment.bottomLeft,
@@ -198,4 +101,63 @@ class SSBodyScreen extends StatelessWidget {
       ),
     );
   }
+}
+
+Widget bodyInformation(final picture, double screenWidth) {
+  return Container(
+    width: screenWidth,
+    padding: const EdgeInsets.all(10),
+    decoration: BoxDecoration(
+      borderRadius: BorderRadius.circular(10),
+      color: const Color.fromARGB(255, 161, 175, 188),
+    ),
+    child: Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        buildRichText("Gravity:",
+            picture.gravity == 0 ? "Unknown" : "${picture.gravity} m/s^2"),
+        buildRichText(
+            "Semimajor Axis:",
+            picture.semimajorAxis == 0
+                ? "Unknown"
+                : "${picture.semimajorAxis} km"),
+        buildRichText("Orbital inclination:", "${picture.inclination}º"),
+        buildRichText(
+            "Mass:",
+            picture.massValue == 0
+                ? "Unknown"
+                : "${picture.massValue} · 10^${picture.massExponent} kg"),
+        buildRichText(
+            "Volume:",
+            picture.volValue == 0
+                ? "Unknown"
+                : "${picture.volValue} · 10^${picture.volExponent} km^3"),
+        buildRichText("Density:",
+            picture.density == 0 ? "Unknown" : "${picture.density} g/cm^3"),
+        buildRichText("Mean Radius:",
+            picture.meanRadius == 0 ? "Unknown" : "${picture.meanRadius} km"),
+        buildRichText(
+            "Sideral Orbit Period:",
+            picture.sideralOrbit == 0
+                ? "Unknown"
+                : "${picture.sideralOrbit} days"),
+        buildRichText(
+            "Sideral Rotation:",
+            picture.sideralRotation == 0
+                ? "Unknown"
+                : "${picture.sideralRotation} hours"),
+        buildRichText("Axial Tilt:", "${picture.axialTilt}º"),
+        buildRichText("Mean Temperature:", "${picture.avgTemp} K"),
+        buildRichText("Discovered by:",
+            picture.discoveredBy == "" ? "Unknown" : "${picture.discoveredBy}"),
+        buildRichText(
+            "Discovery date:",
+            picture.discoveryDate == ""
+                ? "Unknown"
+                : "${picture.discoveryDate}"),
+        buildRichText("Alternative name:",
+            picture.alternativeName == "" ? "-" : "${picture.alternativeName}"),
+      ],
+    ),
+  );
 }

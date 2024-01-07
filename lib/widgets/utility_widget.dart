@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mobile_project/models/ss_body.dart';
 
 // Pageview Index UI ----------------------------
 class IndicatorsTrueWidget extends StatelessWidget {
@@ -37,7 +38,6 @@ class IndicatorsFalseWidget extends StatelessWidget {
   }
 }
 
-
 // Image with transparecy gradient
 class ImageGradientFade extends StatelessWidget {
   const ImageGradientFade({
@@ -57,7 +57,12 @@ class ImageGradientFade extends StatelessWidget {
           begin: Alignment.bottomCenter,
           end: Alignment.topCenter,
           stops: gradientStops,
-          colors: const [Colors.transparent, Colors.black, Colors.black, Colors.transparent],
+          colors: const [
+            Colors.transparent,
+            Colors.black,
+            Colors.black,
+            Colors.transparent
+          ],
         ).createShader(bounds);
       },
       blendMode: BlendMode.dstIn,
@@ -65,7 +70,6 @@ class ImageGradientFade extends StatelessWidget {
     );
   }
 }
-
 
 // Image button with label
 Widget buildImageButton(
@@ -129,6 +133,27 @@ Widget buildExpandedRow(List<Widget> widgets) {
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: widgets,
+          ),
+  );
+}
+
+// Function to create RichText with bold and regular parts
+Widget buildRichText(String boldText, String regularText) {
+  TextStyle text = const TextStyle(color: Colors.black);
+  return RichText(
+    text: TextSpan(
+      style: text,
+      children: [
+        TextSpan(
+          text: boldText,
+          style: const TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        TextSpan(
+          text: ' $regularText',
+        ),
+      ],
     ),
   );
 }

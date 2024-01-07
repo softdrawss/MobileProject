@@ -3,6 +3,50 @@ import 'package:mobile_project/screens/ss_body_screen.dart';
 import 'package:mobile_project/models/ss_list.dart';
 import '../widgets/utility_widget.dart';
 
+void navigateToBodyDetails(BuildContext context, String planetName) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => SSBodyScreen(id: planetName),
+    ),
+  );
+}
+
+Widget buildBodyButton(
+    String label, String imagePath, BuildContext context, String id) {
+  return GestureDetector(
+    onTap: () {
+      navigateToBodyDetails(context, id);
+    },
+    child: Container(
+      width: MediaQuery.of(context).size.width - 20,
+      height: MediaQuery.of(context).size.height / 3 - 48,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10),
+        border: Border.all(color: const Color.fromARGB(255, 219, 230, 240), width: 2), // Add white border
+        image: DecorationImage(
+          image: AssetImage(imagePath),
+          fit: BoxFit.contain,
+        ),
+      ),
+      child: Align(
+        alignment: Alignment.bottomLeft,
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Text(
+            label,
+            style: const TextStyle(
+              color: Color.fromARGB(255, 219, 230, 240),
+              fontSize: 18,
+              fontWeight: FontWeight.bold,
+              decoration: TextDecoration.none, // Remove text decoration
+            ),
+          ),
+        ),
+      ),
+    ),
+  );
+}
 
 class SSList extends StatelessWidget {
   const SSList({super.key});
@@ -40,50 +84,6 @@ class SSList extends StatelessWidget {
   }
 }
 
-void navigateToBodyDetails(BuildContext context, String planetName) {
-  Navigator.push(
-    context,
-    MaterialPageRoute(
-      builder: (context) => SSBodyScreen(id: planetName),
-    ),
-  );
-}
-
-Widget _buildImageButton(String label, String imagePath, BuildContext context, String id) {
-  return GestureDetector(
-    onTap: () {
-      navigateToBodyDetails(context, id);
-    },
-    child: Container(
-      width: MediaQuery.of(context).size.width - 20,
-      height: MediaQuery.of(context).size.height / 3 - 48,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        border: Border.all(color: const Color.fromARGB(255, 219, 230, 240), width: 2), // Add white border
-        image: DecorationImage(
-          image: AssetImage(imagePath),
-          fit: BoxFit.contain,
-        ),
-      ),
-      child: Align(
-        alignment: Alignment.bottomLeft,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            label,
-            style: const TextStyle(
-              color: Color.fromARGB(255, 219, 230, 240),
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.none, // Remove text decoration
-            ),
-          ),
-        ),
-      ),
-    ),
-  );
-}
-
 // Due to the planets do not appear in the usual order (from nearest to farest to the sun), I prefered to upload them manually
 class PlanetsList extends StatelessWidget {
   const PlanetsList({super.key});
@@ -95,36 +95,35 @@ class PlanetsList extends StatelessWidget {
         Column(
           children: [
             Align(
-              alignment: Alignment.centerLeft,
-              child: ElevatedButton(
+              alignment: Alignment.topLeft,
+              child: BackButton(
                 onPressed: () {
                   Navigator.pop(context);
                 },
-                child: const Text('Back'),
               ),
             ),
-            _buildImageButton('Mercury',
+            buildBodyButton('Mercury',
                 "lib/assets/images/planets/mercury.jpg", context, "mercure"),
-            const SizedBox(height: 10),
-            _buildImageButton("Venus", "lib/assets/images/planets/venus.jpg",
+            const SizedBox(height: 6),
+            buildBodyButton("Venus", "lib/assets/images/planets/venus.jpg",
                 context, "venus"),
-            const SizedBox(height: 10),
-            _buildImageButton("Earth", "lib/assets/images/planets/earth.jpg",
+            const SizedBox(height: 6),
+            buildBodyButton("Earth", "lib/assets/images/planets/earth.jpg",
                 context, "terre"),
-            const SizedBox(height: 10),
-            _buildImageButton(
+            const SizedBox(height: 6),
+            buildBodyButton(
                 "Mars", "lib/assets/images/planets/mars.jpg", context, "mars"),
-            const SizedBox(height: 10),
-            _buildImageButton("Jupiter",
+            const SizedBox(height: 6),
+            buildBodyButton("Jupiter",
                 "lib/assets/images/planets/jupiter.jpg", context, "jupiter"),
-            const SizedBox(height: 10),
-            _buildImageButton("Saturn", "lib/assets/images/planets/saturn.jpg",
+            const SizedBox(height: 6),
+            buildBodyButton("Saturn", "lib/assets/images/planets/saturn.jpg",
                 context, "saturne"),
-            const SizedBox(height: 10),
-            _buildImageButton("Uranus", "lib/assets/images/planets/uranus.jpg",
+            const SizedBox(height: 6),
+            buildBodyButton("Uranus", "lib/assets/images/planets/uranus.jpg",
                 context, "uranus"),
-            const SizedBox(height: 10),
-            _buildImageButton("Neptune",
+            const SizedBox(height: 6),
+            buildBodyButton("Neptune",
                 "lib/assets/images/planets/neptune.jpg", context, "neptune"),
           ],
         ),
