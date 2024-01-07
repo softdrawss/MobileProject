@@ -67,8 +67,21 @@ class PaginatedBodyList extends StatefulWidget {
 
 class PaginatedBodyListState extends State<PaginatedBodyList> {
   final PageController _pageController = PageController();
+  int currentPage = 0;
+  int maxPages = 0;
 
   @override
+
+  // To calculate maxPages
+  void initState() {
+    super.initState();
+    // Load the list and set the initial values of currentPage and maxPages
+    loadList(widget.url).then((List<ListedBody> bodyList) {
+      maxPages = (bodyList.length / 10).ceil();
+      setState(() {});
+    });
+  }
+  
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(
@@ -94,13 +107,19 @@ class PaginatedBodyListState extends State<PaginatedBodyList> {
                   return const Center(child: Text('No data available'));
                 } else {
                   List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
+                  maxPages = (bodyList.length / 10).ceil();
 
                   return PageView.builder(
                     controller: _pageController,
-                    itemCount: (bodyList.length / 10).ceil(),
+                    itemCount: maxPages,
+                    onPageChanged: (int index) {
+                      setState(() {
+                        currentPage = index;
+                      });
+                    },
                     itemBuilder: (context, pageIndex) {
-                      int startIndex = pageIndex * 10;
-                      int endIndex = (pageIndex + 1) * 10;
+                      int startIndex = currentPage * 10;
+                      int endIndex = (currentPage + 1) * 10;
                       endIndex = endIndex > bodyList.length
                           ? bodyList.length
                           : endIndex;
@@ -135,25 +154,32 @@ class PaginatedBodyListState extends State<PaginatedBodyList> {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               IconButton(
-                icon: const Icon(Icons.arrow_back),
-                onPressed: () {
-                  if (_pageController.page!.toInt() != 0) {
-                    _pageController.previousPage(
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeInOut);
-                  }
-                },
+                icon: const Icon(
+                  Icons.arrow_back,
+                ),
+                onPressed: currentPage > 0
+                    ? () {
+                        setState(() {
+                          currentPage--;
+                        });
+                      }
+                    : null,
+                color: currentPage == 0 ? Colors.grey.withOpacity(0.5) : null,
               ),
+              // Display row of numbers between the arrows
+              Text("${currentPage + 1}"),
               IconButton(
                 icon: const Icon(Icons.arrow_forward),
-                onPressed: () {
-                  if (_pageController.page!.toInt() !=
-                      (_pageController.page!.toInt() - 1)) {
-                    _pageController.nextPage(
-                        duration: const Duration(milliseconds: 500),
-                        curve: Curves.easeInOut);
-                  }
-                },
+                onPressed: currentPage + 1 < maxPages
+                    ? () {
+                        setState(() {
+                          currentPage++;
+                        });
+                      }
+                    : null,
+                color: currentPage + 1 >= maxPages
+                    ? Colors.grey.withOpacity(0.5)
+                    : null,
               ),
             ],
           ),

@@ -46,7 +46,7 @@ class MyApp extends StatelessWidget {
         "/dwarflist": (_) => const DwarfList(),
         "/asteroidslist": (_) => const AsteroidsList(),
         "/spacerocks": (_) => const SpaceRocksScreen(),
-
+        "/moonplanets": (_) => const MoonList(),
         "/people": (_) => const PeopleInSpaceScreen(),
         "/earthview": (_) => const EarthViewScreen(),
       },
