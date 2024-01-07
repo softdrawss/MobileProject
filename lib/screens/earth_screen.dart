@@ -162,7 +162,7 @@ class _EarthViewScreenState extends State<EarthViewScreen> {
                     style: TextStyle(fontSize: 40),
                     textAlign: TextAlign.center,
                   ),
-                  const Spacer(),
+                  const SizedBox(height: 30,),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
