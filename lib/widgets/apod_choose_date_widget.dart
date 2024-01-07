@@ -17,8 +17,6 @@ class ChooseDateWidget extends StatefulWidget {
 }
 
 class _ChooseDateWidgetState extends State<ChooseDateWidget> {
-  late DateTime selectedDateTime = widget.dateTime;
-
   void selectDate() {
     showDatePicker(
             builder: (context, child) {
@@ -41,16 +39,13 @@ class _ChooseDateWidgetState extends State<ChooseDateWidget> {
               );
             },
             context: context,
-            initialDate: selectedDateTime,
-            currentDate: selectedDateTime,
+            initialDate: widget.dateTime,
+            currentDate: widget.dateTime,
             firstDate: DateTime(1995, 6, 20),
             lastDate: DateTime.now())
         .then((value) {
       if (value != null) {
         widget.onDateChanged(value);
-        setState(() {
-          selectedDateTime = value;
-        });
       }
     });
   }
@@ -74,7 +69,7 @@ class _ChooseDateWidgetState extends State<ChooseDateWidget> {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Text(
-              selectedDateTime.toString().split(" ")[0],
+              widget.dateTime.toString().split(" ")[0],
               style: const TextStyle(color: Color.fromARGB(255, 161, 175, 188)),
             ),
           ],
