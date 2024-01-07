@@ -99,7 +99,7 @@ class _SpaceRocksScreenState extends State<SpaceRocksScreen> {
             }
           ),
           Positioned(
-            top: MediaQuery.of(context).size.height - 32,
+            top: MediaQuery.of(context).size.height - 20,
             right: 0,
             left: 0,  
             child: Column(
@@ -142,13 +142,13 @@ class _SpaceRocksScreenState extends State<SpaceRocksScreen> {
 
 class SpaceRockWidget extends StatelessWidget {
   const SpaceRockWidget({
-    super.key,
+    Key? key,
     required this.image,
     required this.title,
     required this.description,
     required this.onTab,
-    required this.index
-  });
+    required this.index,
+  }) : super(key: key);
 
   final String image;
   final String title;
@@ -169,7 +169,7 @@ class SpaceRockWidget extends StatelessWidget {
               child: ImageGradientFade(
                 imagePath: image,
                 gradientStops: const [0.0, 0.1, 0.94, 1.0],
-                ),
+              ),
             ),
           ),
           Positioned(
@@ -183,18 +183,29 @@ class SpaceRockWidget extends StatelessWidget {
                 borderRadius: BorderRadius.only(
                   topLeft: Radius.circular(15),
                   topRight: Radius.circular(15),
-                )
-              ),
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25),
-                child: Column(
-                  children: [
-                    const SizedBox(height: 40,),
-                    Text(title, style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
-                    const SizedBox(height: 20,),
-                    Text(description, style: const TextStyle(fontSize: 16, height: 1.5, color: Colors.grey), textAlign: TextAlign.justify,)
-                  ],
                 ),
+              ),
+              child: Column(
+                children: [
+                  const SizedBox(height: 40),
+                  Text(title, style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
+                  const SizedBox(height: 20),
+                  Expanded(
+                    child: SingleChildScrollView(
+                      padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                      child: Text(
+                        description,
+                        style: const TextStyle(
+                          fontSize: 16,
+                          height: 1.5,
+                          color: Colors.grey,
+                        ),
+                        textAlign: TextAlign.justify,
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 32),
+                ],
               ),
             ),
           ),
