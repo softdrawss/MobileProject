@@ -4,10 +4,12 @@ class ChooseDateWidget extends StatefulWidget {
   const ChooseDateWidget({
     super.key,
     required this.dateTime,
+    required this.beginDate,
     required this.onDateChanged,
   });
 
   final DateTime dateTime;
+  final DateTime beginDate;
   final Function(DateTime) onDateChanged;
 
   @override

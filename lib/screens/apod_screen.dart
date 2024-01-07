@@ -96,6 +96,7 @@ class _APODScreenState extends State<APODScreen> {
                       const SizedBox(height: 15),
                       ChooseDateWidget(
                           dateTime: dateTime,
+                          beginDate: DateTime(1995, 6, 20),
                           onDateChanged: (newDateTime) {
                             setState(() {
                               dateTime = newDateTime;
