@@ -1,6 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_project/models/ss_body.dart';
+import 'package:mobile_project/screens/ss_list_screen.dart';
 import '../widgets/utility_widget.dart';
+
+void navigateToMoonList(BuildContext context, String planetID, String planetName) {
+  Navigator.push(
+    context,
+    MaterialPageRoute(
+      builder: (context) => SSBodyMoonList(planetID: planetID, planetName: planetName),
+    ),
+  );
+}
 
 class SSBodyScreen extends StatelessWidget {
   SSBodyScreen({super.key, required this.id});
@@ -60,6 +70,9 @@ class SSBodyScreen extends StatelessWidget {
                 if (picture.moons.isNotEmpty)
                   bodyMoons(
                     picture,
+                    context,
+                    picture.id,
+                    picture.name,
                     screenWidth,
                     screenHeight,
                   ),
@@ -131,10 +144,11 @@ Widget bodyInformation(final picture, double screenWidth) {
   );
 }
 
-Widget bodyMoons(final picture, double screenWidth, double screenHeight) {
+Widget bodyMoons(final picture, final context, String planetID, String planetName,
+    double screenWidth, double screenHeight) {
   return GestureDetector(
     onTap: () {
-      //navigateToBodyDetails(context, id);
+      navigateToMoonList(context, planetID, planetName);
     },
     child: Container(
       width: screenWidth,
@@ -153,7 +167,7 @@ Widget bodyMoons(final picture, double screenWidth, double screenHeight) {
         color: const Color.fromARGB(0, 0, 0, 0),
         child: InkWell(
           onTap: () {
-            //(context) => SSBodyMoonList(planetID: picture.id);
+            navigateToMoonList(context, planetID, planetName);
           },
           splashColor: Colors.white.withOpacity(0.1),
           borderRadius: BorderRadius.circular(8),

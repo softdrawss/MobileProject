@@ -168,12 +168,14 @@ class AsteroidsList extends StatelessWidget {
 }
 
 class SSBodyMoonList extends StatelessWidget {
-  const SSBodyMoonList({super.key, required this.planetID});
+  final String planetID;
+  final String planetName;
+  const SSBodyMoonList({super.key, required this.planetID, required this.planetName});
 
-final String planetID;
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      body: BodyMoonList(planetID: planetID, planetName: planetName),
+    );
   }
 }
-
