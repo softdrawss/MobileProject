@@ -97,16 +97,16 @@ class APODInfoWidget extends StatefulWidget {
 
 class _APODInfoWidgetState extends State<APODInfoWidget> {
   //Function that separates a text into paragraphs
+  // Assuming paragraphs are separated by a dot and a space
   String separateIntoParagraphs(String text) {
-    List<String> paragraphs = text
-        .split('. '); // Assuming paragraphs are separated by a dot and a space
-    String result = '';
+    List<String> paragraphs = text.split('. ');
+    StringBuffer sb = StringBuffer();
 
     for (String paragraph in paragraphs) {
-      result += '$paragraph.\n\n'; // Add two line breaks after each paragraph
+      sb.write("$paragraph.\n\n"); // Add two line breaks after each paragraph
     }
 
-    return result.trim(); // Trim any leading or trailing whitespace
+    return sb.toString(); // Trim any leading or trailing whitespace
   }
 
   @override
