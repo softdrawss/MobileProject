@@ -143,19 +143,29 @@ Widget bodyMoons(final picture, double screenWidth, double screenHeight) {
         image: const DecorationImage(
             image: AssetImage("lib/assets/images/ss_body_screen/moons.jpg"),
             fit: BoxFit.cover,
-            opacity: 0.5),
+            opacity: 0.8),
       ),
-      child: Align(
-        alignment: Alignment.bottomLeft,
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Text(
-            "SEE MOONS IN ${picture.name.toUpperCase()}",
-            style: const TextStyle(
-              color: Color.fromARGB(255, 219, 230, 240),
-              fontSize: 18,
-              fontWeight: FontWeight.bold,
-              decoration: TextDecoration.none, // Remove text decoration
+      child: Material(
+        color: const Color.fromARGB(0, 0, 0, 0),
+        child: InkWell(
+          onTap: () {
+            //navigateToBodyDetails(context, id);
+          },
+          splashColor: Colors.white.withOpacity(0.1),
+          borderRadius: BorderRadius.circular(8),
+          child: Align(
+            alignment: Alignment.bottomLeft,
+            child: Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text(
+                "SEE MOONS IN ${picture.name.toUpperCase()}",
+                style: const TextStyle(
+                  color: Color.fromARGB(255, 219, 230, 240),
+                  fontSize: 18,
+                  fontWeight: FontWeight.bold,
+                  decoration: TextDecoration.none, // Remove text decoration
+                ),
+              ),
             ),
           ),
         ),

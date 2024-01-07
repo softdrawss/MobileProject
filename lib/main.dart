@@ -46,7 +46,6 @@ class MyApp extends StatelessWidget {
         "/moonlist": (_) => const MoonList(),
         "/dwarflist": (_) => const DwarfList(),
         "/asteroidslist": (_) => const AsteroidsList(),
-        "/body": (_) => SSBodyScreen(id: "sycorax"),
         "/spacerocks": (_) => const SpaceRocksScreen(),
 
         "/people": (_) => const PeopleInSpaceScreen(),

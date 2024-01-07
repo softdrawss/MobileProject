@@ -20,16 +20,13 @@ Widget buildBodyButton(
     },
     child: Container(
       width: MediaQuery.of(context).size.width - 20,
-      height: MediaQuery.of(context).size.height / 4 - 10,
+      height: MediaQuery.of(context).size.height / 5 - 10,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(8),
         border: Border.all(
             color: const Color.fromARGB(255, 219, 230, 240), width: 2),
         image: DecorationImage(
-          image: AssetImage(imagePath),
-          fit: BoxFit.contain,
-          opacity: 0.8
-        ),
+            image: AssetImage(imagePath), fit: BoxFit.contain, opacity: 0.8),
       ),
       child: Material(
         color: const Color.fromARGB(0, 0, 0, 0),
@@ -58,6 +55,55 @@ Widget buildBodyButton(
       ),
     ),
   );
+}
+
+Widget listWidget(String url, BuildContext context){
+  return Column(
+        children: [
+          Align(
+            alignment: Alignment.topLeft,
+            child: BackButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
+          Expanded(
+            child: FutureBuilder(
+              future: loadList(url),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (!snapshot.hasData ||
+                    (snapshot.data as List).isEmpty) {
+                  return const Center(child: Text('No data available'));
+                } else {
+                  List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
+                  return ListView.builder(
+                    itemCount: bodyList.length,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                          ElevatedButton(
+                            onPressed: () {
+                              navigateToBodyDetails(
+                                  context, bodyList[index].id);
+                            },
+                            child: Text(bodyList[index].name),
+                          ),
+                          const SizedBox(height: 6)
+                        ],
+                      );
+                    },
+                  );
+                }
+              },
+            ),
+          ),
+        ],
+      );
 }
 
 class SSList extends StatelessWidget {
@@ -168,226 +214,54 @@ class PlanetsList extends StatelessWidget {
 // Links may have to be changed
 
 // bodyType -> Comet
-// To see all the elements:
 // https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CComet
 class CometsList extends StatelessWidget {
   const CometsList({super.key});
 
-  final String url =
-      "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CComet";
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: BackButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-          Expanded(
-            child: FutureBuilder(
-              future: loadList(url),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else if (!snapshot.hasData ||
-                    (snapshot.data as List).isEmpty) {
-                  return const Center(child: Text('No data available'));
-                } else {
-                  List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
-                  return ListView.builder(
-                    itemCount: bodyList.length,
-                    itemBuilder: (context, index) {
-                      return ElevatedButton(
-                        onPressed: () {
-                          navigateToBodyDetails(context, bodyList[index].id);
-                        },
-                        child: Text(bodyList[index].name),
-                      );
-                    },
-                  );
-                }
-              },
-            ),
-          ),
-        ],
-      ),
+      body: listWidget("https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CComet", context)
     );
   }
 }
 
 // bodyType -> Moon
-// To see all the elements:
 // https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CMoon
 class MoonList extends StatelessWidget {
   const MoonList({super.key});
 
-  final String url =
-      "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CMoon";
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: BackButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-          Expanded(
-            child: FutureBuilder(
-              future: loadList(url),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else if (!snapshot.hasData ||
-                    (snapshot.data as List).isEmpty) {
-                  return const Center(child: Text('No data available'));
-                } else {
-                  List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
-                  return ListView.builder(
-                    itemCount: bodyList.length,
-                    itemBuilder: (context, index) {
-                      return ElevatedButton(
-                        onPressed: () {
-                          navigateToBodyDetails(context, bodyList[index].id);
-                        },
-                        child: Text(bodyList[index].name),
-                      );
-                    },
-                  );
-                }
-              },
-            ),
-          ),
-        ],
-      ),
+      body: listWidget("https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CMoon", context)
     );
   }
 }
 
 // bodyType -> Dwarf Planet
-// To see all the elements:
 // https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CDwarf%20Planet
 
 class DwarfList extends StatelessWidget {
   const DwarfList({super.key});
 
-  final String url =
-      "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CDwarf%20Planet";
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: BackButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-          Expanded(
-            child: FutureBuilder(
-              future: loadList(url),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else if (!snapshot.hasData ||
-                    (snapshot.data as List).isEmpty) {
-                  return const Center(child: Text('No data available'));
-                } else {
-                  List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
-                  return ListView.builder(
-                    itemCount: bodyList.length,
-                    itemBuilder: (context, index) {
-                      return ElevatedButton(
-                        onPressed: () {
-                          navigateToBodyDetails(context, bodyList[index].id);
-                        },
-                        child: Text(bodyList[index].name),
-                      );
-                    },
-                  );
-                }
-              },
-            ),
-          ),
-        ],
-      ),
+      body: listWidget("https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CDwarf%20Planet", context)
     );
   }
 }
 
 // bodyType -> Asteroid
-// To see all the elements:
 // https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CAsteroid
 class AsteroidsList extends StatelessWidget {
   const AsteroidsList({super.key});
 
-  final String url =
-      "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CAsteroid";
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: BackButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
-          Expanded(
-            child: FutureBuilder(
-              future: loadList(url),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else if (!snapshot.hasData ||
-                    (snapshot.data as List).isEmpty) {
-                  return const Center(child: Text('No data available'));
-                } else {
-                  List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
-                  return ListView.builder(
-                    itemCount: bodyList.length,
-                    itemBuilder: (context, index) {
-                      return ElevatedButton(
-                        onPressed: () {
-                          navigateToBodyDetails(context, bodyList[index].id);
-                        },
-                        child: Text(bodyList[index].name),
-                      );
-                    },
-                  );
-                }
-              },
-            ),
-          ),
-        ],
-      ),
+      body: listWidget("https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CAsteroid", context)
     );
   }
 }
