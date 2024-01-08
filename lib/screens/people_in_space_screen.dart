@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_project/models/people_in_space.dart';
+import 'package:mobile_project/screens/LL2_astronauts_screen.dart';
 
 class PeopleInSpaceScreen extends StatelessWidget {
   const PeopleInSpaceScreen({super.key});
@@ -46,26 +47,41 @@ class PeopleInSpaceScreen extends StatelessWidget {
                   const SizedBox(
                     height: 50,
                   ),
-                  const Text("People currently in space:",
-                    style:
-                      TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                  const Text(
+                    "People currently in space:",
+                    style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+                  ),
                   const SizedBox(
                     height: 30,
                   ),
-                  Text((peopleNum.toString()),
+                  Text(
+                    (peopleNum.toString()),
                     style: const TextStyle(
                       color: Color.fromARGB(255, 219, 230, 240),
                       fontSize: 120,
-                      fontWeight: FontWeight.bold)),
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
                   const SizedBox(
                     height: 50,
                   ),
                   Expanded(
-                    child: SpacePeopleList(peopleBySpacecraft: peopleBySpacecraft)
+                    child: SpacePeopleList(peopleBySpacecraft: peopleBySpacecraft),
                   ),
                 ],
               ),
             ),
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                // Navigate to another screen when the button is pressed
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => const AstronautListScreen()),
+                );
+              },
+              child: Icon(Icons.arrow_forward),
+            ),
+            floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
           );
         }
       },
