@@ -187,7 +187,7 @@ class SpaceRockWidget extends StatelessWidget {
               ),
               child: Column(
                 children: [
-                  const SizedBox(height: 40),
+                  const SizedBox(height: 32),
                   Text(title, style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
                   const SizedBox(height: 20),
                   Expanded(

@@ -46,7 +46,7 @@ class PeopleInSpaceScreen extends StatelessWidget {
                   const SizedBox(
                     height: 50,
                   ),
-                  const Text("People currently on space:",
+                  const Text("People currently in space:",
                       style:
                           TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                   const SizedBox(
