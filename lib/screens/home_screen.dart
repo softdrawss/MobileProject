@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/utility_widget.dart';
-
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -99,19 +99,37 @@ class DrawerScreen extends StatelessWidget {
               ),
             ),
           ),
-          ListTile(
-            title: const Text(
-              'Item 1',
-              style: TextStyle(
-                fontSize: 16,
-                fontWeight: FontWeight.normal,
-              ),
-            ),
-            onTap: () {
-            },
-          ),
+          buildListTile('Swap UI', () {
+            // Handle item 1 tap
+          }),
+          buildListTile('GitHub', () {
+            _launchURL('https://github.com/softdrawss/MobileProject');
+          }),
+          buildListTile('APIs used', () {
+            // Handle item 1 tap
+          }),
         ],
       ),
     );
   }
+}
+
+Widget buildListTile(String title, Function() onTap) {
+  return ListTile(
+    title: Text(
+      title,
+      style: const TextStyle(
+        fontSize: 16,
+        fontWeight: FontWeight.normal,
+      ),
+    ),
+    onTap: onTap,
+  );
+}
+
+_launchURL(String url) async {
+   final Uri uri = Uri.parse(url);
+   if (!await launchUrl(uri)) {
+        throw Exception('Could not launch $uri');
+    }
 }
