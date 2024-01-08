@@ -176,6 +176,7 @@ class _EarthViewScreenState extends State<EarthViewScreen> {
                             setState(() {
                               date = newDateTime;
                             });
+                            currentImg = 0;
                           }),
                     ],
                   ),
