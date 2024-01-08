@@ -30,7 +30,7 @@ class SSBodyScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
-    double screenHeight = MediaQuery.of(context).size.height / 3 - 48;
+    double containerHeight = MediaQuery.of(context).size.height / 4 - 48;
 
     return Scaffold(
       appBar: AppBar(
@@ -74,7 +74,7 @@ class SSBodyScreen extends StatelessWidget {
                     picture.id,
                     picture.name,
                     screenWidth,
-                    screenHeight,
+                    containerHeight,
                   ),
               ],
             ),
@@ -145,19 +145,16 @@ Widget bodyInformation(final picture, double screenWidth) {
 }
 
 Widget bodyMoons(final picture, final context, String planetID, String planetName,
-    double screenWidth, double screenHeight) {
+    double screenWidth, double containerHeight) {
   return GestureDetector(
     onTap: () {
       navigateToMoonList(context, planetID, planetName);
     },
     child: Container(
       width: screenWidth,
-      height: screenHeight,
+      height: containerHeight,
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(10),
-        border: Border.all(
-            color: const Color.fromARGB(255, 219, 230, 240),
-            width: 2), // Add white border
         image: const DecorationImage(
             image: AssetImage("lib/assets/images/ss_body_screen/moons.jpg"),
             fit: BoxFit.cover,

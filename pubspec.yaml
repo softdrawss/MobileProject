@@ -69,6 +69,7 @@ flutter:
     - lib/assets/images/ss_list_screen/planets/
     - lib/assets/images/ss_list_screen/dwarfplanets/
     - lib/assets/images/ss_list_screen/comets/
+    - lib/assets/images/ss_list_screen/stars/
     - lib/assets/images/ss_screen/
     - lib/assets/images/ss_body_screen/
 

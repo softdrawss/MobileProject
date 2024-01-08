@@ -23,44 +23,38 @@ class SSList extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             buildExpandedButton(
-              'PLANETS',
-              Alignment.center,
-              'lib/assets/images/ss_screen/planets.png',
-              context,
-              "/planetslist"
-            ),
+                'PLANETS',
+                Alignment.center,
+                'lib/assets/images/ss_screen/planets.png',
+                context,
+                "/planetslist"),
             const SizedBox(height: 6),
             buildExpandedButton(
-              'DWARF PLANETS',
-              Alignment.center,
-              'lib/assets/images/ss_screen/dwarf_planets.png',
-              context,
-              "/dwarflist"
-            ),
+                'DWARF PLANETS',
+                Alignment.center,
+                'lib/assets/images/ss_screen/dwarf_planets.png',
+                context,
+                "/dwarflist"),
             const SizedBox(height: 6),
             buildExpandedButton(
-              'COMETS',
-              Alignment.center,
-              'lib/assets/images/ss_screen/comets.png',
-              context,
-              "/cometslist"
-            ),
+                'COMETS',
+                Alignment.center,
+                'lib/assets/images/ss_screen/comets.png',
+                context,
+                "/cometslist"),
+            const SizedBox(height: 6),
+            buildExpandedButton('MOONS', Alignment.center,
+                'lib/assets/images/ss_screen/moons.png', context, "/moonlist"),
             const SizedBox(height: 6),
             buildExpandedButton(
-              'MOONS',
-              Alignment.center,
-              'lib/assets/images/ss_screen/moons.png',
-              context,
-              "/moonlist"
-            ),
+                'ASTEROIDS',
+                Alignment.center,
+                'lib/assets/images/ss_screen/asteroids.png',
+                context,
+                "/asteroidslist"),
             const SizedBox(height: 6),
-            buildExpandedButton(
-              'ASTEROIDS',
-              Alignment.center,
-              'lib/assets/images/ss_screen/asteroids.png',
-              context,
-              "/asteroidslist"
-            ),
+            buildExpandedButton('STARS', Alignment.center,
+                'lib/assets/images/ss_screen/stars.png', context, "/starslist"),
           ],
         ),
       ),
@@ -72,11 +66,13 @@ class SSList extends StatelessWidget {
 class PlanetsList extends StatelessWidget {
   const PlanetsList({super.key});
 
-  static const CustomDivider divider = CustomDivider(height: 1, color: Color.fromARGB(128, 161, 175, 188));
+  static const CustomDivider divider =
+      CustomDivider(height: 1, color: Color.fromARGB(128, 161, 175, 188));
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black12,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leading: BackButton(
@@ -89,21 +85,53 @@ class PlanetsList extends StatelessWidget {
       body: ListView(
         padding: const EdgeInsets.all(12.0),
         children: [
-          buildBodyButton('MERCURY', "lib/assets/images/ss_list_screen/planets/mercury.jpg", context, "mercure"),
+          buildBodyButton(
+              'MERCURY',
+              "lib/assets/images/ss_list_screen/planets/mercury.jpg",
+              context,
+              "mercure"),
           divider,
-          buildBodyButton("VENUS", "lib/assets/images/ss_list_screen/planets/venus.jpg", context, "venus"),
+          buildBodyButton(
+              "VENUS",
+              "lib/assets/images/ss_list_screen/planets/venus.jpg",
+              context,
+              "venus"),
           divider,
-          buildBodyButton("EARTH", "lib/assets/images/ss_list_screen/planets/earth.jpg", context, "terre"),
+          buildBodyButton(
+              "EARTH",
+              "lib/assets/images/ss_list_screen/planets/earth.jpg",
+              context,
+              "terre"),
           divider,
-          buildBodyButton("MARS", "lib/assets/images/ss_list_screen/planets/mars.jpg", context, "mars"),
+          buildBodyButton(
+              "MARS",
+              "lib/assets/images/ss_list_screen/planets/mars.jpg",
+              context,
+              "mars"),
           divider,
-          buildBodyButton("JUPITER", "lib/assets/images/ss_list_screen/planets/jupiter.jpg", context, "jupiter"),
+          buildBodyButton(
+              "JUPITER",
+              "lib/assets/images/ss_list_screen/planets/jupiter.jpg",
+              context,
+              "jupiter"),
           divider,
-          buildBodyButton("SATURN", "lib/assets/images/ss_list_screen/planets/saturn.jpg", context, "saturne"),
+          buildBodyButton(
+              "SATURN",
+              "lib/assets/images/ss_list_screen/planets/saturn.jpg",
+              context,
+              "saturne"),
           divider,
-          buildBodyButton("URANUS", "lib/assets/images/ss_list_screen/planets/uranus.jpg", context, "uranus"),
+          buildBodyButton(
+              "URANUS",
+              "lib/assets/images/ss_list_screen/planets/uranus.jpg",
+              context,
+              "uranus"),
           divider,
-          buildBodyButton("NEPTUNE", "lib/assets/images/ss_list_screen/planets/neptune.jpg", context, "neptune"),
+          buildBodyButton(
+              "NEPTUNE",
+              "lib/assets/images/ss_list_screen/planets/neptune.jpg",
+              context,
+              "neptune"),
         ],
       ),
     );
@@ -120,18 +148,19 @@ class CometsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: BackButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          leading: BackButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          title: const Text('Comets'),
         ),
-        title: const Text('Comets'),
-      ),
         body: const BodyList(
-            url:
-                "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CComet",));
+          url:
+              "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CComet",
+        ));
   }
 }
 
@@ -143,18 +172,19 @@ class MoonList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: BackButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          leading: BackButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          title: const Text('Moons'),
         ),
-        title: const Text('Moons'),
-      ),
         body: const BodyList(
-            url:
-                "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CMoon",));
+          url:
+              "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CMoon",
+        ));
   }
 }
 
@@ -167,18 +197,21 @@ class DwarfList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.transparent,
-        leading: BackButton(
-          onPressed: () {
-            Navigator.pop(context);
-          },
+        backgroundColor: Colors.black12,
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          leading: BackButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          title: const Text('Dwarf Planets'),
         ),
-        title: const Text('Dwarf Planets'),
-      ),
         body: const BodyListImage(
-            url:
-                "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CDwarf%20Planet", folder: "dwarfplanets",));
+          url:
+              "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CDwarf%20Planet",
+          folder: "dwarfplanets",
+        ));
   }
 }
 
@@ -190,6 +223,34 @@ class AsteroidsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.transparent,
+          leading: BackButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+          ),
+          title: const Text('Asteroids'),
+        ),
+        body: const BodyList(
+          url:
+              "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CAsteroid",
+        ));
+  }
+}
+
+// bodyType -> Star
+// There is only the sun
+class StarsList extends StatelessWidget {
+  const StarsList({super.key});
+
+static const CustomDivider divider =
+      CustomDivider(height: 1, color: Color.fromARGB(128, 161, 175, 188));
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.black12,
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         leading: BackButton(
@@ -197,18 +258,28 @@ class AsteroidsList extends StatelessWidget {
             Navigator.pop(context);
           },
         ),
-        title: const Text('Asteroids'),
+        title: const Text('Stars'),
       ),
-        body: const BodyList(
-            url:
-                "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CAsteroid",));
+      body: ListView(
+        padding: const EdgeInsets.all(12.0),
+        children: [
+          buildBodyButton(
+              'SUN',
+              "lib/assets/images/ss_list_screen/stars/sun.jpg",
+              context,
+              "soleil"),
+              divider,
+        ],
+      ),
+    );
   }
 }
 
 class SSBodyMoonList extends StatelessWidget {
   final String planetID;
   final String planetName;
-  const SSBodyMoonList({super.key, required this.planetID, required this.planetName});
+  const SSBodyMoonList(
+      {super.key, required this.planetID, required this.planetName});
 
   @override
   Widget build(BuildContext context) {

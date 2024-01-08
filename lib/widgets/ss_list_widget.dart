@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_project/screens/ss_body_screen.dart';
 import 'package:mobile_project/models/ss_list.dart';
+import 'package:mobile_project/widgets/utility_widget.dart';
 
 void navigateToBodyDetails(BuildContext context, String planetName) {
   Navigator.push(
@@ -23,8 +24,7 @@ Widget buildBodyButton(
       decoration: BoxDecoration(
         image: DecorationImage(
             image: AssetImage(imagePath), fit: BoxFit.contain, opacity: 0.8),
-            color: const Color.fromARGB(0, 0, 0, 0),
-
+        color: const Color.fromARGB(0, 0, 0, 0),
       ),
       child: Material(
         color: const Color.fromARGB(0, 0, 0, 0),
@@ -67,6 +67,9 @@ class BodyListState extends State<BodyList> {
   final PageController _pageController = PageController();
   int currentPage = 0;
   int maxPages = 0;
+
+  static const CustomDivider divider =
+      CustomDivider(height: 1, color: Color.fromARGB(128, 161, 175, 188));
 
   // To calculate maxPages
   @override
@@ -122,14 +125,19 @@ class BodyListState extends State<BodyList> {
                         itemBuilder: (context, index) {
                           return Column(
                             children: [
-                              ElevatedButton(
-                                onPressed: () {
+                              ListTile(
+                                title: Align(
+                                  alignment: Alignment
+                                      .center, // Align text to the center
+                                  child: Text(pageItems[index].name),
+                                ),
+                                onTap: () {
                                   navigateToBodyDetails(
                                       context, pageItems[index].id);
                                 },
-                                child: Text(pageItems[index].name),
                               ),
-                              const SizedBox(height: 6)
+                              divider,
+                              const SizedBox(height: 6),
                             ],
                           );
                         },
@@ -184,41 +192,46 @@ class BodyListImage extends StatelessWidget {
   final String folder;
   const BodyListImage({super.key, required this.url, required this.folder});
 
+  static const CustomDivider divider =
+      CustomDivider(height: 1, color: Color.fromARGB(128, 161, 175, 188));
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Column(
-        children: [
-          Expanded(
-            child: FutureBuilder(
-              future: loadList(url),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (snapshot.hasError) {
-                  return Center(child: Text('Error: ${snapshot.error}'));
-                } else if (!snapshot.hasData ||
-                    (snapshot.data as List).isEmpty) {
-                  return const Center(child: Text('No data available'));
-                } else {
-                  List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
-                  return ListView.builder(
-                    itemCount: bodyList.length,
-                    itemBuilder: (context, index) {
-                      return Column(
-                        children: [
-                          buildBodyButton(bodyList[index].name.toUpperCase(), "lib/assets/images/ss_list_screen/$folder/${bodyList[index].name.toLowerCase()}.jpg", context, bodyList[index].id),
-                          const SizedBox(height: 6)
-                        ],
-                      );
-                    },
-                  );
-                }
-              },
-            ),
+    return Column(
+      children: [
+        Expanded(
+          child: FutureBuilder(
+            future: loadList(url),
+            builder: (context, snapshot) {
+              if (snapshot.connectionState == ConnectionState.waiting) {
+                return const Center(child: CircularProgressIndicator());
+              } else if (snapshot.hasError) {
+                return Center(child: Text('Error: ${snapshot.error}'));
+              } else if (!snapshot.hasData || (snapshot.data as List).isEmpty) {
+                return const Center(child: Text('No data available'));
+              } else {
+                List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
+                return ListView.builder(
+                  itemCount: bodyList.length,
+                  itemBuilder: (context, index) {
+                    return Column(
+                      children: [
+                        buildBodyButton(
+                            bodyList[index].name.toUpperCase(),
+                            "lib/assets/images/ss_list_screen/$folder/${bodyList[index].name.toLowerCase()}.jpg",
+                            context,
+                            bodyList[index].id),
+                        divider,
+                        const SizedBox(height: 6)
+                      ],
+                    );
+                  },
+                );
+              }
+            },
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
