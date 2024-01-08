@@ -90,6 +90,7 @@ Widget buildImageButton(
           image: DecorationImage(
             image: AssetImage(imagePath),
             fit: BoxFit.cover,
+            opacity: 0.7,
           ),
         ),
         child: Material(
