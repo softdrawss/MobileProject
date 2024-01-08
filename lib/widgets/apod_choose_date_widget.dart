@@ -19,36 +19,37 @@ class ChooseDateWidget extends StatefulWidget {
 class _ChooseDateWidgetState extends State<ChooseDateWidget> {
   void selectDate() {
     showDatePicker(
-            builder: (context, child) {
-              return Theme(
-                data: Theme.of(context).copyWith(
-                  colorScheme: const ColorScheme.dark(
-                    primary: Color.fromARGB(
-                        255, 80, 54, 116), // header background color
-                    onPrimary: Colors.white, // header text color
-                    onSurface:
-                        Color.fromARGB(255, 161, 175, 188), // body text color
-                  ),
-                  textButtonTheme: TextButtonThemeData(
-                    style: TextButton.styleFrom(
-                      foregroundColor: Colors.white, // button text color
-                    ),
-                  ),
-                ),
-                child: child!,
-              );
-            },
-            context: context,
-            initialDate: widget.dateTime,
-            currentDate: widget.dateTime,
-            firstDate: DateTime(1995, 6, 20),
-            lastDate: DateTime.now())
-        .then((value) {
+      builder: (context, child) {
+        return Theme(
+          data: Theme.of(context).copyWith(
+            colorScheme: const ColorScheme.dark(
+              primary: Color.fromARGB(
+                  255, 80, 54, 116), // header background color
+              onPrimary: Colors.white, // header text color
+              onSurface:
+                  Color.fromARGB(255, 161, 175, 188), // body text color
+            ),
+            textButtonTheme: TextButtonThemeData(
+              style: TextButton.styleFrom(
+                foregroundColor: Colors.white, // button text color
+              ),
+            ),
+          ),
+          child: child!,
+        );
+      },
+      context: context,
+      initialDate: widget.dateTime,
+      currentDate: widget.dateTime,
+      firstDate: DateTime(1995, 6, 20),
+      lastDate: DateTime.now()
+    ).then((value) {
       if (value != null) {
         widget.onDateChanged(value);
       }
-    });
-  }
+    }
+  );
+}
 
   @override
   Widget build(BuildContext context) {

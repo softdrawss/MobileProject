@@ -47,22 +47,22 @@ class PeopleInSpaceScreen extends StatelessWidget {
                     height: 50,
                   ),
                   const Text("People currently in space:",
-                      style:
-                          TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
+                    style:
+                      TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
                   const SizedBox(
                     height: 30,
                   ),
                   Text((peopleNum.toString()),
-                      style: const TextStyle(
-                          color: Color.fromARGB(255, 219, 230, 240),
-                          fontSize: 120,
-                          fontWeight: FontWeight.bold)),
+                    style: const TextStyle(
+                      color: Color.fromARGB(255, 219, 230, 240),
+                      fontSize: 120,
+                      fontWeight: FontWeight.bold)),
                   const SizedBox(
                     height: 50,
                   ),
                   Expanded(
-                      child: SpacePeopleList(
-                          peopleBySpacecraft: peopleBySpacecraft)),
+                    child: SpacePeopleList(peopleBySpacecraft: peopleBySpacecraft)
+                  ),
                 ],
               ),
             ),
@@ -87,8 +87,7 @@ class SpacePeopleList extends StatelessWidget {
       itemCount: peopleBySpacecraft.length,
       itemBuilder: (context, index) {
         String spacecraft = peopleBySpacecraft.keys.elementAt(index);
-        List<PeopleInSpace> peopleOnSpacecraft =
-            peopleBySpacecraft[spacecraft]!;
+        List<PeopleInSpace> peopleOnSpacecraft = peopleBySpacecraft[spacecraft]!;
 
         return Card(
           margin: const EdgeInsets.all(4.0),
@@ -100,9 +99,9 @@ class SpacePeopleList extends StatelessWidget {
                 child: Text(
                   'Spacecraft: $spacecraft',
                   style: const TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18.0,
-                      color: Color.fromARGB(255, 30, 20, 44)),
+                    fontWeight: FontWeight.bold,
+                    fontSize: 18.0,
+                    color: Color.fromARGB(255, 30, 20, 44)),
                 ),
               ),
               Column(
@@ -112,7 +111,7 @@ class SpacePeopleList extends StatelessWidget {
                         title: Text(
                           person.name,
                           style: const TextStyle(
-                              color: Color.fromARGB(255, 30, 20, 44)),
+                            color: Color.fromARGB(255, 30, 20, 44)),
                         ),
                       ),
                     )

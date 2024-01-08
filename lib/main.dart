@@ -6,6 +6,7 @@ import 'package:mobile_project/screens/apod_screen.dart';
 import 'package:mobile_project/screens/earth_screen.dart';
 import 'package:mobile_project/screens/iss_location_screen.dart';
 import 'package:mobile_project/screens/people_in_space_screen.dart';
+import 'package:mobile_project/screens/people_in_space_2_screen.dart';
 
 void main() {
   runApp(const MyApp());
@@ -46,7 +47,7 @@ class MyApp extends StatelessWidget {
         "/dwarflist": (_) => const DwarfList(),
         "/asteroidslist": (_) => const AsteroidsList(),
         "/spacerocks": (_) => const SpaceRocksScreen(),
-        "/people": (_) => const PeopleInSpaceScreen(),
+        "/people": (_) => const AstronautListScreen(),
         "/earthview": (_) => const EarthViewScreen(),
       },
       initialRoute: "/",
