@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:mobile_project/models/LL2_astronauts.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
+import '../widgets/utility_widget.dart';
 
 
 const statusFilter = ["Active", "Retired", "Training", "Lost in Service", "Deceased"];
@@ -23,7 +24,8 @@ class _AstronautListScreenState extends State<AstronautListScreen> {
   int filterStatusIndex = 0;
   int filterNationalityIndex = 0;
   final ScrollController _scrollController = ScrollController();
-  bool _isLoading = false;
+  bool isLoading = false;
+  bool filter = false;
 
   @override
   void initState() {
@@ -40,22 +42,26 @@ class _AstronautListScreenState extends State<AstronautListScreen> {
       ),
       body: Column(
         children: [
-           FlutterToggleTab(
+          FlutterToggleTab(
             selectedIndex: filterStatusIndex,
             selectedTextStyle: const TextStyle(
               color: Colors.white,
               fontWeight: FontWeight.w600,
             ),
             unSelectedTextStyle: const TextStyle(
-              color: Colors.black,
+              color: Colors.blueGrey,
               fontWeight: FontWeight.w400,
             ),
             labels: const ["Active", "Retired", "Training", "Lost in Service", "Deceased"],
             selectedLabelIndex: (index) {
               setState(() {
                 filterStatusIndex = index;
+                filter = true;
               });
-            },
+            },          
+            borderRadius: 6,
+            selectedBackgroundColors: const [Color.fromARGB(255, 5, 26, 45)],
+            unSelectedBackgroundColors: const [Color.fromARGB(255, 4, 11, 25)],
           ),
           FlutterToggleTab(
             selectedIndex: filterNationalityIndex,
@@ -64,79 +70,112 @@ class _AstronautListScreenState extends State<AstronautListScreen> {
               fontWeight: FontWeight.w600,
             ),
             unSelectedTextStyle: const TextStyle(
-              color: Colors.black,
+              color: Colors.blueGrey,
               fontWeight: FontWeight.w400,
             ),
             labels: const ["All", "American", "Russian", "European", "Other"],
             selectedLabelIndex: (index) {
               setState(() {
                 filterNationalityIndex = index;
+                filter = true;
               });
             },
+            borderRadius: 6,
+            selectedBackgroundColors: const [Color.fromARGB(255, 5, 26, 45)],
+            unSelectedBackgroundColors: const [Color.fromARGB(255, 4, 11, 25)],
           ),
+          const SizedBox(height: 12),
+          const CustomDivider(height: 1, color: Color.fromARGB(128, 161, 175, 188), horizontalPadding: 16),
+          const SizedBox(height: 12),
           Expanded(
-            child: FutureBuilder<AstronautResponse>(
-              future: _isLoading ? null : _loadNextPage(next),
-              builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting && !_isLoading) {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                } 
-                else if (snapshot.hasError) {
-                  return const Text('Error loading astronauts');
-                } 
-                else if (!snapshot.hasData || snapshot.data?.results == null) {
-                  return const Text('No astronauts available');
-                }
-                else{
-                  // Append data to the existing list
-                  next = snapshot.data!.next;
-                  astronauts.addAll(snapshot.data!.results);
-                  count = astronauts.length;
-                  _isLoading = false;
-                }
-
-                // Apply filters based on the selected indices
-                final filteredAstronauts = astronauts.where((astronaut) {
-                  final statusMatches = filterStatusIndex == 0 || astronaut.status.name == statusFilter[filterStatusIndex];
-                  final nationalityMatches = filterNationalityIndex == 0 || astronaut.nationality == nationalityFilter[filterNationalityIndex];
-                  return statusMatches && nationalityMatches;
-                }).toList();
-
-                return ListView.builder(
-                  controller: _scrollController,
-                  itemCount: filteredAstronauts.length + (_isLoading ? 1 : 0),
-                  itemBuilder: (context, index) {
-                    if (index < filteredAstronauts.length) {
-                      final astronaut = filteredAstronauts[index];
-                      return ListTile(
-                        title: Text(astronaut.name),
-                        subtitle: Text('Nationality: ${astronaut.nationality}'),
-                        onTap: () {
-                          // Handle astronaut tap
-                        },
-                      );
-                    } 
-                    else {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                  },
-                );
-              },
-            ),
+            child: _buildAstronautList(),
           ),
         ],
       ),
     );
   }
 
+  Widget _buildAstronautList() {
+    if (filter) {
+      // Apply filters and return the filtered list
+      final filteredAstronauts = astronauts.where((astronaut) {
+        final statusMatches = filterStatusIndex == 0 || astronaut.status.name == statusFilter[filterStatusIndex];
+        final nationalityMatches =
+            filterNationalityIndex == 0 || astronaut.nationality == nationalityFilter[filterNationalityIndex];
+        return statusMatches && nationalityMatches;
+      }).toList();
+
+      return ListView.builder(
+        itemCount: filteredAstronauts.length,
+        itemBuilder: (context, index) {
+          final astronaut = filteredAstronauts[index];
+          return ListTile(
+            title: Text(astronaut.name),
+            subtitle: Text('Nationality: ${astronaut.nationality}'),
+            onTap: () {
+              // Handle astronaut tap
+            },
+          );
+        },
+      );
+    } else {
+      // Use FutureBuilder to load the next page
+      return FutureBuilder<AstronautResponse>(
+        future: isLoading ? null : _loadNextPage(next),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting && !isLoading) {
+            return const Center(
+              child: CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError) {
+            return const Text('Error loading astronauts');
+          } else if (!snapshot.hasData || snapshot.data?.results == null) {
+            return const Text('No astronauts available');
+          }
+
+          // Append data to the existing list
+          next = snapshot.data!.next;
+          astronauts.addAll(snapshot.data!.results);
+          count = astronauts.length;
+          isLoading = false;
+
+          return ListView.builder(
+            controller: _scrollController,
+            itemCount: astronauts.length + (isLoading ? 1 : 0),
+            itemBuilder: (context, index) {
+              if (index < astronauts.length) {
+                final astronaut = astronauts[index];
+                return ListTile(
+                  title: Text(astronaut.name),
+                  subtitle: Text('Nationality: ${astronaut.nationality}'),
+                  trailing: const Icon(
+                    Icons.arrow_forward_ios,
+                    size: 14,
+                    color: Colors.blueGrey
+                    ),
+                  onTap: () {
+                    // Handle astronaut tap
+                  },
+                );
+              } else {
+                return const Center(
+                  child: CircularProgressIndicator(),
+                );
+              }
+            },
+          );
+        },
+      );
+    }
+  }
+
   // Load next page when reaching the end of the scroll
   void _scrollListener() {
-    if (_scrollController.offset >= _scrollController.position.maxScrollExtent && !_scrollController.position.outOfRange) {
-      setState(() {_isLoading = true;});
+    if (_scrollController.offset >= _scrollController.position.maxScrollExtent &&
+        !_scrollController.position.outOfRange) {
+      setState(() {
+        isLoading = true;
+      });
     }
   }
 

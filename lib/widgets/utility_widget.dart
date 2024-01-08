@@ -161,16 +161,25 @@ Widget buildRichText(String boldText, String regularText) {
 
 //Custom divider
 class CustomDivider extends StatelessWidget {
-  const CustomDivider({super.key, required this.height, required this.color});
+  const CustomDivider({
+    super.key,
+    required this.height,
+    required this.color,
+    this.horizontalPadding = 0,
+  });
 
   final double height;
   final Color color;
+  final double horizontalPadding;
 
   @override
   Widget build(BuildContext context) {
-    return Divider(
-      height: height,
-      color: color,
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: horizontalPadding),
+      child: Divider(
+        height: height,
+        color: color,
+      ),
     );
   }
 }

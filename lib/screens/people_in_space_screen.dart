@@ -71,15 +71,16 @@ class PeopleInSpaceScreen extends StatelessWidget {
                 ],
               ),
             ),
+            // Navigate to Astronauts screen
             floatingActionButton: FloatingActionButton(
               onPressed: () {
-                // Navigate to another screen when the button is pressed
                 Navigator.push(
                   context,
                   MaterialPageRoute(builder: (context) => const AstronautListScreen()),
                 );
               },
-              child: Icon(Icons.arrow_forward),
+              backgroundColor: const Color.fromARGB(255, 5, 26, 45),
+              child: const Icon(Icons.arrow_forward),
             ),
             floatingActionButtonLocation: FloatingActionButtonLocation.endFloat,
           );
