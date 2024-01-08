@@ -23,6 +23,8 @@ Widget buildBodyButton(
       decoration: BoxDecoration(
         image: DecorationImage(
             image: AssetImage(imagePath), fit: BoxFit.contain, opacity: 0.8),
+            color: const Color.fromARGB(0, 0, 0, 0),
+
       ),
       child: Material(
         color: const Color.fromARGB(0, 0, 0, 0),
@@ -82,14 +84,6 @@ class BodyListState extends State<BodyList> {
     return Scaffold(
       body: Column(
         children: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: BackButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
           Expanded(
             child: FutureBuilder(
               future: loadList(widget.url),
@@ -195,14 +189,6 @@ class BodyListImage extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: [
-          Align(
-            alignment: Alignment.topLeft,
-            child: BackButton(
-              onPressed: () {
-                Navigator.pop(context);
-              },
-            ),
-          ),
           Expanded(
             child: FutureBuilder(
               future: loadList(url),
@@ -221,7 +207,7 @@ class BodyListImage extends StatelessWidget {
                     itemBuilder: (context, index) {
                       return Column(
                         children: [
-                          buildBodyButton(bodyList[index].name.toUpperCase(), "lib/assets/images/ss_list_screen/$folder/${bodyList[index].name.toLowerCase()}", context, bodyList[index].id),
+                          buildBodyButton(bodyList[index].name.toUpperCase(), "lib/assets/images/ss_list_screen/$folder/${bodyList[index].name.toLowerCase()}.jpg", context, bodyList[index].id),
                           const SizedBox(height: 6)
                         ],
                       );
