@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/utility_widget.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -186,12 +186,4 @@ Widget buildListTile(String title, Function() onTap, {List<Widget>? sublist}) {
             .toList(),
       ),
     );
-}
-
-
-launchURL(String url) async {
-   final Uri uri = Uri.parse(url);
-   if (!await launchUrl(uri)) {
-        throw Exception('Could not launch $uri');
-    }
 }

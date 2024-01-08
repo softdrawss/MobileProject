@@ -114,7 +114,7 @@ class _AstronautListScreenState extends State<AstronautListScreen> {
             title: Text(astronaut.name),
             subtitle: Text('Nationality: ${astronaut.nationality}'),
             onTap: () {
-              astronaoutPopUp(astronaut, context);
+              astronautPopUp(astronaut, context);
             },
           );
         },
@@ -155,7 +155,7 @@ class _AstronautListScreenState extends State<AstronautListScreen> {
                     color: Colors.blueGrey
                   ),
                   onTap: () {
-                    astronaoutPopUp(astronaut, context);
+                    astronautPopUp(astronaut, context);
                   },
                 );
               } else {
@@ -185,14 +185,28 @@ class _AstronautListScreenState extends State<AstronautListScreen> {
   }
 }
 
-void astronaoutPopUp(Astronaut astronaut, context) {
+void astronautPopUp(Astronaut astronaut, context) {
   final astronautDetailsPopup = AstronautDetailsPopup(info: astronaut);
 
   showDialog(
     context: context,
     builder: (BuildContext context) {
-      return AlertDialog(
-        content: astronautDetailsPopup,
+      return Stack(
+        children: [
+          Positioned(
+            bottom: 0,
+            left: 0,
+            right: 0,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                left: 0.0,
+                right: 0.0,
+                top: 16.0,
+              ),
+              child: astronautDetailsPopup,
+            ),
+          ),
+        ],
       );
     },
   );

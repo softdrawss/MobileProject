@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
+
 
 // Pageview Index UI ----------------------------
 class IndicatorsTrueWidget extends StatelessWidget {
@@ -160,7 +162,7 @@ Widget buildRichText(String boldText, String regularText) {
   );
 }
 
-//Custom divider
+// Custom divider
 class CustomDivider extends StatelessWidget {
   const CustomDivider({
     super.key,
@@ -183,4 +185,12 @@ class CustomDivider extends StatelessWidget {
       ),
     );
   }
+}
+
+// Launch Url
+launchURL(String url) async {
+   final Uri uri = Uri.parse(url);
+   if (!await launchUrl(uri)) {
+        throw Exception('Could not launch $uri');
+    }
 }
