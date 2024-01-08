@@ -21,6 +21,7 @@ class _ISSLocationScreenState extends State<ISSLocationScreen> {
 
   late Timer everySecond;
   late Future future;
+
   @override
   void initState() {
     super.initState();
@@ -33,6 +34,12 @@ class _ISSLocationScreenState extends State<ISSLocationScreen> {
         future = loadISSLocation();
       });
     });
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    everySecond.cancel();
   }
 
   @override
