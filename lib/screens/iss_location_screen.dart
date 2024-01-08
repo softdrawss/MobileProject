@@ -92,7 +92,7 @@ class ISSLocationInfoWidget extends StatelessWidget {
             },
           ),
         ),
-        Text("International Space Station", style: titleStyle),
+        const Text("International Space Station", style: titleStyle),
         const SizedBox(height: 15),
         YoutubePlayer(controller: controller),
         const SizedBox(height: 40),

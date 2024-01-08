@@ -71,9 +71,6 @@ flutter:
     - lib/assets/images/ss_list_screen/comets/
     - lib/assets/images/ss_screen/
     - lib/assets/images/ss_body_screen/
-    - lib/assets/fonts/Sometype_Mono/
-    - lib/assets/fonts/Inter_Tight/
-    - lib/assets/fonts/Play/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -103,15 +100,12 @@ flutter:
   fonts:
      - family: Play
        fonts:
-         - asset: assets/fonts/Play/Play-Regular.ttf
-         - asset: assets/fonts/Play/Play-Bold.ttf
-         #- weight: 700
+         - asset: lib/assets/fonts/Play-Regular.ttf
+         - asset: lib/assets/fonts/Play-Bold.ttf
      - family: Sometype_Mono
        fonts:
-         - asset: assets/fonts/Sometype_Mono/static/SometypeMono-Regular.ttf
+         - asset: lib/assets/fonts/SometypeMono-Regular.ttf
      - family: Inter
        fonts:
-         - asset: assets/fonts/Inter_Tight/static/InterTight-Regular.ttf
-         - asset: assets/fonts/Inter_Tight/static/InterTight-Italic.ttf
-         - style: italic
-         - weight: 600
+         - asset: lib/assets/fonts/InterTight-Regular.ttf
+         - asset: lib/assets/fonts/InterTight-Italic.ttf

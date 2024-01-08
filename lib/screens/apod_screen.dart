@@ -117,7 +117,7 @@ class _APODInfoWidgetState extends State<APODInfoWidget> {
             textAlign: TextAlign.justify, style: titleStyle),
         widget.picture.copyright != null
             ? Text(widget.picture.copyright.toString(), style: autorStyle)
-            : Text('NASA', style: autorStyle),
+            : const Text('NASA', style: autorStyle),
         widget.picture.type == "video"
             ? YoutubePlayer(controller: widget.controller)
             : Image(image: NetworkImage(widget.picture.url)),
