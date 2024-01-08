@@ -72,7 +72,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   }
 
   @override
-  Size get preferredSize => Size.fromHeight(kToolbarHeight);
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
 
 class DrawerScreen extends StatelessWidget {
@@ -81,53 +81,115 @@ class DrawerScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Drawer(
+      backgroundColor: const Color.fromARGB(220, 6, 30, 52),
       child: ListView(
         padding: EdgeInsets.zero,
         children: <Widget>[
           Container(
-            height: 80,
-            decoration: const BoxDecoration(
-              color: Colors.blue,
-            ),
+            height: 60,
             alignment: Alignment.center,
             child: const Text(
-              'Settings',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 18,
-                fontWeight: FontWeight.bold,
-              ),
+              '',
             ),
           ),
-          buildListTile('Swap UI', () {
-            // Handle item 1 tap
-          }),
           buildListTile('GitHub', () {
-            _launchURL('https://github.com/softdrawss/MobileProject');
+            launchURL('https://github.com/softdrawss/MobileProject');
           }),
-          buildListTile('APIs used', () {
-            // Handle item 1 tap
-          }),
+          buildListTile('Members', () {}, sublist: [
+            const ListTile(title: Text('Arnau Jiménez')),
+            const ListTile(title: Text('Ariadna Sevcik')),
+            const ListTile(title: Text('Júlia Serra')),
+            const ListTile(title: Text('Héctor Báscones')),
+          ]),
+          buildListTile('APIs used', () {}, sublist: [
+            ListTile(
+              title: const Text('Daily Astronomy Picture'),
+              onTap: () {launchURL('https://github.com/nasa/apod-api');},
+            ),
+            ListTile(
+              title: const Text('ISS Current Location'),
+              onTap: () {launchURL('http://open-notify.org/Open-Notify-API/ISS-Location-Now/');},
+            ),
+            ListTile(
+              title: const Text('Solar System'),
+              onTap: () {launchURL('https://api.le-systeme-solaire.net/en/');},
+            ),
+            ListTile(
+              title: const Text('People in Space:'),
+              onTap: () {launchURL('http://open-notify.org/Open-Notify-API/People-In-Space/');},
+            ),
+            ListTile(
+              title: const Text('Earth View'),
+              onTap: () {launchURL('https://epic.gsfc.nasa.gov/about/api');},
+            ),
+          ]),
         ],
       ),
     );
   }
 }
 
-Widget buildListTile(String title, Function() onTap) {
-  return ListTile(
-    title: Text(
-      title,
-      style: const TextStyle(
+Widget buildListTile(String title, Function() onTap, {List<Widget>? sublist}) {
+
+  final ThemeData customTheme = ThemeData.dark().copyWith(
+    dividerColor: Colors.transparent,
+    textTheme: const TextTheme(
+      bodyLarge: TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.normal,
+        color: Color.fromARGB(255, 161, 175, 188)
       ),
     ),
-    onTap: onTap,
   );
+
+  return sublist == null
+  ? Theme(
+      data: customTheme,
+      child: ListTile(
+        title: Text(
+          title,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.normal,
+            //color: Color.fromARGB(255, 161, 175, 188)
+          ),
+        ),
+        onTap: onTap,
+      ),
+    )
+  : Theme(
+      data: customTheme,
+      child: ExpansionTile(
+        title: Text(
+          title,
+          style: const TextStyle(
+            fontSize: 16,
+            fontWeight: FontWeight.normal,
+            //color: Color.fromARGB(255, 161, 175, 188)
+          ),
+        ),
+        children: sublist
+            .map(
+              (child) => Padding(
+                padding: const EdgeInsets.only(left: 16.0),
+                child: Column(
+                  children: [
+                    child,
+                    const Divider(
+                      height: 0.2,
+                      //color: Color.fromARGB(128, 96, 125, 139),
+                    ),
+                  ],
+                ),
+              ),
+            )
+            .toList(),
+      ),
+    );
 }
 
-_launchURL(String url) async {
+
+launchURL(String url) async {
    final Uri uri = Uri.parse(url);
    if (!await launchUrl(uri)) {
         throw Exception('Could not launch $uri');

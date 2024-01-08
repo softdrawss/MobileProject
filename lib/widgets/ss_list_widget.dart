@@ -70,9 +70,8 @@ class BodyListState extends State<BodyList> {
   int currentPage = 0;
   int maxPages = 0;
 
-  @override
-
   // To calculate maxPages
+  @override
   void initState() {
     super.initState();
     // Load the list and set the initial values of currentPage and maxPages
@@ -82,6 +81,7 @@ class BodyListState extends State<BodyList> {
     });
   }
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: Column(

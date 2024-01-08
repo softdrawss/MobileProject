@@ -130,10 +130,10 @@ class _SpaceRocksScreenState extends State<SpaceRocksScreen> {
     for(var i = 0; i < _pages.length; i++) {
 
       if(_activePage == i) {
-        indicators.add(IndicatorsTrueWidget());
+        indicators.add(const IndicatorsTrueWidget());
       }
       else{
-        indicators.add(IndicatorsFalseWidget());
+        indicators.add(const IndicatorsFalseWidget());
       }
     }
     return  indicators;
