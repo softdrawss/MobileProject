@@ -21,11 +21,8 @@ Widget buildBodyButton(
       width: MediaQuery.of(context).size.width - 20,
       height: MediaQuery.of(context).size.height / 5 - 10,
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(8),
-        border: Border.all(
-            color: const Color.fromARGB(255, 219, 230, 240), width: 2),
         image: DecorationImage(
-            image: AssetImage(imagePath), fit: BoxFit.contain, opacity: 0.8),
+          image: AssetImage(imagePath), fit: BoxFit.contain, opacity: 0.8),
       ),
       child: Material(
         color: const Color.fromARGB(0, 0, 0, 0),
@@ -36,7 +33,7 @@ Widget buildBodyButton(
           splashColor: Colors.white.withOpacity(0.1),
           borderRadius: BorderRadius.circular(8),
           child: Align(
-            alignment: Alignment.center,
+            alignment: Alignment.bottomLeft,
             child: Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text(

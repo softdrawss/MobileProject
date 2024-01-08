@@ -142,13 +142,13 @@ class _SpaceRocksScreenState extends State<SpaceRocksScreen> {
 
 class SpaceRockWidget extends StatelessWidget {
   const SpaceRockWidget({
-    Key? key,
+    super.key,
     required this.image,
     required this.title,
     required this.description,
     required this.onTab,
     required this.index,
-  }) : super(key: key);
+  });
 
   final String image;
   final String title;
@@ -188,11 +188,11 @@ class SpaceRockWidget extends StatelessWidget {
               child: Column(
                 children: [
                   const SizedBox(height: 32),
-                  Text(title, style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold)),
+                  Text(title, style: const TextStyle(fontSize: 40, fontWeight: FontWeight.bold) ),
                   const SizedBox(height: 20),
                   Expanded(
                     child: SingleChildScrollView(
-                      padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                      padding: const EdgeInsets.only(left: 20.0, right: 20.0),
                       child: Text(
                         description,
                         style: const TextStyle(

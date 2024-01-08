@@ -23,35 +23,44 @@ class SSList extends StatelessWidget {
             ),
             const SizedBox(height: 12),
             buildExpandedButton(
-                'PLANETS',
-                Alignment.center,
-                'lib/assets/images/ss_screen/planets.png',
-                context,
-                "/planetslist"),
+              'PLANETS',
+              Alignment.center,
+              'lib/assets/images/ss_screen/planets.png',
+              context,
+              "/planetslist"
+            ),
             const SizedBox(height: 6),
             buildExpandedButton(
-                'COMETS',
-                Alignment.center,
-                'lib/assets/images/ss_screen/comets.png',
-                context,
-                "/cometslist"),
-            const SizedBox(height: 6),
-            buildExpandedButton('MOONS', Alignment.center,
-                'lib/assets/images/ss_screen/moons.png', context, "/moonlist"),
+              'COMETS',
+              Alignment.center,
+              'lib/assets/images/ss_screen/comets.png',
+              context,
+              "/cometslist"
+            ),
             const SizedBox(height: 6),
             buildExpandedButton(
-                'DWARF PLANETS',
-                Alignment.center,
-                'lib/assets/images/ss_screen/dwarf_planets.png',
-                context,
-                "/dwarflist"),
+              'MOONS',
+              Alignment.center,
+              'lib/assets/images/ss_screen/moons.png',
+              context,
+              "/moonlist"
+            ),
             const SizedBox(height: 6),
             buildExpandedButton(
-                'ASTEROIDS',
-                Alignment.center,
-                'lib/assets/images/ss_screen/asteroids.png',
-                context,
-                "/asteroidslist"),
+              'DWARF PLANETS',
+              Alignment.center,
+              'lib/assets/images/ss_screen/dwarf_planets.png',
+              context,
+              "/dwarflist"
+            ),
+            const SizedBox(height: 6),
+            buildExpandedButton(
+              'ASTEROIDS',
+              Alignment.center,
+              'lib/assets/images/ss_screen/asteroids.png',
+              context,
+              "/asteroidslist"
+            ),
           ],
         ),
       ),
@@ -63,47 +72,41 @@ class SSList extends StatelessWidget {
 class PlanetsList extends StatelessWidget {
   const PlanetsList({super.key});
 
+  static const CustomDivider divider = CustomDivider(height: 1, color: Color.fromARGB(128, 161, 175, 188));
+
   @override
   Widget build(BuildContext context) {
-    return ListView(
-      children: [
-        Column(
-          children: [
-            Align(
-              alignment: Alignment.topLeft,
-              child: BackButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-              ),
-            ),
-            const SizedBox(height: 12),
-            buildBodyButton('MERCURY', "lib/assets/images/planets/mercury.jpg",
-                context, "mercure"),
-            const SizedBox(height: 6),
-            buildBodyButton("VENUS", "lib/assets/images/planets/venus.jpg",
-                context, "venus"),
-            const SizedBox(height: 6),
-            buildBodyButton("EARTH", "lib/assets/images/planets/earth.jpg",
-                context, "terre"),
-            const SizedBox(height: 6),
-            buildBodyButton(
-                "MARS", "lib/assets/images/planets/mars.jpg", context, "mars"),
-            const SizedBox(height: 6),
-            buildBodyButton("JUPITER", "lib/assets/images/planets/jupiter.jpg",
-                context, "jupiter"),
-            const SizedBox(height: 6),
-            buildBodyButton("SATURN", "lib/assets/images/planets/saturn.jpg",
-                context, "saturne"),
-            const SizedBox(height: 6),
-            buildBodyButton("URANUS", "lib/assets/images/planets/uranus.jpg",
-                context, "uranus"),
-            const SizedBox(height: 6),
-            buildBodyButton("NEPTUNE", "lib/assets/images/planets/neptune.jpg",
-                context, "neptune"),
-          ],
+    return Scaffold(
+      backgroundColor: Colors.black12,
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        leading: BackButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
         ),
-      ],
+        title: const Text('Planets'),
+      ),
+      body: ListView(
+        padding: const EdgeInsets.all(12.0),
+        children: [
+          buildBodyButton('MERCURY', "lib/assets/images/planets/mercury.jpg", context, "mercure"),
+          divider,
+          buildBodyButton("VENUS", "lib/assets/images/planets/venus.jpg", context, "venus"),
+          divider,
+          buildBodyButton("EARTH", "lib/assets/images/planets/earth.jpg", context, "terre"),
+          divider,
+          buildBodyButton("MARS", "lib/assets/images/planets/mars.jpg", context, "mars"),
+          divider,
+          buildBodyButton("JUPITER", "lib/assets/images/planets/jupiter.jpg", context, "jupiter"),
+          divider,
+          buildBodyButton("SATURN", "lib/assets/images/planets/saturn.jpg", context, "saturne"),
+          divider,
+          buildBodyButton("URANUS", "lib/assets/images/planets/uranus.jpg", context, "uranus"),
+          divider,
+          buildBodyButton("NEPTUNE", "lib/assets/images/planets/neptune.jpg", context, "neptune"),
+        ],
+      ),
     );
   }
 }
