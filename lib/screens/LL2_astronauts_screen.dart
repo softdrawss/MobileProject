@@ -6,6 +6,12 @@ import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 const statusFilter = ["Active", "Retired", "Training", "Lost in Service", "Deceased"];
 const nationalityFilter = ["All", "American", "Russian", "European", "Other"];
 
+int count = 0;
+String initUrl = "https://lldev.thespacedevs.com/2.2.0/astronaut/?limit=30";
+String next = initUrl;
+List<Astronaut> astronauts = [];
+
+
 class AstronautListScreen extends StatefulWidget {
   const AstronautListScreen({super.key});
 
@@ -16,7 +22,15 @@ class AstronautListScreen extends StatefulWidget {
 class _AstronautListScreenState extends State<AstronautListScreen> {
   int filterStatusIndex = 0;
   int filterNationalityIndex = 0;
-  
+  final ScrollController _scrollController = ScrollController();
+  bool _isLoading = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _scrollController.addListener(_scrollListener);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,7 +40,7 @@ class _AstronautListScreenState extends State<AstronautListScreen> {
       ),
       body: Column(
         children: [
-          FlutterToggleTab(
+           FlutterToggleTab(
             selectedIndex: filterStatusIndex,
             selectedTextStyle: const TextStyle(
               color: Colors.white,
@@ -62,17 +76,26 @@ class _AstronautListScreenState extends State<AstronautListScreen> {
           ),
           Expanded(
             child: FutureBuilder<AstronautResponse>(
-              future: loadAstronauts(),
+              future: _isLoading ? null : _loadNextPage(next),
               builder: (context, snapshot) {
-                if (snapshot.connectionState == ConnectionState.waiting) {
-                  return const CircularProgressIndicator();
-                } else if (snapshot.hasError) {
+                if (snapshot.connectionState == ConnectionState.waiting && !_isLoading) {
+                  return const Center(
+                    child: CircularProgressIndicator(),
+                  );
+                } 
+                else if (snapshot.hasError) {
                   return const Text('Error loading astronauts');
-                } else if (!snapshot.hasData || snapshot.data?.results == null) {
+                } 
+                else if (!snapshot.hasData || snapshot.data?.results == null) {
                   return const Text('No astronauts available');
                 }
-
-                final astronauts = snapshot.data!.results;
+                else{
+                  // Append data to the existing list
+                  next = snapshot.data!.next;
+                  astronauts.addAll(snapshot.data!.results);
+                  count = astronauts.length;
+                  _isLoading = false;
+                }
 
                 // Apply filters based on the selected indices
                 final filteredAstronauts = astronauts.where((astronaut) {
@@ -82,16 +105,24 @@ class _AstronautListScreenState extends State<AstronautListScreen> {
                 }).toList();
 
                 return ListView.builder(
-                  itemCount: filteredAstronauts.length,
+                  controller: _scrollController,
+                  itemCount: filteredAstronauts.length + (_isLoading ? 1 : 0),
                   itemBuilder: (context, index) {
-                    final astronaut = filteredAstronauts[index];
-                    return ListTile(
-                      title: Text(astronaut.name),
-                      subtitle: Text('Nationality: ${astronaut.nationality}'),
-                      onTap: () {
-                        // Handle astronaut tap
-                      },
-                    );
+                    if (index < filteredAstronauts.length) {
+                      final astronaut = filteredAstronauts[index];
+                      return ListTile(
+                        title: Text(astronaut.name),
+                        subtitle: Text('Nationality: ${astronaut.nationality}'),
+                        onTap: () {
+                          // Handle astronaut tap
+                        },
+                      );
+                    } 
+                    else {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
                   },
                 );
               },
@@ -100,5 +131,16 @@ class _AstronautListScreenState extends State<AstronautListScreen> {
         ],
       ),
     );
+  }
+
+  // Load next page when reaching the end of the scroll
+  void _scrollListener() {
+    if (_scrollController.offset >= _scrollController.position.maxScrollExtent && !_scrollController.position.outOfRange) {
+      setState(() {_isLoading = true;});
+    }
+  }
+
+  Future<AstronautResponse> _loadNextPage(String next) async {
+    return await loadAstronauts(next);
   }
 }
