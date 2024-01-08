@@ -66,7 +66,9 @@ flutter:
   assets:
     - lib/assets/images/home_screen/
     - lib/assets/images/spacerocks_screen/
-    - lib/assets/images/planets/
+    - lib/assets/images/ss_list_screen/planets/
+    - lib/assets/images/ss_list_screen/dwarfplanets/
+    - lib/assets/images/ss_list_screen/comets/
     - lib/assets/images/ss_screen/
     - lib/assets/images/ss_body_screen/
     - lib/assets/fonts/Sometype_Mono/

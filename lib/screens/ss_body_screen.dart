@@ -161,7 +161,7 @@ Widget bodyMoons(final picture, final context, String planetID, String planetNam
         image: const DecorationImage(
             image: AssetImage("lib/assets/images/ss_body_screen/moons.jpg"),
             fit: BoxFit.cover,
-            opacity: 0.8),
+            opacity: 0.5),
       ),
       child: Material(
         color: const Color.fromARGB(0, 0, 0, 0),

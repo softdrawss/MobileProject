@@ -22,7 +22,7 @@ Widget buildBodyButton(
       height: MediaQuery.of(context).size.height / 5 - 10,
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage(imagePath), fit: BoxFit.contain, opacity: 0.8),
+            image: AssetImage(imagePath), fit: BoxFit.contain, opacity: 0.8),
       ),
       child: Material(
         color: const Color.fromARGB(0, 0, 0, 0),
@@ -55,7 +55,6 @@ Widget buildBodyButton(
 
 class BodyList extends StatefulWidget {
   final String url;
-
   const BodyList({super.key, required this.url});
 
   @override
@@ -179,6 +178,58 @@ class BodyListState extends State<BodyList> {
                     : null,
               ),
             ],
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class BodyListImage extends StatelessWidget {
+  final String url;
+  final String folder;
+  const BodyListImage({super.key, required this.url, required this.folder});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Column(
+        children: [
+          Align(
+            alignment: Alignment.topLeft,
+            child: BackButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+            ),
+          ),
+          Expanded(
+            child: FutureBuilder(
+              future: loadList(url),
+              builder: (context, snapshot) {
+                if (snapshot.connectionState == ConnectionState.waiting) {
+                  return const Center(child: CircularProgressIndicator());
+                } else if (snapshot.hasError) {
+                  return Center(child: Text('Error: ${snapshot.error}'));
+                } else if (!snapshot.hasData ||
+                    (snapshot.data as List).isEmpty) {
+                  return const Center(child: Text('No data available'));
+                } else {
+                  List<ListedBody> bodyList = snapshot.data as List<ListedBody>;
+                  return ListView.builder(
+                    itemCount: bodyList.length,
+                    itemBuilder: (context, index) {
+                      return Column(
+                        children: [
+                          buildBodyButton(bodyList[index].name.toUpperCase(), "lib/assets/images/ss_list_screen/$folder/${bodyList[index].name.toLowerCase()}", context, bodyList[index].id),
+                          const SizedBox(height: 6)
+                        ],
+                      );
+                    },
+                  );
+                }
+              },
+            ),
           ),
         ],
       ),
