@@ -66,6 +66,7 @@ class _EarthViewScreenState extends State<EarthViewScreen> {
                             setState(() {
                               date = newDateTime;
                             });
+                            currentImg = 0;
                           }),
                     ],
                   ),
@@ -78,6 +79,7 @@ class _EarthViewScreenState extends State<EarthViewScreen> {
                     ],
                   ),
                   NumberSlider(
+                    inNumber: currentImg.toDouble(),
                       maxValue: epic.length,
                       position: (newPosition) {
                         setState(() {
@@ -226,9 +228,10 @@ class XYZPositions extends StatelessWidget {
 
 class NumberSlider extends StatefulWidget {
   const NumberSlider(
-      {super.key, required this.maxValue, required this.position});
+      {super.key, required this.maxValue, required this.position, this.inNumber = 0});
 
   final int maxValue;
+  final double inNumber;
   final Function(double) position;
 
   @override
@@ -240,6 +243,7 @@ class _NumberSliderState extends State<NumberSlider> {
 
   @override
   Widget build(BuildContext context) {
+    number = widget.inNumber;
     return Column(
       children: [
         Slider(

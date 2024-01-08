@@ -6,7 +6,6 @@ import 'package:mobile_project/screens/apod_screen.dart';
 import 'package:mobile_project/screens/earth_screen.dart';
 import 'package:mobile_project/screens/iss_location_screen.dart';
 import 'package:mobile_project/screens/people_in_space_screen.dart';
-import 'package:mobile_project/screens/LL2_astronauts_screen.dart';
 
 void main() {
   runApp(const MyApp());
