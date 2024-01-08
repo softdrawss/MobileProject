@@ -126,21 +126,21 @@ class AstronautDetailsPopup extends StatelessWidget {
                 onPressed: () {
                   launchURL(info.twitter);
                 },
-                icon: Icon(FontAwesomeIcons.twitter),
+                icon: const Icon(FontAwesomeIcons.twitter),
                 tooltip: 'Twitter',
               ),
               IconButton(
                 onPressed: () {
                   launchURL(info.instagram);
                 },
-                icon: Icon(FontAwesomeIcons.instagram),
+                icon: const Icon(FontAwesomeIcons.instagram),
                 tooltip: 'Instagram',
               ),
               IconButton(
                 onPressed: () {
                   launchURL(info.wiki);
                 },
-                icon: Icon(FontAwesomeIcons.wikipediaW),
+                icon: const Icon(FontAwesomeIcons.wikipediaW),
                 tooltip: 'Wiki',
               ),
             ],

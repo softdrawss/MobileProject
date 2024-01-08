@@ -133,7 +133,7 @@ class BodyListState extends State<BodyList> {
                                     textAlign: TextAlign.center,
                                   ),
                                 ),
-                                contentPadding: EdgeInsets.only(right: 32),
+                                contentPadding: const EdgeInsets.only(right: 32),
                                 trailing: const Icon(
                                   Icons.arrow_forward_ios,
                                   size: 14,

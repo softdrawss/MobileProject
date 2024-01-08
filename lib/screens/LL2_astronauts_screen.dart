@@ -53,7 +53,7 @@ class _AstronautListScreenState extends State<AstronautListScreen> {
               color: Colors.blueGrey,
               fontWeight: FontWeight.w400,
             ),
-            labels: const ["Active", "Retired", "Training", "Lost in Service", "Deceased"],
+            labels: const ["Active", "Retired", "Training", "Lost in\nService", "Deceased"],
             selectedLabelIndex: (index) {
               setState(() {
                 filterStatusIndex = index;
