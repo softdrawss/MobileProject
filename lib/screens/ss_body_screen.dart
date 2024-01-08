@@ -33,6 +33,14 @@ class SSBodyScreen extends StatelessWidget {
     double screenHeight = MediaQuery.of(context).size.height / 3 - 48;
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.transparent,
+        leading: BackButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+        ),
+      ),
       body: FutureBuilder(
         future: loadBody(id),
         builder: (context, snapshot) {
@@ -50,19 +58,11 @@ class SSBodyScreen extends StatelessWidget {
             );
           }
           final picture = snapshot.data!;
-          return Container(
-            padding: const EdgeInsets.fromLTRB(10, 25, 10, 25),
+          return Padding(
+            padding: const EdgeInsets.fromLTRB(16, 0, 16, 10),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Align(
-                  alignment: Alignment.topLeft,
-                  child: BackButton(
-                    onPressed: () {
-                      Navigator.pop(context);
-                    },
-                  ),
-                ),
                 Text(picture.name, style: name),
                 Text(picture.bodyType, style: bodyType),
                 bodyInformation(picture, screenWidth),
