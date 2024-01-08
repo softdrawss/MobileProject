@@ -196,7 +196,7 @@ class AstronautResponse {
 
 Future<AstronautResponse> loadAstronauts() async {
   final response = await http.get(
-    Uri.parse("https://lldev.thespacedevs.com/2.2.0/astronaut/"),
+    Uri.parse("https://lldev.thespacedevs.com/2.2.0/astronaut/?limit=200"),
   );
 
   final json = jsonDecode(response.body);
