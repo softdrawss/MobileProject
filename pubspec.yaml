@@ -69,6 +69,9 @@ flutter:
     - lib/assets/images/planets/
     - lib/assets/images/ss_screen/
     - lib/assets/images/ss_body_screen/
+    - lib/assets/fonts/Sometype_Mono/
+    - lib/assets/fonts/Inter_Tight/
+    - lib/assets/fonts/Play/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
@@ -95,3 +98,18 @@ flutter:
   #
   # For details regarding fonts from package dependencies,
   # see https://flutter.dev/custom-fonts/#from-packages
+  fonts:
+     - family: Play
+       fonts:
+         - asset: assets/fonts/Play/Play-Regular.ttf
+         - asset: assets/fonts/Play/Play-Bold.ttf
+         #- weight: 700
+     - family: Sometype_Mono
+       fonts:
+         - asset: assets/fonts/Sometype_Mono/static/SometypeMono-Regular.ttf
+     - family: Inter
+       fonts:
+         - asset: assets/fonts/Inter_Tight/static/InterTight-Regular.ttf
+         - asset: assets/fonts/Inter_Tight/static/InterTight-Italic.ttf
+         - style: italic
+         - weight: 600
