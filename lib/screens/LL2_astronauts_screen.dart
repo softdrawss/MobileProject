@@ -18,10 +18,10 @@ class AstronautListScreen extends StatefulWidget {
   const AstronautListScreen({super.key});
 
   @override
-  _AstronautListScreenState createState() => _AstronautListScreenState();
+  AstronautListScreenState createState() => AstronautListScreenState();
 }
 
-class _AstronautListScreenState extends State<AstronautListScreen> {
+class AstronautListScreenState extends State<AstronautListScreen> {
   int filterStatusIndex = 0;
   int filterNationalityIndex = 0;
   final ScrollController _scrollController = ScrollController();

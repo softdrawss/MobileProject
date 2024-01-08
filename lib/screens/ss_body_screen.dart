@@ -12,19 +12,26 @@ void navigateToMoonList(BuildContext context, String planetID, String planetName
   );
 }
 
-class SSBodyScreen extends StatelessWidget {
-  SSBodyScreen({super.key, required this.id});
+class SSBodyScreen extends StatefulWidget {
+  const SSBodyScreen({super.key, required this.id});
 
   final String id;
 
+  @override
+  State<SSBodyScreen> createState() => _SSBodyScreenState();
+}
+
+class _SSBodyScreenState extends State<SSBodyScreen> {
   TextStyle name = const TextStyle(
       fontSize: 50,
       fontWeight: FontWeight.w800,
       color: Color.fromARGB(255, 219, 230, 240));
+
   TextStyle bodyType = const TextStyle(
       fontSize: 15,
       fontWeight: FontWeight.w500,
       color: Color.fromARGB(255, 219, 230, 240));
+
   TextStyle text = const TextStyle(color: Colors.black);
 
   @override
@@ -42,7 +49,7 @@ class SSBodyScreen extends StatelessWidget {
         ),
       ),
       body: FutureBuilder(
-        future: loadBody(id),
+        future: loadBody(widget.id),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const Center(
