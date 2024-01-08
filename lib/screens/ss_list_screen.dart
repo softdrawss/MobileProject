@@ -176,9 +176,9 @@ class DwarfList extends StatelessWidget {
         ),
         title: const Text('Dwarf Planets'),
       ),
-        body: const BodyList(
+        body: const BodyListImage(
             url:
-                "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CDwarf%20Planet",));
+                "https://api.le-systeme-solaire.net/rest.php/bodies?data=id%2CenglishName&filter%5B%5D=bodyType%2Ceq%2CDwarf%20Planet", folder: "dwarfplanets",));
   }
 }
 
