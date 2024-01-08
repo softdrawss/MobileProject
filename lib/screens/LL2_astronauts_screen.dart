@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:mobile_project/models/LL2_astronauts.dart';
 import 'package:flutter_toggle_tab/flutter_toggle_tab.dart';
 import '../widgets/utility_widget.dart';
+import '../widgets/astronaut_details_widget.dart';
 
 
 const statusFilter = ["Active", "Retired", "Training", "Lost in Service", "Deceased"];
@@ -113,7 +114,7 @@ class _AstronautListScreenState extends State<AstronautListScreen> {
             title: Text(astronaut.name),
             subtitle: Text('Nationality: ${astronaut.nationality}'),
             onTap: () {
-              // Handle astronaut tap
+              astronaoutPopUp(astronaut, context);
             },
           );
         },
@@ -154,7 +155,7 @@ class _AstronautListScreenState extends State<AstronautListScreen> {
                     color: Colors.blueGrey
                   ),
                   onTap: () {
-                    // Handle astronaut tap
+                    astronaoutPopUp(astronaut, context);
                   },
                 );
               } else {
@@ -182,4 +183,17 @@ class _AstronautListScreenState extends State<AstronautListScreen> {
   Future<AstronautResponse> _loadNextPage(String next) async {
     return await loadAstronauts(next);
   }
+}
+
+void astronaoutPopUp(Astronaut astronaut, context) {
+  final astronautDetailsPopup = AstronautDetailsPopup(info: astronaut);
+
+  showDialog(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        content: astronautDetailsPopup,
+      );
+    },
+  );
 }
