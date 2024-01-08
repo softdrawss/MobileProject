@@ -69,7 +69,7 @@ class BodyListState extends State<BodyList> {
   int maxPages = 0;
 
   static const CustomDivider divider =
-      CustomDivider(height: 1, color: Color.fromARGB(128, 161, 175, 188));
+      CustomDivider(height: 1, color: Color.fromARGB(64, 161, 175, 188), horizontalPadding: 32);
 
   // To calculate maxPages
   @override
@@ -126,18 +126,26 @@ class BodyListState extends State<BodyList> {
                           return Column(
                             children: [
                               ListTile(
-                                title: Align(
-                                  alignment: Alignment
-                                      .center, // Align text to the center
-                                  child: Text(pageItems[index].name),
+                                leading: const SizedBox(width: 46),
+                                title: Center(
+                                  child: Text(
+                                    pageItems[index].name,
+                                    textAlign: TextAlign.center,
+                                  ),
+                                ),
+                                contentPadding: EdgeInsets.only(right: 32),
+                                trailing: const Icon(
+                                  Icons.arrow_forward_ios,
+                                  size: 14,
+                                  color: Colors.blueGrey,
                                 ),
                                 onTap: () {
-                                  navigateToBodyDetails(
-                                      context, pageItems[index].id);
+                                  navigateToBodyDetails(context, pageItems[index].id);
                                 },
                               ),
+                              const SizedBox(height: 4),
                               divider,
-                              const SizedBox(height: 6),
+                              const SizedBox(height: 4),
                             ],
                           );
                         },
@@ -153,7 +161,9 @@ class BodyListState extends State<BodyList> {
             children: [
               IconButton(
                 icon: const Icon(
-                  Icons.arrow_back,
+                  Icons.arrow_back_ios,
+                  size: 14,
+                  color: Colors.blueGrey,
                 ),
                 onPressed: currentPage > 0
                     ? () {
@@ -167,7 +177,11 @@ class BodyListState extends State<BodyList> {
               // Display row of numbers between the arrows
               Text("${currentPage + 1}"),
               IconButton(
-                icon: const Icon(Icons.arrow_forward),
+                icon: const Icon(
+                  Icons.arrow_forward_ios,
+                  size: 14,
+                  color: Colors.blueGrey,
+                  ),
                 onPressed: currentPage + 1 < maxPages
                     ? () {
                         setState(() {

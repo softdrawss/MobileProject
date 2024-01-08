@@ -152,7 +152,7 @@ class _AstronautListScreenState extends State<AstronautListScreen> {
                     Icons.arrow_forward_ios,
                     size: 14,
                     color: Colors.blueGrey
-                    ),
+                  ),
                   onTap: () {
                     // Handle astronaut tap
                   },
